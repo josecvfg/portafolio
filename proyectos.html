@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Proyectos — Jose Villarreal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700;1,9..144,900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -17,7 +17,7 @@
     --line: #d8d5ce;
   }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
 
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -26,8 +26,8 @@
     background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
-  .nav-logo { font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
-  .nav-back { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+  .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
+  .nav-back { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
   .nav-back:hover { color: var(--black); }
 
   /* HERO */
@@ -37,17 +37,17 @@
   }
   .hero-bg {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Fraunces', serif;
     font-size: clamp(6rem, 18vw, 18rem);
     font-weight: 900; color: transparent;
     -webkit-text-stroke: 1px var(--light-gray);
     white-space: nowrap; pointer-events: none; letter-spacing: -0.04em;
     opacity: 0; animation: fadeIn 1s ease 0.2s forwards;
   }
-  .hero-label { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 1.2rem; opacity: 0; animation: slideUp 0.8s ease 0.4s forwards; }
-  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7vw, 7rem); font-weight: 900; letter-spacing: -0.03em; line-height: 0.95; margin-bottom: 1.5rem; opacity: 0; animation: slideUp 0.8s ease 0.6s forwards; }
+  .hero-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 1.2rem; opacity: 0; animation: slideUp 0.8s ease 0.4s forwards; }
+  .hero-title { font-family: 'Fraunces', serif; font-size: clamp(3rem, 7vw, 7rem); font-weight: 900; letter-spacing: -0.03em; line-height: 0.95; margin-bottom: 1.5rem; opacity: 0; animation: slideUp 0.8s ease 0.6s forwards; }
   .hero-title em { font-style: italic; color: var(--gray); }
-  .hero-count { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--gray); letter-spacing: 0.1em; opacity: 0; animation: slideUp 0.8s ease 0.8s forwards; }
+  .hero-count { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--gray); letter-spacing: 0.1em; opacity: 0; animation: slideUp 0.8s ease 0.8s forwards; }
 
   /* FILTER */
   .filter-bar {
@@ -55,7 +55,7 @@
     display: flex; gap: 1rem; flex-wrap: wrap;
   }
   .filter-btn {
-    font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
     padding: 0.5rem 1.2rem; border-radius: 100px; border: 1px solid var(--line);
     background: transparent; color: var(--gray); cursor: pointer; transition: all 0.2s;
   }
@@ -80,7 +80,7 @@
   .project-card:hover .card-arrow { opacity: 1; transform: translate(4px, -4px); }
 
   .card-header { display: flex; justify-content: space-between; align-items: flex-start; }
-  .card-num { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--gray); letter-spacing: 0.1em; }
+  .card-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gray); letter-spacing: 0.1em; }
   .card-arrow { font-size: 1.2rem; opacity: 0.2; transition: all 0.3s; }
 
   .card-img-wrap { overflow: hidden; border-radius: 0.75rem; border: 1px solid var(--line); aspect-ratio: 16/9; background: var(--off); }
@@ -93,12 +93,12 @@
     flex-direction: column; gap: 0.8rem;
   }
   .placeholder-icon { font-size: 2.5rem; opacity: 0.3; }
-  .placeholder-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
+  .placeholder-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
 
-  .card-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .card-title { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
   .card-desc { font-size: 0.9rem; color: var(--gray); line-height: 1.65; font-weight: 300; }
   .card-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .tag { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.28rem 0.7rem; background: var(--white); border: 1px solid var(--line); border-radius: 100px; color: var(--gray); }
+  .tag { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.28rem 0.7rem; background: var(--white); border: 1px solid var(--line); border-radius: 100px; color: var(--gray); }
 
   /* MORE COMING */
   .more-card {
@@ -107,8 +107,8 @@
     flex-direction: column; gap: 1rem; color: var(--gray);
     grid-column: span 2;
   }
-  .more-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; }
-  .more-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; color: var(--light-gray); }
+  .more-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; }
+  .more-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-style: italic; color: var(--light-gray); }
 
   /* MOBILE */
   @media(max-width: 768px) {

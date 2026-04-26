@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Cotizaciones — Jose Villarreal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700;1,9..144,900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -14,7 +14,7 @@
     --cot-ink: #1a1a2e; --cot-accent: #4a6fa5; --cot-light: #dde8f5;
   }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
 
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -23,8 +23,8 @@
     background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
-  .nav-logo { font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
-  .nav-back { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+  .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
+  .nav-back { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
   .nav-back:hover { color: var(--black); }
 
   /* HERO */
@@ -51,19 +51,19 @@
   @keyframes slideLeft { from{opacity:0;transform:translateX(30px);} to{opacity:1;transform:translateX(0);} }
 
   .doc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
-  .doc-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 900; color: rgba(255,255,255,0.7); }
-  .doc-badge { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cot-accent); color: white; padding: 0.25rem 0.6rem; border-radius: 4px; }
+  .doc-logo { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 900; color: rgba(255,255,255,0.7); }
+  .doc-badge { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cot-accent); color: white; padding: 0.25rem 0.6rem; border-radius: 4px; }
   .doc-line { height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 1rem; }
   .doc-row { display: flex; justify-content: space-between; margin-bottom: 0.6rem; }
-  .doc-label { font-family: 'Space Mono', monospace; font-size: 0.55rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; text-transform: uppercase; }
-  .doc-val { font-family: 'Space Mono', monospace; font-size: 0.55rem; color: rgba(255,255,255,0.5); }
+  .doc-label { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; text-transform: uppercase; }
+  .doc-val { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: rgba(255,255,255,0.5); }
   .doc-items { margin: 1rem 0; }
   .doc-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
   .doc-item-name { font-size: 0.6rem; color: rgba(255,255,255,0.5); }
-  .doc-item-price { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: rgba(255,255,255,0.4); }
+  .doc-item-price { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: rgba(255,255,255,0.4); }
   .doc-total { display: flex; justify-content: space-between; margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); }
-  .doc-total-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; }
-  .doc-total-val { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.7); }
+  .doc-total-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; }
+  .doc-total-val { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.7); }
 
   .hero-orb {
     position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
@@ -74,28 +74,28 @@
   }
   @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-25px);} }
 
-  .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cot-light); margin-bottom: 1.5rem; opacity: 0; animation: slideUp 0.8s ease 0.3s forwards; }
-  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 9vw, 9rem); font-weight: 900; line-height: 0.85; letter-spacing: -0.04em; color: var(--white); margin-bottom: 2rem; opacity: 0; animation: slideUp 0.9s ease 0.5s forwards; }
+  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cot-light); margin-bottom: 1.5rem; opacity: 0; animation: slideUp 0.8s ease 0.3s forwards; }
+  .hero-title { font-family: 'Fraunces', serif; font-size: clamp(3.5rem, 9vw, 9rem); font-weight: 900; line-height: 0.85; letter-spacing: -0.04em; color: var(--white); margin-bottom: 2rem; opacity: 0; animation: slideUp 0.9s ease 0.5s forwards; }
   .hero-title em { font-style: italic; color: var(--cot-light); opacity: 0.5; }
-  .hero-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.4); line-height: 1.5; max-width: 420px; opacity: 0; animation: slideUp 0.8s ease 0.7s forwards; }
+  .hero-sub { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.4); line-height: 1.5; max-width: 420px; opacity: 0; animation: slideUp 0.8s ease 0.7s forwards; }
   .hero-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 2rem; opacity: 0; animation: slideUp 0.8s ease 0.9s forwards; }
-  .htag { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 0.9rem; border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; color: rgba(255,255,255,0.45); }
+  .htag { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 0.9rem; border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; color: rgba(255,255,255,0.45); }
 
   /* SECTIONS */
   section { padding: 7rem 4rem; }
   .divider { width: 100%; height: 1px; background: var(--line); }
-  .section-label { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 
   /* OVERVIEW */
   .overview-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 6rem; align-items: start; }
-  .overview-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1.5rem; }
+  .overview-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1.5rem; }
   .overview-title em { font-style: italic; color: var(--gray); }
   .overview-text { font-size: 1rem; line-height: 1.85; color: var(--gray); font-weight: 300; }
   .overview-text p + p { margin-top: 1.2rem; }
   .meta-list { display: flex; flex-direction: column; gap: 1.8rem; }
-  .meta-key { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.4rem; }
-  .meta-val { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700; }
+  .meta-key { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.4rem; }
+  .meta-val { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 700; }
 
   /* SCREENSHOTS */
   .screens-section { background: var(--off); }
@@ -111,24 +111,24 @@
   .screen-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
   .screen-img { width: 100%; display: block; }
   .screen-img-contain { width: 100%; display: block; max-height: 420px; object-fit: contain; background: #1a1a1a; }
-  .screen-cap { padding: 0.9rem 1rem; background: var(--white); font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); border-top: 1px solid var(--line); }
+  .screen-cap { padding: 0.9rem 1rem; background: var(--white); font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); border-top: 1px solid var(--line); }
 
   /* FEATURES */
   .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
   .feature-item { border-top: 2px solid var(--line); padding-top: 1.5rem; transition: border-color 0.3s; }
   .feature-item:hover { border-top-color: var(--cot-accent); }
-  .feature-num { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--gray); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
-  .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .feature-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gray); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+  .feature-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.6rem; }
   .feature-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.65; font-weight: 300; }
 
   /* LINKS */
   .links-section { background: var(--cot-ink); }
   .links-section .section-label { color: rgba(255,255,255,0.2); }
   .links-section .section-label::after { background: rgba(255,255,255,0.1); }
-  .links-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 900; letter-spacing: -0.03em; color: white; margin-bottom: 3rem; line-height: 1; }
+  .links-title { font-family: 'Fraunces', serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 900; letter-spacing: -0.03em; color: white; margin-bottom: 3rem; line-height: 1; }
   .links-title em { font-style: italic; color: var(--cot-light); opacity: 0.6; }
   .links-row { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-  .project-link { display: flex; align-items: center; gap: 0.7rem; padding: 0.9rem 1.6rem; border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; text-decoration: none; color: white; font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; }
+  .project-link { display: flex; align-items: center; gap: 0.7rem; padding: 0.9rem 1.6rem; border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; text-decoration: none; color: white; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; }
   .project-link:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); transform: translateY(-2px); }
   .project-link.primary { background: var(--cot-accent); border-color: var(--cot-accent); }
   .project-link.primary:hover { background: #5a82bc; border-color: #5a82bc; }
