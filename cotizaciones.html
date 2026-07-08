@@ -1,318 +1,134 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Cotizaciones — Jose Villarreal</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cotizaciones - Jose Villarreal</title>
+<link rel="icon" type="image/png" href="assets/img/icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700;1,9..144,900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --white: #ffffff; --off: #f5f4f1; --black: #0d0d0d;
-    --gray: #6b6b6b; --light-gray: #e8e6e1; --line: #d8d5ce;
-    --cot-ink: #1a1a2e; --cot-accent: #4a6fa5; --cot-light: #dde8f5;
-  }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+  .hero { padding: 9rem 4rem 3rem; }
+  .hero-grid { display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 3rem; align-items: end; }
+  .hero-title { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 6.5vw, 5.2rem); letter-spacing: -0.03em; line-height: 0.95; margin: 0.6rem 0 1.2rem; }
+  .hero-title .accent { color: var(--amber); }
+  .hero-desc { color: var(--text-dim); font-size: 1.05rem; line-height: 1.7; max-width: 520px; }
+  .hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem 4rem;
-    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
-  .nav-back { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
-  .nav-back:hover { color: var(--black); }
+  .about-wrap { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3.5rem; align-items: start; }
+  .about-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; margin-bottom: 1.3rem; line-height: 1.3; }
+  .about-title .accent { color: var(--teal); }
+  .about-text { color: var(--text-dim); line-height: 1.85; }
+  .about-text p + p { margin-top: 1rem; }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    background: var(--cot-ink);
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 0 4rem 5rem;
-    position: relative; overflow: hidden;
-  }
+  .gallery3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  .shot { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface); }
+  .shot img { width: 100%; display: block; aspect-ratio: 4/3; object-fit: cover; transition: transform .6s var(--ease); }
+  .shot:hover img { transform: scale(1.04); }
+  .shot-label { font-family: var(--mono); font-size: 0.66rem; color: var(--text-faint); padding: 0.8rem 1rem; border-top: 1px solid var(--border); }
 
-  /* Decorative PDF mockup bg */
-  .hero-doc {
-    position: absolute;
-    top: 8rem; right: 4rem;
-    width: 340px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 0.75rem;
-    padding: 2rem;
-    opacity: 0;
-    animation: slideLeft 1s ease 0.8s forwards;
-  }
-  @keyframes slideLeft { from{opacity:0;transform:translateX(30px);} to{opacity:1;transform:translateX(0);} }
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .feat-item { background: var(--surface); padding: 1.8rem; }
+  .feat-item .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); margin-bottom: 1rem; }
+  .feat-item h3 { font-family: var(--display); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .feat-item p { color: var(--text-dim); font-size: 0.86rem; line-height: 1.6; }
 
-  .doc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
-  .doc-logo { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 900; color: rgba(255,255,255,0.7); }
-  .doc-badge { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--cot-accent); color: white; padding: 0.25rem 0.6rem; border-radius: 4px; }
-  .doc-line { height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 1rem; }
-  .doc-row { display: flex; justify-content: space-between; margin-bottom: 0.6rem; }
-  .doc-label { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; text-transform: uppercase; }
-  .doc-val { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: rgba(255,255,255,0.5); }
-  .doc-items { margin: 1rem 0; }
-  .doc-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-  .doc-item-name { font-size: 0.6rem; color: rgba(255,255,255,0.5); }
-  .doc-item-price { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: rgba(255,255,255,0.4); }
-  .doc-total { display: flex; justify-content: space-between; margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); }
-  .doc-total-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; }
-  .doc-total-val { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.7); }
+  /* mock invoice card — pequeño detalle ilustrativo */
+  .invoice { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); padding: 1.4rem 1.6rem; font-family: var(--mono); font-size: 0.78rem; }
+  .invoice-head { display: flex; justify-content: space-between; color: var(--text-faint); border-bottom: 1px dashed var(--border); padding-bottom: 0.8rem; margin-bottom: 0.8rem; }
+  .invoice-row { display: flex; justify-content: space-between; padding: 0.3rem 0; color: var(--text-dim); }
+  .invoice-total { display: flex; justify-content: space-between; padding-top: 0.6rem; margin-top: 0.5rem; border-top: 1px solid var(--border); color: var(--amber); font-weight: 600; }
 
-  .hero-orb {
-    position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(74,111,165,0.2) 0%, transparent 70%);
-    top: 5%; left: -100px;
-    animation: float 9s ease-in-out infinite;
-  }
-  @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-25px);} }
-
-  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cot-light); margin-bottom: 1.5rem; opacity: 0; animation: slideUp 0.8s ease 0.3s forwards; }
-  .hero-title { font-family: 'Fraunces', serif; font-size: clamp(3.5rem, 9vw, 9rem); font-weight: 900; line-height: 0.85; letter-spacing: -0.04em; color: var(--white); margin-bottom: 2rem; opacity: 0; animation: slideUp 0.9s ease 0.5s forwards; }
-  .hero-title em { font-style: italic; color: var(--cot-light); opacity: 0.5; }
-  .hero-sub { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.4); line-height: 1.5; max-width: 420px; opacity: 0; animation: slideUp 0.8s ease 0.7s forwards; }
-  .hero-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 2rem; opacity: 0; animation: slideUp 0.8s ease 0.9s forwards; }
-  .htag { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 0.9rem; border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; color: rgba(255,255,255,0.45); }
-
-  /* SECTIONS */
-  section { padding: 7rem 4rem; }
-  .divider { width: 100%; height: 1px; background: var(--line); }
-  .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
-
-  /* OVERVIEW */
-  .overview-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 6rem; align-items: start; }
-  .overview-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1.5rem; }
-  .overview-title em { font-style: italic; color: var(--gray); }
-  .overview-text { font-size: 1rem; line-height: 1.85; color: var(--gray); font-weight: 300; }
-  .overview-text p + p { margin-top: 1.2rem; }
-  .meta-list { display: flex; flex-direction: column; gap: 1.8rem; }
-  .meta-key { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.4rem; }
-  .meta-val { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 700; }
-
-  /* SCREENSHOTS */
-  .screens-section { background: var(--off); }
-  .screens-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .screens-grid-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
-
-  .screen-card {
-    border-radius: 0.75rem; overflow: hidden; border: 1px solid var(--line);
-    background: var(--white);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .screen-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
-  .screen-img { width: 100%; display: block; }
-  .screen-img-contain { width: 100%; display: block; max-height: 420px; object-fit: contain; background: #1a1a1a; }
-  .screen-cap { padding: 0.9rem 1rem; background: var(--white); font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); border-top: 1px solid var(--line); }
-
-  /* FEATURES */
-  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
-  .feature-item { border-top: 2px solid var(--line); padding-top: 1.5rem; transition: border-color 0.3s; }
-  .feature-item:hover { border-top-color: var(--cot-accent); }
-  .feature-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gray); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
-  .feature-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.6rem; }
-  .feature-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.65; font-weight: 300; }
-
-  /* LINKS */
-  .links-section { background: var(--cot-ink); }
-  .links-section .section-label { color: rgba(255,255,255,0.2); }
-  .links-section .section-label::after { background: rgba(255,255,255,0.1); }
-  .links-title { font-family: 'Fraunces', serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 900; letter-spacing: -0.03em; color: white; margin-bottom: 3rem; line-height: 1; }
-  .links-title em { font-style: italic; color: var(--cot-light); opacity: 0.6; }
-  .links-row { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-  .project-link { display: flex; align-items: center; gap: 0.7rem; padding: 0.9rem 1.6rem; border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; text-decoration: none; color: white; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; }
-  .project-link:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); transform: translateY(-2px); }
-  .project-link.primary { background: var(--cot-accent); border-color: var(--cot-accent); }
-  .project-link.primary:hover { background: #5a82bc; border-color: #5a82bc; }
-
-  @keyframes slideUp { from{opacity:0;transform:translateY(28px);} to{opacity:1;transform:translateY(0);} }
-  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  @media(max-width:900px) {
-    nav { padding: 1.2rem 1.5rem; }
-    section { padding: 5rem 1.5rem; }
-    .hero { padding: 8rem 1.5rem 4rem; }
-    .hero-doc { display: none; }
-    .overview-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .screens-grid { grid-template-columns: 1fr; }
-    .screens-grid-bottom { grid-template-columns: 1fr; }
-    .screen-card.wide { grid-column: span 1; }
-    .features-grid { grid-template-columns: 1fr; gap: 2rem; }
+  @media (max-width: 860px) {
+    .hero { padding: 7rem 1.4rem 2rem; }
+    .hero-grid, .about-wrap { grid-template-columns: 1fr; }
+    .gallery3 { grid-template-columns: 1fr; }
+    .feat-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">INICIO</a>
-  <a href="index.html" class="nav-back">← Proyectos</a>
-</nav>
+<div class="winbar">
+  <div class="winbar-lights"><span></span><span></span><span></span></div>
+  <div class="winbar-path"><a href="index.html" data-transition style="color:inherit">Jose Villarreal / </a><span class="seg-cur">Cotizaciones</span><span class="car"></span></div>
+  <nav class="winbar-tabs">
+    <a href="index.html" data-transition>inicio</a>
+    <a href="proyectos.html" data-transition>proyectos</a>
+    <a href="dgsc.html" data-transition>dgsc</a>
+  </nav>
+  <div class="winbar-status"><span class="dot"></span><span data-clock>--:--:--</span></div>
+</div>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-orb"></div>
-
-  <!-- Decorative PDF card -->
-  <div class="hero-doc">
-    <div class="doc-header">
-      <div class="doc-logo">Cotización</div>
-      <div class="doc-badge">PDF</div>
-    </div>
-    <div class="doc-line"></div>
-    <div class="doc-row"><span class="doc-label">Cliente</span><span class="doc-val">Acme Corp.</span></div>
-    <div class="doc-row"><span class="doc-label">Fecha</span><span class="doc-val">Feb 2025</span></div>
-    <div class="doc-items">
-      <div class="doc-item"><span class="doc-item-name">Diseño web</span><span class="doc-item-price">$4,500</span></div>
-      <div class="doc-item"><span class="doc-item-name">Backend API</span><span class="doc-item-price">$6,000</span></div>
-      <div class="doc-item"><span class="doc-item-name">Mantenimiento</span><span class="doc-item-price">$1,200</span></div>
-    </div>
-    <div class="doc-total">
-      <span class="doc-total-label">Total</span>
-      <span class="doc-total-val">$11,700</span>
-    </div>
-  </div>
-
-  <p class="hero-eyebrow">Proyecto Web — Herramienta</p>
-  <h1 class="hero-title">Cotiza<em>ciones</em></h1>
-  <p class="hero-sub">Genera cotizaciones profesionales en segundos. Clientes, productos, servicios, totales y exportación a PDF.</p>
-  <div class="hero-tags">
-    <span class="htag">React</span>
-    <span class="htag">PDF</span>
-    <span class="htag">Dashboard</span>
-    <span class="htag">Estadísticas</span>
-  </div>
-</section>
-
-<!-- OVERVIEW -->
-<section id="overview">
-  <div class="section-label">01 — El proyecto</div>
-  <div class="overview-grid">
+  <div class="hero-grid">
     <div>
-      <h2 class="overview-title reveal">Menos Excel,<br>más <em>profesional.</em></h2>
-      <div class="overview-text reveal">
-        <p>Cotizaciones nació de un problema cotidiano para freelancers y pequeñas empresas: armar una cotización decente toma demasiado tiempo y termina en plantillas de Excel o Word que se ven poco profesionales.</p>
-        <p>La app permite gestionar un catálogo de productos y servicios, una base de clientes, y generar cotizaciones completas con cálculo automático de subtotales, descuentos e impuestos. Al terminar, un clic genera el PDF listo para enviar.</p>
-        <p>El módulo de estadísticas muestra el valor total cotizado, tasa de cierre y los productos más solicitados, dándole visibilidad real al negocio.</p>
+      <div class="eyebrow reveal">npm run build <span class="glow">// app web</span></div>
+      <h1 class="hero-title reveal" data-delay="60">Cotiza<span class="accent">ciones.</span></h1>
+      <p class="hero-desc reveal" data-delay="120">Genera cotizaciones profesionales en segundos: clientes, catálogo, totales automáticos y exportación a PDF lista para enviar.</p>
+      <div class="hero-tags reveal" data-delay="160">
+        <span class="tag">React</span><span class="tag">PDF</span><span class="tag">Dashboard</span><span class="tag">Fullstack</span>
       </div>
     </div>
-    <div class="meta-list reveal">
-      <div class="meta-item">
-        <div class="meta-key">Tipo</div>
-        <div class="meta-val">Aplicación web</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-key">Stack</div>
-        <div class="meta-val">React · PDF generation</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-key">Funciones</div>
-        <div class="meta-val">CRUD · PDF · Estadísticas</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-key">Rol</div>
-        <div class="meta-val">Diseño, desarrollo & deploy</div>
-      </div>
+    <div class="invoice reveal" data-delay="120">
+      <div class="invoice-head"><span>Cotización</span><span>PDF</span></div>
+      <div class="invoice-row"><span>Cliente</span><span>Acme Corp.</span></div>
+      <div class="invoice-row"><span>Diseño web</span><span>$4,500</span></div>
+      <div class="invoice-row"><span>Backend API</span><span>$6,000</span></div>
+      <div class="invoice-row"><span>Mantenimiento</span><span>$1,200</span></div>
+      <div class="invoice-total"><span>Total</span><span>$11,700</span></div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- SCREENSHOTS / MOCKUPS -->
-<section class="screens-section" id="screens">
-  <div class="section-label">02 — La app</div>
-  <div class="screens-grid">
-
-    <!-- Dashboard -->
-    <div class="screen-card reveal">
-      <img class="screen-img" src="c1.jpg" alt="Dashboard principal" />
-      <div class="screen-cap">Dashboard principal</div>
+<section>
+  <div class="about-wrap">
+    <div>
+      <h2 class="about-title reveal">Menos Excel, <span class="accent">más profesional.</span></h2>
+      <div class="about-text reveal" data-delay="70">
+        <p>Cotizaciones nació de un problema cotidiano para freelancers y pequeñas empresas: armar una cotización decente toma demasiado tiempo y termina en plantillas de Excel o Word poco profesionales.</p>
+        <p>La app gestiona un catálogo de productos y servicios, una base de clientes, y genera cotizaciones completas con cálculo automático de subtotales, descuentos e impuestos. Al terminar, un clic genera el PDF. El módulo de estadísticas muestra el valor total cotizado, la tasa de cierre y los productos más solicitados.</p>
+      </div>
     </div>
-
-    <!-- Estadísticas -->
-    <div class="screen-card reveal">
-      <img class="screen-img" src="c2.jpg" alt="Estadísticas y gráficas" />
-      <div class="screen-cap">Estadísticas y gráficas</div>
-    </div>
-
-    <!-- PDF -->
-    <div class="screen-card reveal" style="grid-column: 1 / -1; max-width: 560px; margin: 0 auto; width: 100%;">
-      <img class="screen-img-contain" src="c3.jpg" alt="Exportación PDF" />
-      <div class="screen-cap">Exportación PDF</div>
-    </div>
-
+    <div class="eyebrow reveal" data-delay="100" style="align-self:start;">02 // características</div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- FEATURES -->
-<section id="features">
-  <div class="section-label">03 — Características</div>
-  <div class="features-grid">
-    <div class="feature-item reveal">
-      <div class="feature-num">001</div>
-      <div class="feature-title">Gestión de clientes</div>
-      <p class="feature-desc">Base de datos de clientes con nombre, contacto y dirección. Selecciona un cliente al crear la cotización y los datos se llenan automáticamente.</p>
-    </div>
-    <div class="feature-item reveal">
-      <div class="feature-num">002</div>
-      <div class="feature-title">Catálogo de productos</div>
-      <p class="feature-desc">Registra productos y servicios con precio unitario. Al agregarlos a una cotización, los totales se calculan en tiempo real.</p>
-    </div>
-    <div class="feature-item reveal">
-      <div class="feature-num">003</div>
-      <div class="feature-title">Generación de PDF</div>
-      <p class="feature-desc">Exporta cualquier cotización a PDF con un solo clic. Formato limpio y profesional, listo para enviar por email o imprimir.</p>
-    </div>
-    <div class="feature-item reveal">
-      <div class="feature-num">004</div>
-      <div class="feature-title">Cálculo automático</div>
-      <p class="feature-desc">Subtotales, descuentos e impuestos calculados automáticamente. Sin fórmulas manuales, sin errores de suma.</p>
-    </div>
-    <div class="feature-item reveal">
-      <div class="feature-num">005</div>
-      <div class="feature-title">Estadísticas</div>
-      <p class="feature-desc">Dashboard con total cotizado por período, productos más frecuentes y métricas de actividad. Visibilidad real del pipeline de ventas.</p>
-    </div>
-    <div class="feature-item reveal">
-      <div class="feature-num">006</div>
-      <div class="feature-title">Historial completo</div>
-      <p class="feature-desc">Todas las cotizaciones guardadas y accesibles. Filtra por cliente, fecha o estado y consulta el detalle de cualquier cotización pasada.</p>
-    </div>
+<section style="padding-top:0;">
+  <div class="feat-grid reveal">
+    <div class="feat-item"><span class="dot"></span><h3>Gestión de clientes</h3><p>Base de datos de clientes; sus datos se autocompletan al crear una cotización.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Catálogo de productos</h3><p>Productos y servicios con precio unitario; los totales se calculan en tiempo real.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Generación de PDF</h3><p>Exporta cualquier cotización con un clic, en formato limpio y listo para enviar.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Cálculo automático</h3><p>Subtotales, descuentos e impuestos sin fórmulas manuales ni errores de suma.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Estadísticas</h3><p>Total cotizado por período, productos más frecuentes y métricas de actividad.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Historial completo</h3><p>Filtra por cliente, fecha o estado y consulta el detalle de cualquier cotización pasada.</p></div>
   </div>
 </section>
 
-<!-- LINKS -->
-<section class="links-section">
-  <div class="section-label">04 — Ver proyecto</div>
-  <h2 class="links-title reveal">Cotiza<br><em>rápido.</em></h2>
-  <div class="links-row reveal">
-    <a href="https://cotizaciones-uzhg.vercel.app/#/" class="project-link primary">Ver app en vivo →</a>
-    <a href="https://github.com/jose-xd/cotizaciones" class="project-link">GitHub →</a>
+<section>
+  <div class="eyebrow reveal">ls ./screenshots</div>
+  <div class="gallery3" style="margin-top:2rem;">
+    <div class="shot reveal"><img src="assets/img/cotiz-1.jpg" alt="Dashboard principal - Cotizaciones" loading="lazy"><div class="shot-label">dashboard principal</div></div>
+    <div class="shot reveal" data-delay="80"><img src="assets/img/cotiz-2.jpg" alt="Estadísticas y gráficas - Cotizaciones" loading="lazy"><div class="shot-label">estadísticas y gráficas</div></div>
+    <div class="shot reveal" data-delay="160"><img src="assets/img/cotiz-3.jpg" alt="Exportación a PDF - Cotizaciones" loading="lazy"><div class="shot-label">exportación a PDF</div></div>
   </div>
 </section>
 
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), (i % 4) * 80);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  reveals.forEach(el => obs.observe(el));
-</script>
+<section id="contacto" style="text-align:center;">
+  <h2 class="about-title reveal" style="font-size:clamp(1.8rem,4vw,2.8rem);">Cotiza <span style="color:var(--amber)">rápido.</span></h2>
+  <div class="reveal" data-delay="80" style="margin-top:1.6rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
+    <a href="proyectos.html" data-transition class="btn magnetic primary">Ver más proyectos</a>
+    <a href="index.html#contacto" data-transition class="btn magnetic">Hablemos de tu proyecto</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Jose Villarreal</span>
+  <a href="index.html" data-transition>← volver al inicio</a>
+</footer>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>

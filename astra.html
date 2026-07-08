@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Astraea - Jose Villarreal</title>
+<link rel="icon" type="image/png" href="assets/img/icon.png" />
+<meta name="description" content="Astraea - app educativa para aprender las constelaciones de forma gamificada. Actualmente en desarrollo." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .hero { padding: 9rem 4rem 3rem; }
+  .hero-grid { display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 3rem; align-items: end; }
+  .hero-title { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 6.5vw, 5.2rem); letter-spacing: -0.03em; line-height: 0.95; margin: 0.6rem 0 1.2rem; }
+  .hero-title .accent { color: var(--amber); }
+  .hero-desc { color: var(--text-dim); font-size: 1.05rem; line-height: 1.7; max-width: 520px; }
+  .hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
+
+  .about-wrap { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3.5rem; align-items: start; }
+  .about-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; margin-bottom: 1.3rem; line-height: 1.3; }
+  .about-title .accent { color: var(--teal); }
+  .about-text { color: var(--text-dim); line-height: 1.85; }
+  .about-text p + p { margin-top: 1rem; }
+
+  /* device frames */
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; max-width: 1000px; margin: 2rem auto 0; }
+  .device { border: 1px solid var(--border); border-radius: 18px; padding: 10px; background: var(--surface); }
+  .device-screen { border-radius: 10px; overflow: hidden; aspect-ratio: 9/19; background: var(--bg-soft); }
+  .device-screen img { width: 100%; height: 100%; object-fit: contain; transition: transform .6s var(--ease); }
+  .device:hover .device-screen img { transform: scale(1.03); }
+  .device-label { font-family: var(--mono); font-size: 0.68rem; color: var(--text-faint); text-align: center; padding-top: 0.7rem; }
+
+  /* features */
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .feat-item { background: var(--surface); padding: 1.8rem; }
+  .feat-item .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); margin-bottom: 1rem; }
+  .feat-item h3 { font-family: var(--display); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .feat-item p { color: var(--text-dim); font-size: 0.86rem; line-height: 1.6; }
+
+  /* progreso */
+  .progress-note { display: flex; align-items: center; gap: 0.6rem; font-family: var(--mono); font-size: 0.78rem; color: var(--amber); margin-bottom: 1.6rem; }
+  .progress-note .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 8px var(--amber); animation: pulse 2.4s ease-in-out infinite; }
+
+  @media (max-width: 860px) {
+    .hero { padding: 7rem 1.4rem 2rem; }
+    .hero-grid, .about-wrap { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .feat-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="winbar">
+  <div class="winbar-lights"><span></span><span></span><span></span></div>
+  <div class="winbar-path"><a href="index.html" data-transition style="color:inherit">Jose Villarreal / </a><span class="seg-cur">Astraea</span><span class="car"></span></div>
+  <nav class="winbar-tabs">
+    <a href="index.html" data-transition>inicio</a>
+    <a href="snaps.html" data-transition>snaps</a>
+    <a href="proyectos.html" data-transition>proyectos</a>
+  </nav>
+  <div class="winbar-status"><span class="dot"></span><span data-clock>--:--:--</span></div>
+</div>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow reveal">en desarrollo <span class="glow">// app móvil educativa</span></div>
+      <h1 class="hero-title reveal" data-delay="60">Astraea<span class="accent">.</span></h1>
+      <p class="hero-desc reveal" data-delay="120">Una app para aprender las constelaciones explorando el cielo por regiones, con lecciones cortas, rachas diarias y recompensas, pensada para que aprender astronomía se sienta como un juego.</p>
+      <div class="hero-tags reveal" data-delay="160">
+        <span class="tag">Flutter</span><span class="tag">Gamificación</span><span class="tag">Educación</span><span class="tag">iOS &amp; Android</span>
+      </div>
+    </div>
+    <div class="manifest reveal" data-delay="120">
+      <div class="manifest-row"><span class="manifest-key">tipo</span><span class="manifest-val">App móvil educativa</span></div>
+      <div class="manifest-row"><span class="manifest-key">stack</span><span class="manifest-val">Flutter</span></div>
+      <div class="manifest-row"><span class="manifest-key">rol</span><span class="manifest-val">Producto, diseño &amp; desarrollo</span></div>
+      <div class="manifest-row"><span class="manifest-key">estado</span><span class="manifest-val soon">● en desarrollo</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="about-wrap">
+    <div>
+      <h2 class="about-title reveal">Aprender el cielo, <span class="accent">una región a la vez.</span></h2>
+      <div class="about-text reveal" data-delay="70">
+        <p>Astraea organiza el cielo nocturno en regiones temáticas, como "El Zodiaco", y convierte cada constelación en una lección corta con su propia recompensa de experiencia. Se avanza descubriendo, no memorizando.</p>
+        <p>Una racha diaria y un dato curioso nuevo cada día mantienen el hábito de volver; un sistema de niveles y logros le da seguimiento visual al progreso del usuario a lo largo del tiempo.</p>
+      </div>
+    </div>
+    <div class="eyebrow reveal" data-delay="100" style="align-self:start;">próximo lanzamiento // beta cerrada</div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="feat-grid reveal">
+    <div class="feat-item"><span class="dot"></span><h3>Regiones del cielo</h3><p>El mapa estelar se explora por regiones temáticas, cada una con su propio set de constelaciones y lecciones.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Lecciones gamificadas</h3><p>Cada constelación se desbloquea completando una lección corta, con XP como recompensa inmediata.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Racha diaria</h3><p>Un contador de días consecutivos anima a volver cada día, el mismo mecanismo que hace efectivos a los apps de hábitos.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Dato diario</h3><p>Una curiosidad astronómica distinta cada día, con historial de entradas anteriores para repasar.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Niveles y experiencia</h3><p>El progreso se traduce en niveles con nombre propio, de "Explorador" en adelante, y una barra de XP visible.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Logros desbloqueables</h3><p>Insignias por hitos concretos: primera lección completada, XP acumulado, región terminada.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow reveal">vista previa // capturas del producto en desarrollo</div>
+  <div class="gallery" style="margin-top:2rem;">
+    <div class="device reveal"><div class="device-screen"><img src="assets/img/astra-1.png" alt="Mapa de regiones y lección actual en Astraea" loading="lazy"></div><div class="device-label">región actual y racha</div></div>
+    <div class="device reveal" data-delay="80"><div class="device-screen"><img src="assets/img/astra-2.png" alt="Dato astronómico diario en Astraea" loading="lazy"></div><div class="device-label">dato diario</div></div>
+    <div class="device reveal" data-delay="160"><div class="device-screen"><img src="assets/img/astra-3.png" alt="Perfil, niveles y logros en Astraea" loading="lazy"></div><div class="device-label">perfil, nivel &amp; logros</div></div>
+  </div>
+</section>
+
+<section id="contacto" style="text-align:center;">
+  <div class="progress-note reveal" style="justify-content:center;"><span class="dot"></span>proyecto en desarrollo activo</div>
+  <h2 class="about-title reveal" style="font-size:clamp(1.8rem,4vw,2.8rem);">¿Quieres ser de los primeros en <span class="accent" style="color:var(--amber)">probarla?</span></h2>
+  <div class="reveal" data-delay="80" style="margin-top:1.6rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
+    <a href="index.html#contacto" data-transition class="btn magnetic primary">Escríbeme</a>
+    <a href="proyectos.html" data-transition class="btn magnetic">Ver más proyectos</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Jose Villarreal</span>
+  <a href="index.html" data-transition>← volver al inicio</a>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

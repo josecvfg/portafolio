@@ -1,217 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Proyectos — Jose Villarreal</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Proyectos web - Jose Villarreal</title>
+<link rel="icon" type="image/png" href="assets/img/icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700;1,9..144,900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --white: #ffffff;
-    --off: #f5f4f1;
-    --black: #0d0d0d;
-    --gray: #6b6b6b;
-    --light-gray: #e8e6e1;
-    --line: #d8d5ce;
+  .hero { padding: 9rem 4rem 3rem; }
+  .hero-title { font-family: var(--display); font-weight: 700; font-size: clamp(2.4rem, 6vw, 4.5rem); letter-spacing: -0.03em; line-height: 1; margin-bottom: 1rem; }
+  .hero-title .accent { color: var(--amber); }
+  .hero-desc { color: var(--text-dim); max-width: 560px; font-size: 1.05rem; line-height: 1.7; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    transition: border-color .3s, transform .3s;
+    display: flex;
+    flex-direction: column;
   }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+  .card:hover { border-color: var(--amber); transform: translateY(-4px); }
+  .card-shot { aspect-ratio: 16/10; overflow: hidden; background: var(--bg-soft); border-bottom: 1px solid var(--border); }
+  .card-shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+  .card:hover .card-shot img { transform: scale(1.04); }
+  .card-body { padding: 1.8rem; display: flex; flex-direction: column; gap: 0.9rem; flex: 1; }
+  .card-top { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 0.68rem; color: var(--text-faint); }
+  .card-top .live { display: flex; align-items: center; gap: 0.4rem; color: var(--teal); }
+  .card-top .live::before { content:''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 6px var(--teal); }
+  .card-title { font-family: var(--display); font-weight: 600; font-size: 1.6rem; }
+  .card-desc { color: var(--text-dim); font-size: 0.92rem; line-height: 1.6; }
+  .card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: auto; }
+  .card-cta { display: flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.75rem; color: var(--amber); margin-top: 0.4rem; }
+  .card:hover .card-cta span { transform: translateX(4px); }
+  .card-cta span { display: inline-block; transition: transform .25s; }
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem 4rem;
-    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
-  .nav-back { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
-  .nav-back:hover { color: var(--black); }
+  .more-row { text-align: center; padding: 3rem 0 0; color: var(--text-faint); font-family: var(--mono); font-size: 0.8rem; }
 
-  /* HERO */
-  .hero {
-    padding: 16rem 4rem 6rem;
-    position: relative; overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    font-family: 'Fraunces', serif;
-    font-size: clamp(6rem, 18vw, 18rem);
-    font-weight: 900; color: transparent;
-    -webkit-text-stroke: 1px var(--light-gray);
-    white-space: nowrap; pointer-events: none; letter-spacing: -0.04em;
-    opacity: 0; animation: fadeIn 1s ease 0.2s forwards;
-  }
-  .hero-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 1.2rem; opacity: 0; animation: slideUp 0.8s ease 0.4s forwards; }
-  .hero-title { font-family: 'Fraunces', serif; font-size: clamp(3rem, 7vw, 7rem); font-weight: 900; letter-spacing: -0.03em; line-height: 0.95; margin-bottom: 1.5rem; opacity: 0; animation: slideUp 0.8s ease 0.6s forwards; }
-  .hero-title em { font-style: italic; color: var(--gray); }
-  .hero-count { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--gray); letter-spacing: 0.1em; opacity: 0; animation: slideUp 0.8s ease 0.8s forwards; }
-
-  /* FILTER */
-  .filter-bar {
-    padding: 0 4rem 3rem;
-    display: flex; gap: 1rem; flex-wrap: wrap;
-  }
-  .filter-btn {
-    font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
-    padding: 0.5rem 1.2rem; border-radius: 100px; border: 1px solid var(--line);
-    background: transparent; color: var(--gray); cursor: pointer; transition: all 0.2s;
-  }
-  .filter-btn:hover, .filter-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
-
-  /* GRID */
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    border-top: 1px solid var(--line);
-  }
-
-  .project-card {
-    border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
-    padding: 3.5rem; text-decoration: none; color: var(--black);
-    display: flex; flex-direction: column; gap: 1.5rem;
-    position: relative; overflow: hidden;
-    transition: background 0.3s;
-  }
-  .project-card:nth-child(2n) { border-right: none; }
-  .project-card:hover { background: var(--off); }
-  .project-card:hover .card-img { transform: scale(1.03); }
-  .project-card:hover .card-arrow { opacity: 1; transform: translate(4px, -4px); }
-
-  .card-header { display: flex; justify-content: space-between; align-items: flex-start; }
-  .card-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gray); letter-spacing: 0.1em; }
-  .card-arrow { font-size: 1.2rem; opacity: 0.2; transition: all 0.3s; }
-
-  .card-img-wrap { overflow: hidden; border-radius: 0.75rem; border: 1px solid var(--line); aspect-ratio: 16/9; background: var(--off); }
-  .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
-
-  /* placeholder screens */
-  .card-placeholder {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 0.8rem;
-  }
-  .placeholder-icon { font-size: 2.5rem; opacity: 0.3; }
-  .placeholder-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
-
-  .card-title { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
-  .card-desc { font-size: 0.9rem; color: var(--gray); line-height: 1.65; font-weight: 300; }
-  .card-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .tag { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.28rem 0.7rem; background: var(--white); border: 1px solid var(--line); border-radius: 100px; color: var(--gray); }
-
-  /* MORE COMING */
-  .more-card {
-    border-bottom: 1px solid var(--line);
-    padding: 3.5rem; display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 1rem; color: var(--gray);
-    grid-column: span 2;
-  }
-  .more-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; }
-  .more-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-style: italic; color: var(--light-gray); }
-
-  /* MOBILE */
-  @media(max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .hero, .filter-bar { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .project-card:nth-child(2n) { border-right: 1px solid var(--line); }
-    .more-card { grid-column: span 1; }
-  }
-
-  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-  @keyframes slideUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
-
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } .hero { padding: 7rem 1.4rem 2rem; } }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">INICIO</a>
-  <a href="index.html" class="nav-back">← Volver al portafolio</a>
-</nav>
-
-<div class="hero">
-  <div class="hero-bg">WEB</div>
-  <p class="hero-label">Jose Villarreal — Proyectos</p>
-  <h1 class="hero-title">Proyectos<br><em>Web.</em></h1>
-  <p class="hero-count">02 proyectos — Next.js · React · Go · Node</p>
+<div class="winbar">
+  <div class="winbar-lights"><span></span><span></span><span></span></div>
+  <div class="winbar-path"><a href="index.html" data-transition style="color:inherit">Jose Villarreal / </a><span class="seg-cur">Proyectos web</span><span class="car"></span></div>
+  <nav class="winbar-tabs">
+    <a href="index.html" data-transition>inicio</a>
+    <a href="snaps.html" data-transition>snaps</a>
+    <a href="infra.html" data-transition>infra</a>
+  </nav>
+  <div class="winbar-status"><span class="dot"></span><span data-clock>--:--:--</span></div>
 </div>
 
-<div class="filter-bar reveal">
-  <button class="filter-btn active">Todos</button>
-  <button class="filter-btn">Next.js</button>
-  <button class="filter-btn">React</button>
-  <button class="filter-btn">Fullstack</button>
-</div>
+<section class="hero">
+  <div class="eyebrow reveal">cd ~/proyectos/web</div>
+  <h1 class="hero-title reveal" data-delay="60">Proyectos <span class="accent">web.</span></h1>
+  <p class="hero-desc reveal" data-delay="120">Aplicaciones fullstack construidas con Next.js y React, del primer wireframe al deploy en producción, incluyendo la base de datos y la lógica de negocio detrás.</p>
+</section>
 
-<div class="projects-grid">
+<section style="padding-top:0;">
+  <div class="grid2">
 
-  <!-- DGSC -->
-  <a href="dgsc.html" class="project-card reveal">
-    <div class="card-header">
-      <span class="card-num">001</span>
-      <span class="card-arrow">↗</span>
-    </div>
-    <div class="card-img-wrap">
-      <img class="card-img" src="d1.webp" alt="DGSC — Disc Golf Score Card" />
-    </div>
-    <div class="card-title">DGSC</div>
-    <p class="card-desc">App web para tarjetas de puntaje de disc golf. Login, historial de partidas y ubicación del campo en mapa.</p>
-    <div class="card-tags">
-      <span class="tag">Next.js</span>
-      <span class="tag">Login</span>
-      <span class="tag">Maps</span>
-      <span class="tag">Fullstack</span>
-    </div>
-  </a>
+    <a href="dgsc.html" data-transition class="card reveal" style="color:inherit;">
+      <div class="card-shot"><img src="assets/img/dgsc-1.webp" alt="DGSC - Disc Golf Score Card" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="card-top"><span>001</span><span class="live">en producción</span></div>
+        <div class="card-title">DGSC</div>
+        <p class="card-desc">Tarjeta de puntaje para disc golf. Login, historial de rondas y ubicación del campo en mapa.</p>
+        <div class="card-tags"><span class="tag">Next.js</span><span class="tag">Auth</span><span class="tag">Maps</span></div>
+        <div class="card-cta">Ver proyecto <span>→</span></div>
+      </div>
+    </a>
 
-  <!-- COTIZACIONES -->
-  <a href="cotizaciones.html" class="project-card reveal">
-    <div class="card-header">
-      <span class="card-num">002</span>
-      <span class="card-arrow">↗</span>
-    </div>
-    <div class="card-img-wrap">
-      <img class="card-img" src="c1.jpg" alt="Cotizaciones" />
-    </div>
-    <div class="card-title">Cotizaciones</div>
-    <p class="card-desc">Generador de cotizaciones profesionales. Clientes, productos, servicios, cálculo de totales, exportación PDF y estadísticas.</p>
-    <div class="card-tags">
-      <span class="tag">React</span>
-      <span class="tag">PDF</span>
-      <span class="tag">Dashboard</span>
-      <span class="tag">Fullstack</span>
-    </div>
-  </a>
+    <a href="cotizaciones.html" data-transition class="card reveal" data-delay="80" style="color:inherit;">
+      <div class="card-shot"><img src="assets/img/cotiz-1.jpg" alt="Cotizaciones - generador de cotizaciones" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="card-top"><span>002</span><span class="live">en producción</span></div>
+        <div class="card-title">Cotizaciones</div>
+        <p class="card-desc">Generador de cotizaciones profesionales: clientes, catálogo, totales automáticos y exportación a PDF.</p>
+        <div class="card-tags"><span class="tag">React</span><span class="tag">PDF</span><span class="tag">Dashboard</span></div>
+        <div class="card-cta">Ver proyecto <span>→</span></div>
+      </div>
+    </a>
 
-  <div class="more-card">
-    <span class="more-label">Más proyectos próximamente</span>
   </div>
+  <div class="more-row reveal"># más proyectos en construcción</div>
+</section>
 
-</div>
+<footer>
+  <span>© 2026 Jose Villarreal</span>
+  <a href="index.html" data-transition>← volver al inicio</a>
+</footer>
 
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  reveals.forEach(el => obs.observe(el));
-
-  // Filter buttons (visual only)
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-</script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

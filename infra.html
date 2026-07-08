@@ -1,526 +1,174 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Cloud & Infra — Jose Villarreal</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cloud & Infra - Jose Villarreal</title>
+<link rel="icon" type="image/png" href="assets/img/icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700;1,9..144,900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --white: #ffffff; --off: #f5f4f1; --black: #0d0d0d;
-    --gray: #6b6b6b; --light-gray: #e8e6e1; --line: #d8d5ce;
-    --infra-dark: #0d1117; --infra-mid: #161b22;
-    --infra-border: #30363d; --infra-text: #8b949e;
-    --do-blue: #0080ff; --aws-orange: #ff9900;
-    --gh-green: #3fb950; --docker-blue: #1d97ed;
-    --redis-red: #dc382c;
+  .hero { padding: 9rem 4rem 3rem; }
+  .hero-title { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 6.5vw, 5.2rem); letter-spacing: -0.03em; line-height: 0.95; margin: 0.6rem 0 1.2rem; }
+  .hero-title .accent { color: var(--amber); }
+  .hero-desc { color: var(--text-dim); font-size: 1.05rem; line-height: 1.7; max-width: 560px; }
+  .hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
+
+  /* consola simulada de fondo, decorativa */
+  .console-deco {
+    border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface);
+    font-family: var(--mono); font-size: 0.78rem; padding: 1.4rem 1.6rem; margin-top: 2.2rem; color: var(--text-dim);
+    max-width: 640px;
   }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+  .console-deco .l1 { color: var(--text-faint); }
+  .console-deco .ok { color: var(--teal); }
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem 4rem;
-    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
-  .nav-back { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
-  .nav-back:hover { color: var(--black); }
+  .case { margin-bottom: 5rem; }
+  .case-head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.6rem; flex-wrap: wrap; }
+  .case-head h2 { font-family: var(--display); font-weight: 600; font-size: 1.7rem; }
+  .case-head .accent { color: var(--amber); }
+  .case-desc { color: var(--text-dim); line-height: 1.8; max-width: 680px; margin-bottom: 2rem; }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    background: var(--infra-dark);
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 0 4rem 5rem;
-    position: relative; overflow: hidden;
-  }
+  .arch-flow { display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding-bottom: 0.5rem; }
+  .arch-node { flex: 1; min-width: 200px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); padding: 1.4rem; }
+  .arch-node .icon { font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .arch-node h4 { font-family: var(--mono); font-size: 0.82rem; color: var(--teal); margin-bottom: 0.4rem; }
+  .arch-node p { color: var(--text-dim); font-size: 0.8rem; line-height: 1.5; }
+  .arch-arrow { display: flex; align-items: center; justify-content: center; padding: 0 0.9rem; color: var(--text-faint); font-family: var(--mono); }
 
-  /* Terminal decoration */
-  .hero-terminal {
-    position: absolute;
-    top: 7rem; right: 4rem;
-    width: 420px;
-    background: var(--infra-mid);
-    border: 1px solid var(--infra-border);
-    border-radius: 0.75rem;
-    overflow: hidden;
-    opacity: 0;
-    animation: slideLeft 1s ease 0.9s forwards;
-    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
-  }
-  .term-bar {
-    padding: 0.7rem 1rem;
-    background: #21262d;
-    border-bottom: 1px solid var(--infra-border);
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .term-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .term-dot.r { background: #ff5f57; }
-  .term-dot.y { background: #ffbd2e; }
-  .term-dot.g { background: #28c840; }
-  .term-title { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--infra-text); letter-spacing: 0.05em; margin-left: 0.5rem; }
-  .term-body { padding: 1.2rem 1.4rem; font-family: 'DM Mono', monospace; font-size: 0.7rem; line-height: 2; }
-  .t-prompt { color: var(--gh-green); }
-  .t-cmd { color: #e6edf3; }
-  .t-out { color: var(--infra-text); }
-  .t-success { color: var(--gh-green); }
-  .t-warning { color: var(--aws-orange); }
-  .t-blue { color: var(--do-blue); }
-  .t-cursor { display: inline-block; width: 8px; height: 14px; background: #e6edf3; opacity: 0.7; animation: blink 1s step-end infinite; vertical-align: middle; }
-  @keyframes blink { 0%,100%{opacity:0.7} 50%{opacity:0} }
+  .pipeline { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-top: 1.6rem; }
+  .pl-step { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.4rem; border-bottom: 1px solid var(--border-soft); font-family: var(--mono); font-size: 0.82rem; }
+  .pl-step:last-child { border-bottom: none; }
+  .pl-check { color: var(--teal); }
+  .pl-name { color: var(--text); flex: 1; }
+  .pl-desc { color: var(--text-faint); font-size: 0.76rem; }
+  .pl-time { color: var(--text-faint); font-size: 0.72rem; white-space: nowrap; }
 
-  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--do-blue); margin-bottom: 1.5rem; opacity: 0; animation: slideUp 0.8s ease 0.3s forwards; }
-  .hero-title { font-family: 'Fraunces', serif; font-size: clamp(3.5rem, 9vw, 9rem); font-weight: 900; line-height: 0.85; letter-spacing: -0.04em; color: var(--white); margin-bottom: 2rem; opacity: 0; animation: slideUp 0.9s ease 0.5s forwards; }
-  .hero-title em { font-style: italic; color: rgba(255,255,255,0.2); }
-  .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 440px; font-weight: 300; opacity: 0; animation: slideUp 0.8s ease 0.7s forwards; }
-  .hero-badges { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 2rem; opacity: 0; animation: slideUp 0.8s ease 0.9s forwards; }
-  .badge { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.8rem; border-radius: 4px; }
-  .badge.do { background: rgba(0,128,255,0.15); color: var(--do-blue); border: 1px solid rgba(0,128,255,0.3); }
-  .badge.aws { background: rgba(255,153,0,0.12); color: var(--aws-orange); border: 1px solid rgba(255,153,0,0.25); }
-  .badge.gh { background: rgba(63,185,80,0.12); color: var(--gh-green); border: 1px solid rgba(63,185,80,0.25); }
-  .badge.docker { background: rgba(29,151,237,0.12); color: var(--docker-blue); border: 1px solid rgba(29,151,237,0.25); }
-  .badge.redis { background: rgba(220,56,44,0.12); color: var(--redis-red); border: 1px solid rgba(220,56,44,0.25); }
+  .tools-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .tool-item { background: var(--surface); padding: 1.6rem 1.2rem; text-align: center; }
+  .tool-item .icon { font-size: 1.6rem; margin-bottom: 0.7rem; }
+  .tool-item h3 { font-family: var(--display); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .tool-item p { color: var(--text-dim); font-size: 0.76rem; line-height: 1.5; }
 
-  /* SECTIONS */
-  section { padding: 7rem 4rem; }
-  .divider { width: 100%; height: 1px; background: var(--line); }
-  .section-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
-
-  /* CASES */
-  .cases { display: flex; flex-direction: column; gap: 0; }
-
-  .case-item {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    border-bottom: 1px solid var(--line);
-  }
-  .case-item:first-child { border-top: 1px solid var(--line); }
-
-  .case-sidebar {
-    padding: 3rem 2.5rem 3rem 0;
-    border-right: 1px solid var(--line);
-    display: flex; flex-direction: column; justify-content: space-between;
-  }
-  .case-project-name { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-  .case-project-type { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); }
-  .case-tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem; }
-  .case-tag { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 3px; }
-  .tag-do { background: rgba(0,128,255,0.08); color: var(--do-blue); border: 1px solid rgba(0,128,255,0.2); }
-  .tag-aws { background: rgba(255,153,0,0.08); color: var(--aws-orange); border: 1px solid rgba(255,153,0,0.2); }
-  .tag-gh { background: rgba(63,185,80,0.08); color: var(--gh-green); border: 1px solid rgba(63,185,80,0.2); }
-  .tag-docker { background: rgba(29,151,237,0.08); color: var(--docker-blue); border: 1px solid rgba(29,151,237,0.2); }
-  .tag-redis { background: rgba(220,56,44,0.08); color: var(--redis-red); border: 1px solid rgba(220,56,44,0.2); }
-  .tag-neutral { background: var(--off); color: var(--gray); border: 1px solid var(--line); }
-
-  .case-body { padding: 3rem 0 3rem 3rem; display: flex; flex-direction: column; gap: 2.5rem; }
-
-  .case-desc { font-size: 0.95rem; line-height: 1.8; color: var(--gray); font-weight: 300; max-width: 600px; }
-
-  /* Architecture diagram */
-  .arch-diagram {
-    background: var(--infra-dark);
-    border: 1px solid var(--infra-border);
-    border-radius: 0.75rem;
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 0;
-    overflow-x: auto;
-  }
-
-  .arch-node {
-    display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
-    min-width: 100px; text-align: center;
-  }
-  .arch-icon {
-    width: 48px; height: 48px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem; border: 1px solid;
-  }
-  .arch-icon.do { background: rgba(0,128,255,0.1); border-color: rgba(0,128,255,0.3); }
-  .arch-icon.aws { background: rgba(255,153,0,0.1); border-color: rgba(255,153,0,0.3); }
-  .arch-icon.gh { background: rgba(63,185,80,0.1); border-color: rgba(63,185,80,0.3); }
-  .arch-icon.docker { background: rgba(29,151,237,0.1); border-color: rgba(29,151,237,0.3); }
-  .arch-icon.redis { background: rgba(220,56,44,0.1); border-color: rgba(220,56,44,0.3); }
-  .arch-icon.neutral { background: rgba(255,255,255,0.04); border-color: var(--infra-border); }
-
-  .arch-node-name { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: #e6edf3; letter-spacing: 0.05em; }
-  .arch-node-sub { font-family: 'DM Mono', monospace; font-size: 0.52rem; color: var(--infra-text); }
-
-  .arch-connector {
-    flex: 1; min-width: 30px;
-    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
-  }
-  .arch-line {
-    width: 100%; height: 1px;
-    background: linear-gradient(90deg, var(--infra-border), rgba(255,255,255,0.15), var(--infra-border));
-    position: relative;
-  }
-  .arch-line::after {
-    content: '▶'; position: absolute; right: -6px; top: -7px;
-    color: var(--infra-border); font-size: 0.6rem;
-  }
-  .arch-connector-label { font-family: 'DM Mono', monospace; font-size: 0.48rem; color: var(--infra-text); letter-spacing: 0.06em; white-space: nowrap; }
-
-  /* Pipeline steps */
-  .pipeline {
-    display: flex; flex-direction: column; gap: 0;
-    background: var(--infra-dark); border: 1px solid var(--infra-border); border-radius: 0.75rem;
-    overflow: hidden;
-  }
-  .pipeline-step {
-    display: flex; align-items: flex-start; gap: 1.2rem;
-    padding: 1.1rem 1.5rem;
-    border-bottom: 1px solid var(--infra-border);
-    transition: background 0.2s;
-  }
-  .pipeline-step:last-child { border-bottom: none; }
-  .pipeline-step:hover { background: rgba(255,255,255,0.02); }
-
-  .step-status {
-    width: 18px; height: 18px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.55rem; flex-shrink: 0; margin-top: 1px;
-  }
-  .step-status.done { background: rgba(63,185,80,0.15); color: var(--gh-green); border: 1px solid rgba(63,185,80,0.3); }
-  .step-status.run { background: rgba(255,153,0,0.15); color: var(--aws-orange); border: 1px solid rgba(255,153,0,0.3); animation: pulseOrange 1.5s ease infinite; }
-  @keyframes pulseOrange { 0%,100%{opacity:1} 50%{opacity:0.5} }
-
-  .step-info { flex: 1; }
-  .step-name { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #e6edf3; letter-spacing: 0.04em; margin-bottom: 0.2rem; }
-  .step-detail { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--infra-text); }
-  .step-time { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: var(--infra-text); flex-shrink: 0; }
-
-  /* STACK SUMMARY */
-  .stack-section { background: var(--off); }
-  .stack-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--line); border-radius: 1rem; overflow: hidden; }
-  .stack-cell {
-    padding: 2.5rem 2rem; border-right: 1px solid var(--line);
-    transition: background 0.2s;
-  }
-  .stack-cell:last-child { border-right: none; }
-  .stack-cell:hover { background: var(--white); }
-  .stack-cell-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
-  .stack-cell-name { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; }
-  .stack-cell-desc { font-size: 0.78rem; color: var(--gray); line-height: 1.55; font-weight: 300; }
-
-  /* FOOTER DARK */
-  .footer-section { background: var(--infra-dark); }
-  .footer-section .section-label { color: rgba(255,255,255,0.15); }
-  .footer-section .section-label::after { background: rgba(255,255,255,0.08); }
-  .footer-title { font-family: 'Fraunces', serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 900; letter-spacing: -0.03em; color: white; margin-bottom: 3rem; line-height: 1; }
-  .footer-title em { font-style: italic; color: rgba(255,255,255,0.2); }
-  .footer-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-  .footer-link { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: white; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.3rem; transition: border-color 0.2s; }
-  .footer-link:hover { border-color: white; }
-
-  @keyframes slideUp { from{opacity:0;transform:translateY(28px);} to{opacity:1;transform:translateY(0);} }
-  @keyframes slideLeft { from{opacity:0;transform:translateX(30px);} to{opacity:1;transform:translateX(0);} }
-  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  @media(max-width:900px) {
-    nav { padding: 1.2rem 1.5rem; }
-    section { padding: 5rem 1.5rem; }
-    .hero { padding: 8rem 1.5rem 4rem; }
-    .hero-terminal { display: none; }
-    .case-item { grid-template-columns: 1fr; }
-    .case-sidebar { border-right: none; border-bottom: 1px solid var(--line); padding: 2rem 0; }
-    .case-body { padding: 2rem 0; }
-    .stack-grid { grid-template-columns: repeat(2, 1fr); }
-    .stack-cell:nth-child(2n) { border-right: none; }
-    .stack-cell { border-bottom: 1px solid var(--line); }
+  @media (max-width: 860px) {
+    .hero { padding: 7rem 1.4rem 2rem; }
+    .arch-flow { flex-direction: column; }
+    .arch-arrow { transform: rotate(90deg); padding: 0.4rem 0; }
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    .pl-step { flex-wrap: wrap; }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">INICIO</a>
-  <a href="index.html" class="nav-back">← Portafolio</a>
-</nav>
+<div class="winbar">
+  <div class="winbar-lights"><span></span><span></span><span></span></div>
+  <div class="winbar-path"><a href="index.html" data-transition style="color:inherit">Jose Villarreal / </a><span class="seg-cur">Cloud &amp; Infra</span><span class="car"></span></div>
+  <nav class="winbar-tabs">
+    <a href="index.html" data-transition>inicio</a>
+    <a href="proyectos.html" data-transition>proyectos</a>
+    <a href="snaps.html" data-transition>snaps</a>
+  </nav>
+  <div class="winbar-status"><span class="dot"></span><span data-clock>--:--:--</span></div>
+</div>
 
-<!-- HERO -->
 <section class="hero">
-
-  <div class="hero-terminal">
-    <div class="term-bar">
-      <div class="term-dot r"></div>
-      <div class="term-dot y"></div>
-      <div class="term-dot g"></div>
-      <span class="term-title">github-actions — deploy.yml</span>
-    </div>
-    <div class="term-body">
-      <div><span class="t-prompt">▶</span> <span class="t-cmd">Run flutter build apk --release</span></div>
-      <div><span class="t-out">Building APK for release...</span></div>
-      <div><span class="t-success">✓ Built build/app/outputs/apk/release</span></div>
-      <div style="margin-top:0.3rem"><span class="t-prompt">▶</span> <span class="t-cmd">ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8aeeeffae6e5f3caf9e4ebfaf9a4eee5">[email&#160;protected]</a></span></div>
-      <div><span class="t-blue">Connecting to DigitalOcean droplet...</span></div>
-      <div><span class="t-success">✓ Connected</span></div>
-      <div style="margin-top:0.3rem"><span class="t-prompt">▶</span> <span class="t-cmd">docker compose up -d</span></div>
-      <div><span class="t-out">Starting go-api      ... </span><span class="t-success">done</span></div>
-      <div><span class="t-out">Starting redis       ... </span><span class="t-success">done</span></div>
-      <div style="margin-top:0.3rem"><span class="t-prompt">$</span> <span class="t-cmd"> </span><span class="t-cursor"></span></div>
-    </div>
+  <div class="eyebrow reveal">docker compose up -d <span class="glow">// cloud &amp; devops</span></div>
+  <h1 class="hero-title reveal" data-delay="60">Cloud &amp; <span class="accent">Infra.</span></h1>
+  <p class="hero-desc reveal" data-delay="120">Arquitecturas reales en producción: deploy automatizado, servidores administrados y servicios en la nube, sin humo, sin capturas de marketing.</p>
+  <div class="hero-tags reveal" data-delay="160">
+    <span class="tag">DigitalOcean</span><span class="tag">AWS EC2</span><span class="tag">GitHub Actions</span><span class="tag">Docker</span><span class="tag">Redis</span>
   </div>
-
-  <p class="hero-eyebrow">Jose Villarreal — Infraestructura</p>
-  <h1 class="hero-title">Cloud<br>E <em>Infra</em></h1>
-  <p class="hero-sub">Arquitecturas reales en producción. Deploy automatizado, servidores administrados y servicios en la nube.</p>
-  <div class="hero-badges">
-    <span class="badge do">DigitalOcean</span>
-    <span class="badge aws">AWS EC2</span>
-    <span class="badge gh">GitHub Actions</span>
-    <span class="badge docker">Docker</span>
-    <span class="badge redis">Redis</span>
+  <div class="console-deco reveal" data-delay="220">
+    <div class="l1">$ github-actions - deploy.yml</div>
+    <div>▶ flutter build apk --release</div>
+    <div class="ok">✓ built build/app/outputs/apk/release</div>
+    <div>▶ ssh droplet.digitalocean.com</div>
+    <div class="ok">✓ connected</div>
+    <div>▶ docker compose up -d</div>
+    <div class="ok">✓ go-api ... redis ... running</div>
   </div>
 </section>
 
-<!-- CASES -->
-<section id="casos">
-  <div class="section-label">01 — Casos reales</div>
-  <div class="cases">
+<section>
+  <div class="eyebrow reveal" style="margin-bottom:2.5rem;">01 // casos reales</div>
 
-    <!-- SNAPS -->
-    <div class="case-item reveal">
-      <div class="case-sidebar">
-        <div>
-          <div class="case-project-name">Snaps</div>
-          <div class="case-project-type">App móvil — Backend</div>
-          <div class="case-tech-tags">
-            <span class="case-tag tag-do">DigitalOcean</span>
-            <span class="case-tag tag-redis">Redis</span>
-            <span class="case-tag tag-gh">GitHub Actions</span>
-            <span class="case-tag tag-neutral">Go API</span>
-          </div>
-        </div>
-      </div>
-      <div class="case-body">
-        <p class="case-desc">El backend de Snaps corre en un Droplet de DigitalOcean. La API en Go y Redis comparten el servidor, coordinados con Docker Compose. GitHub Actions maneja el CI/CD: cada push a <code style="font-family:'Space Mono',monospace;font-size:0.85em;background:var(--off);padding:0.1rem 0.4rem;border-radius:3px;">main</code> compila la app de Flutter, corre los tests y despliega automáticamente al servidor.</p>
+  <div class="case">
+    <div class="case-head reveal">
+      <h2>Snaps <span class="accent">- backend</span></h2>
+      <span class="tag">DigitalOcean</span><span class="tag">Redis</span><span class="tag">GitHub Actions</span>
+    </div>
+    <p class="case-desc reveal" data-delay="60">El backend de Snaps corre en un Droplet de DigitalOcean. La API en Go y Redis comparten servidor, coordinados con Docker Compose. GitHub Actions maneja el CI/CD: cada push a <code>main</code> compila la app de Flutter, corre los tests y despliega automáticamente.</p>
 
-        <div class="arch-diagram">
-          <div class="arch-node">
-            <div class="arch-icon gh">📱</div>
-            <div class="arch-node-name">Flutter App</div>
-            <div class="arch-node-sub">iOS / Android</div>
-          </div>
-          <div class="arch-connector">
-            <div class="arch-line"></div>
-            <div class="arch-connector-label">HTTPS</div>
-          </div>
-          <div class="arch-node">
-            <div class="arch-icon do">🌊</div>
-            <div class="arch-node-name">Droplet DO</div>
-            <div class="arch-node-sub">Ubuntu</div>
-          </div>
-          <div class="arch-connector">
-            <div class="arch-line"></div>
-            <div class="arch-connector-label">interno</div>
-          </div>
-          <div class="arch-node">
-            <div class="arch-icon neutral">⚙️</div>
-            <div class="arch-node-name">Go API</div>
-            <div class="arch-node-sub">Docker container</div>
-          </div>
-          <div class="arch-connector">
-            <div class="arch-line"></div>
-            <div class="arch-connector-label">127.0.0.1</div>
-          </div>
-          <div class="arch-node">
-            <div class="arch-icon redis">⚡</div>
-            <div class="arch-node-name">Redis</div>
-            <div class="arch-node-sub">TTL nativo</div>
-          </div>
-        </div>
-
-        <div>
-          <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.8rem;">Pipeline CI/CD — GitHub Actions</div>
-          <div class="pipeline">
-            <div class="pipeline-step">
-              <div class="step-status done">✓</div>
-              <div class="step-info">
-                <div class="step-name">checkout & setup</div>
-                <div class="step-detail">actions/checkout · flutter-action · setup-go</div>
-              </div>
-              <div class="step-time">~12s</div>
-            </div>
-            <div class="pipeline-step">
-              <div class="step-status done">✓</div>
-              <div class="step-info">
-                <div class="step-name">flutter build apk --release</div>
-                <div class="step-detail">Compilación nativa con caché de dependencias</div>
-              </div>
-              <div class="step-time">~2m 10s</div>
-            </div>
-            <div class="pipeline-step">
-              <div class="step-status done">✓</div>
-              <div class="step-info">
-                <div class="step-name">go build & test</div>
-                <div class="step-detail">Build del backend + tests unitarios</div>
-              </div>
-              <div class="step-time">~28s</div>
-            </div>
-            <div class="pipeline-step">
-              <div class="step-status done">✓</div>
-              <div class="step-info">
-                <div class="step-name">deploy to DigitalOcean</div>
-                <div class="step-detail">SSH al droplet → git pull → docker compose up -d</div>
-              </div>
-              <div class="step-time">~18s</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="arch-flow reveal" data-delay="100">
+      <div class="arch-node"><div class="icon">📱</div><h4>flutter app</h4><p>iOS / Android - HTTPS</p></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node"><div class="icon">🌊</div><h4>droplet - do</h4><p>Ubuntu, red interna</p></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node"><div class="icon">⚙️</div><h4>go api</h4><p>contenedor Docker · 127.0.0.1</p></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node"><div class="icon">⚡</div><h4>redis</h4><p>TTL nativo</p></div>
     </div>
 
-    <!-- DGSC -->
-    <div class="case-item reveal">
-      <div class="case-sidebar">
-        <div>
-          <div class="case-project-name">DGSC</div>
-          <div class="case-project-type">App web — Fullstack</div>
-          <div class="case-tech-tags">
-            <span class="case-tag tag-aws">AWS EC2</span>
-            <span class="case-tag tag-docker">Docker</span>
-            <span class="case-tag tag-neutral">Next.js</span>
-          </div>
-        </div>
-      </div>
-      <div class="case-body">
-        <p class="case-desc">DGSC corre en una instancia EC2 de AWS. La app de Next.js está containerizada con Docker, lo que hace el deploy reproducible y el entorno idéntico entre desarrollo y producción. EC2 expone la app directamente al exterior vía puerto 443 con certificado SSL.</p>
-
-        <div class="arch-diagram">
-          <div class="arch-node">
-            <div class="arch-icon neutral">🌐</div>
-            <div class="arch-node-name">Browser</div>
-            <div class="arch-node-sub">Usuario</div>
-          </div>
-          <div class="arch-connector">
-            <div class="arch-line"></div>
-            <div class="arch-connector-label">HTTPS 443</div>
-          </div>
-          <div class="arch-node">
-            <div class="arch-icon aws">☁️</div>
-            <div class="arch-node-name">EC2</div>
-            <div class="arch-node-sub">AWS — t3.micro</div>
-          </div>
-          <div class="arch-connector">
-            <div class="arch-line"></div>
-            <div class="arch-connector-label">docker run</div>
-          </div>
-          <div class="arch-node">
-            <div class="arch-icon docker">🐳</div>
-            <div class="arch-node-name">Container</div>
-            <div class="arch-node-sub">Docker</div>
-          </div>
-          <div class="arch-connector">
-            <div class="arch-line"></div>
-            <div class="arch-connector-label">puerto 3000</div>
-          </div>
-          <div class="arch-node">
-            <div class="arch-icon neutral">⚡</div>
-            <div class="arch-node-name">Next.js</div>
-            <div class="arch-node-sub">SSR + API Routes</div>
-          </div>
-        </div>
-
-        <div>
-          <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.8rem;">Flujo de deploy</div>
-          <div class="pipeline">
-            <div class="pipeline-step">
-              <div class="step-status done">✓</div>
-              <div class="step-info">
-                <div class="step-name">docker build</div>
-                <div class="step-detail">Imagen de Next.js con multi-stage build</div>
-              </div>
-              <div class="step-time">~1m 40s</div>
-            </div>
-            <div class="pipeline-step">
-              <div class="step-status done">✓</div>
-              <div class="step-info">
-                <div class="step-name">push to registry</div>
-                <div class="step-detail">Imagen publicada en Docker Hub / ECR</div>
-              </div>
-              <div class="step-time">~45s</div>
-            </div>
-            <div class="pipeline-step">
-              <div class="step-status done">✓</div>
-              <div class="step-info">
-                <div class="step-name">pull & run en EC2</div>
-                <div class="step-detail">SSH al servidor → docker pull → docker run -d -p 443:3000</div>
-              </div>
-              <div class="step-time">~22s</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="pipeline reveal" data-delay="140">
+      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">checkout &amp; setup</span><span class="pl-desc">actions/checkout · flutter-action · setup-go</span><span class="pl-time">~12s</span></div>
+      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">flutter build apk --release</span><span class="pl-desc">compilación nativa con caché de dependencias</span><span class="pl-time">~2m 10s</span></div>
+      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">go build &amp; test</span><span class="pl-desc">build del backend + tests unitarios</span><span class="pl-time">~28s</span></div>
+      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">deploy to DigitalOcean</span><span class="pl-desc">ssh al droplet → git pull → docker compose up -d</span><span class="pl-time">~18s</span></div>
     </div>
-
   </div>
-</section>
 
-<div class="divider"></div>
+  <div class="case">
+    <div class="case-head reveal">
+      <h2>DGSC <span class="accent">- app web</span></h2>
+      <span class="tag">AWS EC2</span><span class="tag">Docker</span><span class="tag">Next.js</span>
+    </div>
+    <p class="case-desc reveal" data-delay="60">DGSC corre en una instancia EC2 de AWS. La app de Next.js está containerizada con Docker, lo que hace el deploy reproducible y el entorno idéntico entre desarrollo y producción. EC2 expone la app directamente vía puerto 443 con certificado SSL.</p>
 
-<!-- STACK SUMMARY -->
-<section class="stack-section" id="stack">
-  <div class="section-label">02 — Herramientas</div>
-  <div class="stack-grid">
-    <div class="stack-cell">
-      <div class="stack-cell-icon">🌊</div>
-      <div class="stack-cell-name">DigitalOcean</div>
-      <p class="stack-cell-desc">Droplets para backends y APIs. Sencillo de administrar, predecible en costos y con buen rendimiento para proyectos de tamaño medio.</p>
+    <div class="arch-flow reveal" data-delay="100">
+      <div class="arch-node"><div class="icon">🌐</div><h4>browser</h4><p>usuario · HTTPS 443</p></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node"><div class="icon">☁️</div><h4>ec2 - aws</h4><p>t3.micro · docker run</p></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node"><div class="icon">🐳</div><h4>contenedor</h4><p>Docker · puerto 3000</p></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node"><div class="icon">⚡</div><h4>next.js</h4><p>SSR + API Routes</p></div>
     </div>
-    <div class="stack-cell">
-      <div class="stack-cell-icon">☁️</div>
-      <div class="stack-cell-name">AWS EC2</div>
-      <p class="stack-cell-desc">Instancias para aplicaciones web. Flexibilidad en tipo de instancia, integración con otros servicios de AWS y control total del servidor.</p>
-    </div>
-    <div class="stack-cell">
-      <div class="stack-cell-icon">🐳</div>
-      <div class="stack-cell-name">Docker</div>
-      <p class="stack-cell-desc">Containerización de apps para que el entorno sea idéntico en dev y producción. Simplifica el deploy y elimina el clásico "en mi máquina funciona".</p>
-    </div>
-    <div class="stack-cell">
-      <div class="stack-cell-icon">⚙️</div>
-      <div class="stack-cell-name">GitHub Actions</div>
-      <p class="stack-cell-desc">CI/CD automatizado con caché de dependencias. Cada push dispara build, tests y deploy sin intervención manual.</p>
-    </div>
-    <div class="stack-cell">
-      <div class="stack-cell-icon">⚡</div>
-      <div class="stack-cell-name">Redis</div>
-      <p class="stack-cell-desc">Almacenamiento en memoria con TTL nativo para la expiración de notas en Snaps. Alta velocidad y cero overhead para datos temporales.</p>
+
+    <div class="pipeline reveal" data-delay="140">
+      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">docker build</span><span class="pl-desc">imagen de Next.js con multi-stage build</span><span class="pl-time">~1m 40s</span></div>
+      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">push to registry</span><span class="pl-desc">imagen publicada en Docker Hub / ECR</span><span class="pl-time">~45s</span></div>
+      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">pull &amp; run en EC2</span><span class="pl-desc">ssh al servidor → docker pull → docker run -d -p 443:3000</span><span class="pl-time">~22s</span></div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<section class="footer-section">
-  <div class="section-label" style="color:rgba(255,255,255,0.15)">03 — Más</div>
-  <h2 class="footer-title reveal">Ver<br><em>proyectos.</em></h2>
-  <div class="footer-links reveal">
-    <a href="proyectos.html" class="footer-link">Proyectos web →</a>
-    <a href="snaps.html" class="footer-link">Snaps →</a>
-    <a href="index.html" class="footer-link">Portafolio →</a>
+<section style="padding-top:0;">
+  <div class="eyebrow reveal" style="margin-bottom:2rem;">02 // herramientas</div>
+  <div class="tools-grid reveal">
+    <div class="tool-item"><div class="icon">🌊</div><h3>DigitalOcean</h3><p>Droplets para backends y APIs. Costos predecibles, buen rendimiento.</p></div>
+    <div class="tool-item"><div class="icon">☁️</div><h3>AWS EC2</h3><p>Instancias para apps web, con integración al resto del ecosistema AWS.</p></div>
+    <div class="tool-item"><div class="icon">🐳</div><h3>Docker</h3><p>Mismo entorno en dev y producción, sin el clásico "en mi máquina sí funciona".</p></div>
+    <div class="tool-item"><div class="icon">⚙️</div><h3>GitHub Actions</h3><p>CI/CD automatizado: cada push dispara build, tests y deploy.</p></div>
+    <div class="tool-item"><div class="icon">⚡</div><h3>Redis</h3><p>Almacenamiento en memoria con TTL nativo para datos temporales.</p></div>
   </div>
 </section>
 
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), (i % 3) * 100);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.06 });
-  reveals.forEach(el => obs.observe(el));
-</script>
+<section id="contacto" style="text-align:center;">
+  <h2 style="font-family:var(--display); font-weight:600; font-size:clamp(1.8rem,4vw,2.8rem);" class="reveal">¿Necesitas llevar tu app a <span style="color:var(--amber)">producción?</span></h2>
+  <div class="reveal" data-delay="80" style="margin-top:1.6rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
+    <a href="proyectos.html" data-transition class="btn magnetic primary">Ver proyectos web</a>
+    <a href="index.html#contacto" data-transition class="btn magnetic">Hablemos de tu proyecto</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Jose Villarreal</span>
+  <a href="index.html" data-transition>← volver al inicio</a>
+</footer>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>

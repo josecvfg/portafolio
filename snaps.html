@@ -2,739 +2,161 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Snaps — Jose Villarreal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Snaps - Jose Villarreal</title>
+<link rel="icon" type="image/png" href="assets/img/icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700;1,9..144,900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  .hero { padding: 9rem 4rem 3rem; }
+  .hero-grid { display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 3rem; align-items: end; }
+  .hero-title { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 6.5vw, 5.2rem); letter-spacing: -0.03em; line-height: 0.95; margin: 0.6rem 0 1.2rem; }
+  .hero-title .accent { color: var(--amber); }
+  .hero-desc { color: var(--text-dim); font-size: 1.05rem; line-height: 1.7; max-width: 520px; }
+  .hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
 
-  :root {
-    --white: #ffffff;
-    --off: #f5f4f1;
-    --black: #0d0d0d;
-    --gray: #6b6b6b;
-    --light-gray: #e8e6e1;
-    --line: #d8d5ce;
-    --snaps-warm: #f0ebe3;
-    --snaps-accent: #c8825a;
-    --snaps-dark: #1c1612;
-  }
+  .about-wrap { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3.5rem; align-items: start; }
+  .about-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; margin-bottom: 1.3rem; line-height: 1.3; }
+  .about-title .accent { color: var(--teal); }
+  .about-text { color: var(--text-dim); line-height: 1.85; }
+  .about-text p + p { margin-top: 1rem; }
 
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--white);
-    color: var(--black);
-    overflow-x: hidden;
-  }
+  /* device frames */
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; max-width: 1000px; margin: 2rem auto 0; }
+  .device { border: 1px solid var(--border); border-radius: 18px; padding: 10px; background: var(--surface); }
+  .device-screen { border-radius: 10px; overflow: hidden; aspect-ratio: 9/17; background: var(--bg-soft); }
+  .device-screen img { width: 100%; height: 100%; object-fit: contain; transition: transform .6s var(--ease); }
+  .device:hover .device-screen img { transform: scale(1.03); }
+  .device-label { font-family: var(--mono); font-size: 0.68rem; color: var(--text-faint); text-align: center; padding-top: 0.7rem; }
 
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 4rem;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav-logo {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    color: var(--black);
-    text-decoration: none;
-  }
-  .nav-back {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gray);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.2s, gap 0.2s;
-  }
-  .nav-back:hover { color: var(--black); gap: 0.8rem; }
+  /* features */
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .feat-item { background: var(--surface); padding: 1.8rem; }
+  .feat-item .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); margin-bottom: 1rem; }
+  .feat-item h3 { font-family: var(--display); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .feat-item p { color: var(--text-dim); font-size: 0.86rem; line-height: 1.6; }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    background: var(--snaps-dark);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 4rem 5rem;
-    position: relative;
-    overflow: hidden;
-  }
+  /* architecture */
+  .arch-flow { display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding-bottom: 0.5rem; }
+  .arch-node { flex: 1; min-width: 220px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); padding: 1.5rem; }
+  .arch-node .icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+  .arch-node h4 { font-family: var(--mono); font-size: 0.85rem; color: var(--teal); margin-bottom: 0.4rem; }
+  .arch-node p { color: var(--text-dim); font-size: 0.82rem; line-height: 1.55; }
+  .arch-arrow { display: flex; align-items: center; justify-content: center; padding: 0 1rem; color: var(--text-faint); font-family: var(--mono); font-size: 1.1rem; }
+  .arch-detail { margin-top: 1.4rem; }
+  .arch-detail .manifest-row { flex-direction: column; gap: 0.3rem; }
+  .arch-detail .manifest-key { width: auto; color: var(--amber); }
 
-  .hero-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-  }
-  .orb1 {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(200,130,90,0.25) 0%, transparent 70%);
-    top: 10%; right: -100px;
-    animation: float 8s ease-in-out infinite;
-  }
-  .orb2 {
-    width: 350px; height: 350px;
-    background: radial-gradient(circle, rgba(200,130,90,0.12) 0%, transparent 70%);
-    bottom: 20%; left: -50px;
-    animation: float 10s ease-in-out infinite reverse;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-30px); }
-  }
-
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--snaps-accent);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: slideUp 0.8s ease 0.3s forwards;
-  }
-
-  .hero-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(5rem, 14vw, 14rem);
-    font-weight: 900;
-    line-height: 0.85;
-    letter-spacing: -0.04em;
-    color: var(--white);
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: slideUp 0.9s ease 0.5s forwards;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--snaps-accent);
-  }
-
-  .hero-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    opacity: 0;
-    animation: slideUp 0.8s ease 0.8s forwards;
-  }
-
-  .hero-tagline {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    color: rgba(255,255,255,0.5);
-    max-width: 380px;
-    line-height: 1.5;
-  }
-
-  .hero-tags {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  .htag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.4rem 0.9rem;
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 100px;
-    color: rgba(255,255,255,0.5);
-  }
-
-  .hero-timer {
-    position: absolute;
-    top: 50%;
-    right: 4rem;
-    transform: translateY(-50%);
-    text-align: right;
-    opacity: 0;
-    animation: fadeIn 1s ease 1.2s forwards;
-  }
-
-  .timer-display {
-    font-family: 'DM Mono', monospace;
-    font-size: 3rem;
-    color: rgba(255,255,255,0.08);
-    letter-spacing: 0.05em;
-    line-height: 1;
-  }
-
-  .timer-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.15);
-    margin-top: 0.4rem;
-  }
-
-  /* SECTIONS */
-  section { padding: 7rem 4rem; }
-
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 3rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
-
-  .divider { width: 100%; height: 1px; background: var(--line); }
-
-  /* OVERVIEW */
-  .overview-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
-
-  .overview-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2rem, 4vw, 3.8rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-  .overview-title em { font-style: italic; color: var(--gray); }
-
-  .overview-text {
-    font-size: 1rem;
-    line-height: 1.85;
-    color: var(--gray);
-    font-weight: 300;
-  }
-  .overview-text p + p { margin-top: 1.2rem; }
-
-  .overview-meta { display: flex; flex-direction: column; gap: 2rem; }
-
-  .meta-item {}
-  .meta-key {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 0.5rem;
-  }
-  .meta-val {
-    font-family: 'Fraunces', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-
-  /* MOCKUPS */
-  .mockups-section { background: var(--snaps-warm); }
-
-  .mockups-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-    margin-top: 1rem;
-    align-items: end;
-  }
-
-  .mockup-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .mockup-wrap:nth-child(2) {
-    transform: translateY(-2rem);
-  }
-
-  .mockup-img {
-    width: 100%;
-    max-width: 280px;
-    border-radius: 1.5rem;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.18), 0 8px 24px rgba(0,0,0,0.1);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    display: block;
-  }
-
-  .mockup-img:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 40px 100px rgba(0,0,0,0.22), 0 12px 32px rgba(0,0,0,0.12);
-  }
-
-  .mockup-caption {
-    text-align: center;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--gray);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 1.2rem;
-  }
-
-  /* ARCHITECTURE */
-  .arch-section { background: var(--off); }
-
-  .arch-diagram {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1rem;
-    padding: 3rem 0;
-  }
-
-  .arch-node {
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    padding: 2rem 1.5rem;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .arch-node:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-  }
-
-  .arch-node-icon {
-    font-size: 2rem;
-    margin-bottom: 0.8rem;
-    display: block;
-  }
-
-  .arch-node-title {
-    font-family: 'Fraunces', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.4rem;
-  }
-
-  .arch-node-sub {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: var(--snaps-accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-  }
-
-  .arch-node-desc {
-    font-size: 0.8rem;
-    color: var(--gray);
-    line-height: 1.5;
-  }
-
-  .arch-arrow {
-    font-size: 1.5rem;
-    color: var(--light-gray);
-    text-align: center;
-    font-family: 'DM Mono', monospace;
-  }
-
-  .arch-details {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 0.5rem;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: 1rem;
-    overflow: hidden;
-  }
-
-  .arch-detail-item {
-    background: var(--white);
-    padding: 2rem;
-  }
-
-  .adi-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--snaps-accent);
-    margin-bottom: 0.6rem;
-  }
-
-  .adi-title {
-    font-family: 'Fraunces', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-
-  .adi-text {
-    font-size: 0.85rem;
-    color: var(--gray);
-    line-height: 1.6;
-  }
-
-  /* FEATURES */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-    margin-top: 1rem;
-  }
-
-  .feature-item { border-top: 2px solid var(--line); padding-top: 1.5rem; transition: border-color 0.3s; }
-  .feature-item:hover { border-top-color: var(--snaps-accent); }
-
-  .feature-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--gray);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.8rem;
-  }
-
-  .feature-title {
-    font-family: 'Fraunces', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 0.6rem;
-    letter-spacing: -0.01em;
-  }
-
-  .feature-desc {
-    font-size: 0.88rem;
-    color: var(--gray);
-    line-height: 1.65;
-    font-weight: 300;
-  }
-
-  /* LINKS */
-  .links-section { background: var(--snaps-dark); }
-  .links-section .section-label { color: rgba(255,255,255,0.2); }
-  .links-section .section-label::after { background: rgba(255,255,255,0.1); }
-
-  .links-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2.5rem, 5vw, 5rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    color: white;
-    margin-bottom: 3rem;
-    line-height: 1;
-  }
-  .links-title em { font-style: italic; color: var(--snaps-accent); }
-
-  .links-row {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .project-link {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 1rem 1.8rem;
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 100px;
-    text-decoration: none;
-    color: white;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
-  }
-  .project-link:hover {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(255,255,255,0.3);
-    transform: translateY(-2px);
-  }
-  .project-link.primary {
-    background: var(--snaps-accent);
-    border-color: var(--snaps-accent);
-  }
-  .project-link.primary:hover {
-    background: #d4906a;
-    border-color: #d4906a;
-  }
-
-  .nav-divider {
-    color: rgba(255,255,255,0.15);
-    padding: 1rem 2rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.9rem;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-  @keyframes slideUp {
-    from{opacity:0;transform:translateY(30px);}
-    to{opacity:1;transform:translateY(0);}
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* RESPONSIVE */
-  @media(max-width: 900px) {
-    nav { padding: 1.2rem 1.5rem; }
-    section { padding: 5rem 1.5rem; }
-    .hero { padding: 0 1.5rem 4rem; }
-    .overview-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .arch-diagram { grid-template-columns: 1fr; }
-    .arch-arrow { transform: rotate(90deg); }
-    .arch-details { grid-template-columns: 1fr; }
-    .features-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .mockups-grid { grid-template-columns: 1fr; max-width: 240px; margin: 0 auto; }
-    .phone-mockup:nth-child(2) { transform: none; }
-    .phone-mockup:nth-child(2):hover { transform: translateY(-8px) scale(1.02); }
-    .hero-timer { display: none; }
+  @media (max-width: 860px) {
+    .hero { padding: 7rem 1.4rem 2rem; }
+    .hero-grid, .about-wrap { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .feat-grid { grid-template-columns: 1fr; }
+    .arch-flow { flex-direction: column; }
+    .arch-arrow { transform: rotate(90deg); padding: 0.4rem 0; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">← INICIO</a>
-  <a href="index.html" class="nav-back">Volver al portafolio →</a>
-</nav>
+<div class="winbar">
+  <div class="winbar-lights"><span></span><span></span><span></span></div>
+  <div class="winbar-path"><a href="index.html" data-transition style="color:inherit">Jose Villarreal / </a><span class="seg-cur">Snaps</span><span class="car"></span></div>
+  <nav class="winbar-tabs">
+    <a href="index.html" data-transition>inicio</a>
+    <a href="proyectos.html" data-transition>proyectos</a>
+    <a href="infra.html" data-transition>infra</a>
+  </nav>
+  <div class="winbar-status"><span class="dot"></span><span data-clock>--:--:--</span></div>
+</div>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-orb orb1"></div>
-  <div class="hero-orb orb2"></div>
-
-  <div class="hero-timer">
-    <div class="timer-display" id="hero-timer">00:00:00</div>
-    <div class="timer-label">tiempo restante</div>
-  </div>
-
-  <p class="hero-eyebrow">Proyecto — App Móvil</p>
-  <h1 class="hero-title">Snap<em>s</em></h1>
-  <div class="hero-bottom">
-    <p class="hero-tagline">Notas que viven el tiempo que tú decides. Luego, desaparecen.</p>
-    <div class="hero-tags">
-      <span class="htag">Flutter</span>
-      <span class="htag">Go</span>
-      <span class="htag">Redis</span>
-      <span class="htag">iOS & Android</span>
-    </div>
-  </div>
-</section>
-
-<!-- OVERVIEW -->
-<section id="overview">
-  <div class="section-label">01 — El proyecto</div>
-  <div class="overview-grid">
+  <div class="hero-grid">
     <div>
-      <h2 class="overview-title reveal">Una nota tiene<br>fecha de<br><em>expiración.</em></h2>
-      <div class="overview-text reveal">
-        <p>Snaps nació de una idea simple: ¿qué pasaría si tus notas tuvieran vida propia? No todo merece ser guardado para siempre. A veces solo necesitas capturar un pensamiento, una tarea, un recordatorio, y luego dejarlo ir.</p>
-        <p>Con Snaps, tú decides cuánto tiempo vive cada nota. Puede ser 5 minutos, 2 horas, o 3 días. Cuando el tiempo termina, la nota desaparece sin dejar rastro. Sin archivar, sin eliminar manualmente, sin acumulación.</p>
-        <p>La idea conecta con algo más profundo: la efimeralidad como característica, no como bug. El olvido, por diseño.</p>
+      <div class="eyebrow reveal">flutter run --release <span class="glow">// app móvil</span></div>
+      <h1 class="hero-title reveal" data-delay="60">Snap<span class="accent">s.</span></h1>
+      <p class="hero-desc reveal" data-delay="120">Notas que viven el tiempo que tú decides. Cuando el timer llega a cero desaparecen para siempre, sin archivar, sin acumulación, sin rastro.</p>
+      <div class="hero-tags reveal" data-delay="160">
+        <span class="tag">Flutter</span><span class="tag">Go</span><span class="tag">Redis</span><span class="tag">iOS &amp; Android</span>
       </div>
     </div>
-    <div class="overview-meta reveal">
-      <div class="meta-item">
-        <div class="meta-key">Tipo</div>
-        <div class="meta-val">App móvil — iOS & Android</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-key">Stack principal</div>
-        <div class="meta-val">Flutter · Go · Redis</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-key">Rol</div>
-        <div class="meta-val">Diseño, desarrollo & deploy</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-key">Estado</div>
-        <div class="meta-val">En producción</div>
-      </div>
+    <div class="manifest reveal" data-delay="120">
+      <div class="manifest-row"><span class="manifest-key">tipo</span><span class="manifest-val">App móvil nativa</span></div>
+      <div class="manifest-row"><span class="manifest-key">stack</span><span class="manifest-val">Flutter · Go · Redis</span></div>
+      <div class="manifest-row"><span class="manifest-key">rol</span><span class="manifest-val">Diseño, desarrollo &amp; deploy</span></div>
+      <div class="manifest-row"><span class="manifest-key">estado</span><span class="manifest-val ok">● en producción</span></div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- FEATURES -->
-<section id="features">
-  <div class="section-label">02 — Características</div>
-  <div class="features-grid">
-    <div class="feature-item reveal">
-      <div class="feature-num">001</div>
-      <div class="feature-title">Duración configurable</div>
-      <p class="feature-desc">Cada nota tiene su propio timer. Elige desde minutos hasta días. El sistema de expiración corre en el backend sin depender del dispositivo.</p>
+<section>
+  <div class="about-wrap">
+    <div>
+      <h2 class="about-title reveal">Una nota tiene fecha de <span class="accent">expiración.</span></h2>
+      <div class="about-text reveal" data-delay="70">
+        <p>Snaps nació de una idea simple: ¿qué pasaría si tus notas tuvieran vida propia? No todo merece ser guardado para siempre, a veces solo necesitas capturar un pensamiento y luego dejarlo ir.</p>
+        <p>Con Snaps, tú decides cuánto tiempo vive cada nota: 5 minutos, 2 horas o 3 días. Cuando el tiempo termina, la nota desaparece sin dejar rastro. La efimeralidad como característica, no como error, el olvido, por diseño.</p>
+      </div>
     </div>
-    <div class="feature-item reveal">
-      <div class="feature-num">002</div>
-      <div class="feature-title">Personalización visual</div>
-      <p class="feature-desc">Colores, fondos y estilos por nota. Cada snap puede tener su propia identidad visual para que sea fácil de identificar de un vistazo.</p>
-    </div>
-    <div class="feature-item reveal">
-      <div class="feature-num">003</div>
-      <div class="feature-title">Widget nativo</div>
-      <p class="feature-desc">Tus notas activas siempre visibles en la pantalla de inicio. El widget muestra el contenido y el tiempo restante en tiempo real.</p>
-    </div>
-    <div class="feature-item reveal">
-      <div class="feature-num">004</div>
-      <div class="feature-title">Expiración garantizada</div>
-      <p class="feature-desc">El borrado es real y permanente. Cuando termina el tiempo, el backend elimina la nota de Redis. No hay recuperación posible.</p>
-    </div>
-    <div class="feature-item reveal">
-      <div class="feature-num">005</div>
-      <div class="feature-title">Performance nativa</div>
-      <p class="feature-desc">Flutter compila a código nativo en ambas plataformas. Las animaciones corren a 60fps y la app se siente rápida en cualquier dispositivo.</p>
-    </div>
-    <div class="feature-item reveal">
-      <div class="feature-num">006</div>
-      <div class="feature-title">Backend de baja latencia</div>
-      <p class="feature-desc">Go maneja las requests con mínimo overhead. Redis gestiona los timers de expiración de manera nativa con TTL por clave.</p>
-    </div>
+    <div class="eyebrow reveal" data-delay="100" style="align-self:start;">02 // características</div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- MOCKUPS -->
-<section class="mockups-section" id="mockups">
-  <div class="section-label">03 — La app</div>
-  <div class="mockups-grid">
-
-    <div class="mockup-wrap reveal">
-      <img class="mockup-img" src="1.jpg" alt="Snaps — Feed de notas activas" />
-      <div class="mockup-caption">Feed de notas</div>
-    </div>
-
-    <div class="mockup-wrap reveal">
-      <img class="mockup-img" src="2.jpg" alt="Snaps — Crear un snap" />
-      <div class="mockup-caption">Crear nota</div>
-    </div>
-
-    <div class="mockup-wrap reveal">
-      <img class="mockup-img" src="3.jpg" alt="Snaps — Widget en pantalla de inicio" />
-      <div class="mockup-caption">Widget pantalla inicio</div>
-    </div>
-
+<section style="padding-top:0;">
+  <div class="feat-grid reveal">
+    <div class="feat-item"><span class="dot"></span><h3>Duración configurable</h3><p>Cada nota tiene su propio timer, de minutos a días. La expiración corre en el backend, no en el dispositivo.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Personalización visual</h3><p>Colores y estilos por nota, para identificar cada snap de un vistazo.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Widget nativo</h3><p>Notas activas visibles en la pantalla de inicio, con el tiempo restante actualizándose en vivo.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Expiración garantizada</h3><p>Redis elimina la nota al llegar a cero. El borrado es real, permanente y sin recuperación posible.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Performance nativa</h3><p>Flutter compila a código nativo en ambas plataformas, animaciones fluidas a 60fps.</p></div>
+    <div class="feat-item"><span class="dot"></span><h3>Backend de baja latencia</h3><p>Go maneja las requests con mínimo overhead; Redis gestiona los timers con TTL nativo por clave.</p></div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- ARCHITECTURE -->
-<section class="arch-section" id="arquitectura">
-  <div class="section-label">04 — Arquitectura técnica</div>
-
-  <div class="arch-diagram reveal">
-    <div class="arch-node">
-      <span class="arch-node-icon">📱</span>
-      <div class="arch-node-title">Flutter</div>
-      <div class="arch-node-sub">Cliente</div>
-      <div class="arch-node-desc">App nativa para iOS y Android. UI construida con widgets personalizados, animaciones fluidas y sincronización en tiempo real con el backend.</div>
-    </div>
-    <div class="arch-arrow">⟶</div>
-    <div class="arch-node">
-      <span class="arch-node-icon">⚙️</span>
-      <div class="arch-node-title">Go API</div>
-      <div class="arch-node-sub">Backend</div>
-      <div class="arch-node-desc">API REST de alto rendimiento. Gestiona autenticación, creación de snaps y coordina la expiración con Redis. Baja latencia y mínimo consumo de recursos.</div>
-    </div>
-    <div class="arch-arrow">⟶</div>
-    <div class="arch-node">
-      <span class="arch-node-icon">⚡</span>
-      <div class="arch-node-title">Redis</div>
-      <div class="arch-node-sub">Almacenamiento</div>
-      <div class="arch-node-desc">Almacena las notas con TTL nativo. Cuando una clave expira, Redis la elimina automáticamente. Sin crons, sin jobs externos: la expiración es atómica.</div>
-    </div>
-  </div>
-
-  <div class="arch-details reveal">
-    <div class="arch-detail-item">
-      <div class="adi-label">Flutter → Go</div>
-      <div class="adi-title">Comunicación</div>
-      <div class="adi-text">La app hace requests HTTP/REST a la API de Go. El token de sesión viaja en headers. Respuestas en JSON, parsing automático con modelos Dart tipados.</div>
-    </div>
-    <div class="arch-detail-item">
-      <div class="adi-label">Go → Redis</div>
-      <div class="adi-title">Expiración con TTL</div>
-      <div class="adi-text">Cada snap se guarda en Redis con un TTL exacto en segundos. Go calcula el TTL al crear la nota. Redis maneja el borrado sin ningún proceso adicional.</div>
-    </div>
-    <div class="arch-detail-item">
-      <div class="adi-label">Widget</div>
-      <div class="adi-title">Sincronización nativa</div>
-      <div class="adi-text">El widget de pantalla de inicio usa las APIs nativas de iOS (WidgetKit) y Android para mostrar el snap activo y actualizar el countdown en background.</div>
-    </div>
+<section>
+  <div class="eyebrow reveal">ls ./screenshots</div>
+  <div class="gallery" style="margin-top:2rem;">
+    <div class="device reveal"><div class="device-screen"><img src="assets/img/snaps-1.jpg" alt="Feed de notas en Snaps" loading="lazy"></div><div class="device-label">feed de notas</div></div>
+    <div class="device reveal" data-delay="80"><div class="device-screen"><img src="assets/img/snaps-2.jpg" alt="Crear nota en Snaps" loading="lazy"></div><div class="device-label">crear nota</div></div>
+    <div class="device reveal" data-delay="160"><div class="device-screen"><img src="assets/img/snaps-3.jpg" alt="Widget de pantalla de inicio de Snaps" loading="lazy"></div><div class="device-label">widget de inicio</div></div>
   </div>
 </section>
 
-<!-- LINKS -->
-<section class="links-section" id="links">
-  <div class="section-label">05 — Descúbrelo</div>
-  <h2 class="links-title reveal">Disponible<br>en <em>las tiendas.</em></h2>
-  <div class="links-row reveal">
-    <a href="https://apps.apple.com/us/app/snaps-notas-temporales/id6753906165" class="project-link primary">App Store →</a>
-    <a href="https://play.google.com/store/apps/details?id=com.snapsapps.snaps" class="project-link">Google Play →</a>
+<section>
+  <div class="eyebrow reveal">cat architecture.yml</div>
+  <div class="arch-flow reveal" style="margin-top:2rem;">
+    <div class="arch-node"><div class="icon">📱</div><h4>flutter - cliente</h4><p>App nativa iOS/Android. UI con widgets personalizados y sincronización en tiempo real.</p></div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-node"><div class="icon">⚙️</div><h4>go - api</h4><p>API REST de alto rendimiento: autenticación, creación de snaps y coordinación con Redis.</p></div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-node"><div class="icon">⚡</div><h4>redis - storage</h4><p>Notas con TTL nativo. Al expirar la clave, Redis la elimina sola, sin crons, sin jobs externos.</p></div>
+  </div>
+  <div class="manifest arch-detail reveal" data-delay="100">
+    <div class="manifest-row"><span class="manifest-key">flutter → go</span><span class="manifest-val">HTTP/REST con token de sesión en headers; modelos Dart tipados parsean la respuesta JSON.</span></div>
+    <div class="manifest-row"><span class="manifest-key">go → redis</span><span class="manifest-val">Cada snap se guarda con un TTL exacto en segundos, calculado al crear la nota.</span></div>
+    <div class="manifest-row"><span class="manifest-key">widget nativo</span><span class="manifest-val">WidgetKit (iOS) y App Widgets (Android) sincronizan el countdown en background.</span></div>
   </div>
 </section>
 
-<script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        const idx = Array.from(reveals).indexOf(entry.target);
-        setTimeout(() => entry.target.classList.add('visible'), (idx % 4) * 80);
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  reveals.forEach(el => obs.observe(el));
+<section id="contacto" style="text-align:center;">
+  <h2 class="about-title reveal" style="font-size:clamp(1.8rem,4vw,2.8rem);">Disponible en <span class="accent" style="color:var(--amber)">iOS</span> &amp; <span class="accent" style="color:var(--amber)">Android.</span></h2>
+  <div class="reveal" data-delay="80" style="margin-top:1.6rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
+    <a href="https://apps.apple.com/us/app/snaps-notas-temporales/id6753906165" data-transition class="btn magnetic primary">App Store</a>
+    <a href="https://play.google.com/store/apps/details?id=com.snapsapps.snaps" data-transition class="btn magnetic primary">Google Play</a>
+  </div>
+  <div class="reveal" data-delay="80" style="margin-top:1.6rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
+    <a href="proyectos.html" data-transition class="btn magnetic primary">Ver más proyectos</a>
+    <a href="index.html#contacto" data-transition class="btn magnetic">Hablemos de tu proyecto</a>
+  </div>
+</section>
 
-  // Hero countdown timer (fake, decorative)
-  function updateTimer() {
-    const el = document.getElementById('hero-timer');
-    if (!el) return;
-    const now = new Date();
-    const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-    const diff = Math.max(0, end - now);
-    const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
-    const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-    const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-    el.textContent = `${h}:${m}:${s}`;
-  }
-  updateTimer();
-  setInterval(updateTimer, 1000);
-</script>
+<footer>
+  <span>© 2026 Jose Villarreal</span>
+  <a href="index.html" data-transition>← volver al inicio</a>
+</footer>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>
