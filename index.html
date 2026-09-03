@@ -1,340 +1,234 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Jose Villarreal - Desarrollador de software</title>
-<link rel="icon" type="image/png" href="assets/img/icon.png" />
-<meta name="description" content="Jose Villarreal - desarrollador de aplicaciones móviles, backend, web y cloud. Flutter, Go, Next.js, AWS, DigitalOcean." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
-<style>
-  /* ---- estilos específicos de esta página ---- */
-
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 4rem 4rem;
-    position: relative;
-  }
-  .boot {
-    font-family: var(--mono);
-    font-size: 0.82rem;
-    color: var(--text-faint);
-    margin-bottom: 2.2rem;
-    min-height: 4.6em;
-  }
-  .boot-line { line-height: 1.7; }
-  .boot-line:nth-child(1)::before { content: '> '; color: var(--amber); }
-  .boot-line:nth-child(2)::before { content: '> '; color: var(--amber); }
-  .boot-line:nth-child(3) { color: var(--teal); }
-  .boot-line:nth-child(3)::before { content: '✓ '; }
-
-  .hero-name {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(3rem, 9vw, 7.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    opacity: 0;
-  }
-  [data-typewriter].done ~ .hero-name,
-  .hero-reveal { animation: name-in 0.9s var(--ease) 0.15s forwards; }
-  @keyframes name-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-
-  .hero-name .accent { color: var(--amber); }
-  .hero-tagline {
-    max-width: 620px;
-    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
-    color: var(--text-dim);
-    font-weight: 400;
-    margin-top: 1.6rem;
-    line-height: 1.6;
-    opacity: 0;
-  }
-  .hero-reveal-2 { animation: name-in 0.9s var(--ease) 0.45s forwards; }
-
-  .hero-roles {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    margin-top: 2.2rem;
-    opacity: 0;
-  }
-  .hero-reveal-3 { animation: name-in 0.9s var(--ease) 0.7s forwards; }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 4rem;
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    color: var(--text-faint);
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    letter-spacing: 0.05em;
-  }
-  .hero-scroll .bar { width: 1px; height: 34px; background: linear-gradient(var(--amber), transparent); animation: scrollbar-grow 1.8s ease-in-out infinite; }
-  @keyframes scrollbar-grow { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 50.01% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
-
-  /* ABOUT */
-  .about-wrap {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 4.5rem;
-    align-items: start;
-  }
-  .about-title {
-    font-size: clamp(1.9rem, 3.4vw, 2.7rem);
-    font-weight: 600;
-    line-height: 1.25;
-    margin-bottom: 1.6rem;
-  }
-  .about-title .accent { color: var(--teal); }
-  .about-text { color: var(--text-dim); line-height: 1.85; font-size: 1rem; }
-  .about-text p + p { margin-top: 1.1rem; }
-
-  /* neofetch-style panel — elemento distintivo */
-  .neofetch {
-    font-family: var(--mono);
-    font-size: 0.82rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    background: var(--surface);
-    padding: 1.6rem;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1.6rem;
-  }
-  .neofetch-glyph {
-    color: var(--amber);
-    white-space: pre;
-    line-height: 1.15;
-    font-size: 0.72rem;
-    user-select: none;
-  }
-  .neofetch-data .nf-user { color: var(--text); font-weight: 600; margin-bottom: 0.15rem; }
-  .neofetch-data .nf-sep { color: var(--text-faint); margin-bottom: 0.6rem; }
-  .nf-row { display: flex; gap: 0.5rem; padding: 0.18rem 0; flex-wrap: wrap; }
-  .nf-key { color: var(--teal); width: 92px; flex-shrink: 0; }
-  .nf-val { color: var(--text-dim); }
-  .nf-swatches { display: flex; gap: 0.3rem; margin-top: 0.7rem; }
-  .nf-swatches span { width: 16px; height: 12px; border-radius: 2px; display: block; }
-
-  /* PROYECTOS — process monitor */
-  .proc-table { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-  .proc-head {
-    display: grid;
-    grid-template-columns: 28px 1.6fr 2fr 1.4fr 24px;
-    gap: 1.2rem;
-    padding: 0.8rem 1.4rem;
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.06em;
-    color: var(--text-faint);
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-  }
-  .proc-row {
-    display: grid;
-    grid-template-columns: 28px 1.6fr 2fr 1.4fr 24px;
-    gap: 1.2rem;
-    align-items: center;
-    padding: 1.5rem 1.4rem;
-    border-bottom: 1px solid var(--border-soft);
-    transition: background .25s;
-    position: relative;
-  }
-  .proc-row:last-child { border-bottom: none; }
-  .proc-row:hover { background: var(--surface); }
-  .proc-status { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
-  .proc-status.dev { background: var(--amber); box-shadow: 0 0 8px var(--amber); animation: pulse 2.4s ease-in-out infinite; }
-  .proc-badge { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em; color: var(--amber); border: 1px solid var(--amber-dim); border-radius: 100px; padding: 0.18rem 0.55rem; margin-left: 0.6rem; white-space: nowrap; }
-  .proc-name { font-family: var(--display); font-weight: 600; font-size: 1.25rem; letter-spacing: -0.01em; }
-  .proc-name .proc-sub { display: block; font-family: var(--mono); font-weight: 400; font-size: 0.78rem; color: var(--text-dim); margin-top: 0.3rem; line-height: 1.5; }
-  .proc-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-  .proc-meta { font-family: var(--mono); font-size: 0.72rem; color: var(--text-faint); text-align: right; }
-  .proc-arrow { color: var(--text-faint); transition: transform .25s, color .25s; }
-  .proc-row:hover .proc-arrow { transform: translateX(4px); color: var(--amber); }
-
-  @media (max-width: 860px) {
-    .about-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
-    .proc-head { display: none; }
-    .proc-row { grid-template-columns: 20px 1fr; }
-    .proc-tags, .proc-meta { grid-column: 2; margin-top: 0.6rem; text-align: left; }
-    .proc-arrow { display: none; }
-    .neofetch { grid-template-columns: 1fr; }
-    .neofetch-glyph { font-size: 0.6rem; }
-  }
-
-  /* CONTACTO */
-  #contacto { background: var(--bg-soft); }
-  .term-window {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    max-width: 720px;
-  }
-  .term-bar { display: flex; align-items: center; gap: 6px; padding: 0.7rem 1rem; background: var(--surface); border-bottom: 1px solid var(--border); }
-  .term-bar span { width: 9px; height: 9px; border-radius: 50%; }
-  .term-bar span:nth-child(1) { background: var(--red); }
-  .term-bar span:nth-child(2) { background: var(--amber); }
-  .term-bar span:nth-child(3) { background: var(--teal); }
-  .term-body { padding: 1.8rem; font-family: var(--mono); font-size: 0.9rem; line-height: 2; background: var(--bg); }
-  .term-body .p { color: var(--teal); }
-  .term-body .cmd { color: var(--text); }
-  .term-body .out { color: var(--text-dim); padding-left: 1.2rem; }
-  .term-links { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.2rem; padding-left: 1.2rem; }
-  .contact-big { font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 600; margin-bottom: 2.2rem; max-width: 700px; line-height: 1.15; }
-  .contact-big .accent { color: var(--amber); }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="José Villarreal diseña y desarrolla productos digitales completos: apps móviles, experiencias web, backend e infraestructura en producción.">
+  <title>José Villarreal — Product Engineer</title>
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-<div class="winbar">
-  <div class="winbar-lights"><span></span><span></span><span></span></div>
-  <div class="winbar-path">Jose Villarreal <span class="seg-cur">- Portafolio</span><span class="car"></span></div>
-  <nav class="winbar-tabs">
-    <a href="#sobre-mi">about</a>
-    <a href="#proyectos">proyectos</a>
-    <a href="#contacto">contacto</a>
-  </nav>
-  <div class="winbar-status"><span class="dot"></span><span data-clock>--:--:--</span></div>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="boot" data-typewriter='["Bienvenido", "Cargando portafolio...", "Listo - app, web y servidor conectados"]'></div>
-  <h1 class="hero-name hero-reveal">Jose <span class="accent">Villarreal</span></h1>
-  <p class="hero-tagline hero-reveal-2">Diseño y construyo productos digitales completos: la app en tu teléfono, la API que la sostiene y el servidor donde vive. Sin intermediarios entre la idea y producción.</p>
-  <div class="hero-roles hero-reveal-3">
-    <span class="tag">Mobile - Flutter</span>
-    <span class="tag">Backend - Go / Node</span>
-    <span class="tag">Web - Next.js</span>
-    <span class="tag">Cloud - AWS / DO</span>
-    <span class="tag">Automatización</span>
-  </div>
-  <div class="hero-scroll"><span class="bar"></span>scroll</div>
-</section>
-
-<!-- ABOUT -->
-<section id="sobre-mi">
-  <div class="section-head reveal">
-    <div class="eyebrow">cat about.md</div>
-  </div>
-  <div class="about-wrap">
-    <div>
-      <h2 class="about-title reveal">No construyo solo pantallas, construyo <span class="accent">el sistema completo</span> detrás de ellas.</h2>
-      <div class="about-text reveal" data-delay="80">
-        <p>Soy desarrollador full-stack enfocado en aplicaciones móviles, con la capacidad de cubrir todo el ciclo: backend, infraestructura en la nube y automatizaciones.</p>
-        <p>Construyo apps móviles con Flutter, interfaces web con React y Next.js, APIs en Go y Node, y despliego todo en servidores propios sobre AWS y DigitalOcean, sin depender de terceros para llevar un producto a producción.</p>
-        <p>Me interesa el producto completo, no solo el código: entender por qué existe una función antes de escribirla, y qué pasa con ella cuando cien personas la usan al mismo tiempo.</p>
-      </div>
+  <header class="site-header">
+    <div class="header-inner shell">
+      <a class="brand" href="index.html" aria-label="Ir al inicio">
+        <span class="brand-mark" aria-hidden="true">JV</span>
+        <span class="brand-copy"><span>José Villarreal</span><span>Product engineer</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><span></span></button>
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <a href="#trabajo">Trabajo</a>
+        <a href="#perfil">Perfil</a>
+        <a href="infra.html" data-transition>Infraestructura</a>
+        <a class="nav-cta" href="#contacto">Hablemos</a>
+      </nav>
     </div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+  </header>
 
-    <div class="neofetch reveal" data-delay="150">
-      <div class="neofetch-data">
-        <div class="nf-user">jose@portfolio</div>
-        <div class="nf-sep">────────────────</div>
-        <div class="nf-row"><span class="nf-key">rol</span><span class="nf-val">Mobile · Full-stack</span></div>
-        <div class="nf-row"><span class="nf-key">experiencia</span><span class="nf-val"><span data-count="3" data-suffix="+">0</span> años activos</span></div>
-        <div class="nf-row"><span class="nf-key">mobile</span><span class="nf-val">Flutter, Dart</span></div>
-        <div class="nf-row"><span class="nf-key">backend</span><span class="nf-val">Go, Node.js, Redis</span></div>
-        <div class="nf-row"><span class="nf-key">frontend</span><span class="nf-val">Next.js, React, TS</span></div>
-        <div class="nf-row"><span class="nf-key">cloud</span><span class="nf-val">AWS EC2, DigitalOcean</span></div>
-        <div class="nf-row"><span class="nf-key">ci/cd</span><span class="nf-val">GitHub Actions, Docker</span></div>
-        <div class="nf-row"><span class="nf-key">plataformas</span><span class="nf-val"><span data-count="2">0</span> - iOS &amp; Android</span></div>
-        <div class="nf-swatches">
-          <span style="background:var(--amber)"></span><span style="background:var(--teal)"></span><span style="background:var(--text-dim)"></span><span style="background:var(--border)"></span>
+  <main id="contenido">
+    <section class="home-hero">
+      <div class="hero-grid shell">
+        <div>
+          <div class="availability">Desarrollo independiente</div>
+          <h1 class="hero-title">
+            <span class="word-mask"><span class="hero-word">Diseño el</span></span><br>
+            <span class="word-mask"><span class="hero-word outline">producto.</span></span><br>
+            <span class="word-mask"><span class="hero-word">Construyo el sistema.</span></span>
+          </h1>
+          <p class="hero-lead">Desarrollo experiencias móviles y web con la arquitectura que necesitan para llegar a producción. <strong>Una sola visión desde la interfaz hasta el servidor.</strong></p>
+          <div class="button-row hero-actions">
+            <a class="button button-primary button-arrow" href="#trabajo">Ver proyectos</a>
+            <a class="button" href="mailto:josecvfg@gmail.com">Iniciar una conversación</a>
+          </div>
+        </div>
+
+        <div class="system-map" aria-label="Mapa de las áreas de desarrollo que conecta José">
+          <svg class="map-orbit" viewBox="0 0 520 520" aria-hidden="true">
+            <path d="M105 82 C230 20 325 45 426 122 C495 176 482 318 405 425 C305 490 180 475 92 391 C18 299 30 160 105 82Z"/>
+            <path d="M86 102 L260 260 L420 134 M260 260 L102 394 M260 260 L421 420"/>
+          </svg>
+          <div class="system-core"><span>Producto<br>completo</span></div>
+          <div class="map-node node-mobile"><strong>Mobile</strong><small>Flutter · iOS · Android</small></div>
+          <div class="map-node node-web"><strong>Web</strong><small>React · Next.js</small></div>
+          <div class="map-node node-backend"><strong>Backend</strong><small>Go · Node · Redis</small></div>
+          <div class="map-node node-cloud"><strong>Cloud</strong><small>AWS · DO · Docker</small></div>
         </div>
       </div>
+      <div class="hero-index">Portafolio / MX</div>
+    </section>
+
+    <section class="section" id="trabajo">
+      <div class="shell">
+        <div class="eyebrow reveal">Trabajo seleccionado</div>
+        <div class="section-heading reveal">
+          <h2 class="section-title">Lo que se ve importa. <em>Lo que lo sostiene también.</em></h2>
+          <p>Productos propios y soluciones web en los que me encargué de convertir una idea en una experiencia usable, conectada y lista para producción.</p>
+        </div>
+
+        <div class="work-grid">
+          <a class="project-card mobile-card reveal" data-project="snaps" href="snaps.html" data-transition>
+            <div class="project-visual"><img src="assets/img/snaps-2.jpg" alt="Pantalla para crear una nota temporal en Snaps" width="1242" height="2688" loading="lazy"></div>
+            <div class="project-content">
+              <div class="project-meta"><span>Producto móvil</span><span class="project-status">En producción</span></div>
+              <div class="project-title">Snaps <span>↗</span></div>
+              <p class="project-description">Notas temporales con widgets nativos, sincronización y una arquitectura pensada alrededor del tiempo.</p>
+              <ul class="project-tags"><li>Flutter</li><li>Go</li><li>Redis</li><li>iOS + Android</li></ul>
+            </div>
+          </a>
+
+          <a class="project-card mobile-card reveal" data-project="astraea" href="astra.html" data-transition>
+            <div class="project-visual"><img src="assets/img/astra-1.png" alt="Lección sobre la constelación del Zodiaco en Astraea" width="379" height="838" loading="lazy"></div>
+            <div class="project-content">
+              <div class="project-meta"><span>Educación móvil</span><span class="project-status">En desarrollo</span></div>
+              <div class="project-title">Astraea <span>↗</span></div>
+              <p class="project-description">Una experiencia para aprender astronomía a través de constelaciones, lecciones cortas y progreso gamificado.</p>
+              <ul class="project-tags"><li>Flutter</li><li>UX móvil</li><li>Gamificación</li></ul>
+            </div>
+          </a>
+
+          <a class="project-card compact reveal" data-project="dgsc" href="dgsc.html" data-transition>
+            <div class="project-visual"><img src="assets/img/dgsc-1.webp" alt="Tarjeta de puntuación de disc golf en DGSC" width="750" height="374" loading="lazy"></div>
+            <div class="project-content">
+              <div class="project-meta"><span>Web app</span><span class="project-status">Fullstack</span></div>
+              <div class="project-title">DGSC <span>↗</span></div>
+              <p class="project-description">Puntuación, historial y ubicación para partidas de disc golf.</p>
+              <ul class="project-tags"><li>Next.js</li><li>Auth</li><li>Maps</li></ul>
+            </div>
+          </a>
+
+          <a class="project-card compact reveal" data-project="cotiza" href="cotizaciones.html" data-transition>
+            <div class="project-visual"><img src="assets/img/cotiz-2.jpg" alt="Panel de estadísticas del sistema de cotizaciones" width="1679" height="821" loading="lazy"></div>
+            <div class="project-content">
+              <div class="project-meta"><span>Herramienta web</span><span class="project-status">En producción</span></div>
+              <div class="project-title">Cotiza <span>↗</span></div>
+              <p class="project-description">Clientes, catálogo, cálculos y PDFs en un flujo hecho para trabajar rápido.</p>
+              <ul class="project-tags"><li>React</li><li>Dashboard</li><li>PDF</li></ul>
+            </div>
+          </a>
+
+          <a class="project-card reveal" data-project="infra" href="infra.html" data-transition>
+            <div class="project-visual" aria-hidden="true">
+              <svg viewBox="0 0 600 600" width="100%" height="100%" role="presentation">
+                <g fill="none" stroke="rgba(111,227,206,.38)" stroke-width="1">
+                  <path d="M55 105H545M55 245H545M55 385H545M55 525H545"/>
+                  <path d="M105 55V545M245 55V545M385 55V545M525 55V545"/>
+                  <path d="M105 105L385 245L245 385L525 525" stroke-dasharray="7 10"/>
+                </g>
+                <g fill="#6fe3ce">
+                  <rect x="89" y="89" width="32" height="32"/><rect x="369" y="229" width="32" height="32"/>
+                  <rect x="229" y="369" width="32" height="32"/><rect x="509" y="509" width="32" height="32"/>
+                </g>
+              </svg>
+            </div>
+            <div class="project-content">
+              <div class="project-meta"><span>Sistemas</span><span class="project-status">Cloud</span></div>
+              <div class="project-title">Infra <span>↗</span></div>
+              <p class="project-description">Despliegues reproducibles, servidores administrados y automatización para mantener los productos vivos.</p>
+              <ul class="project-tags"><li>AWS</li><li>DigitalOcean</li><li>Docker</li><li>CI/CD</li></ul>
+            </div>
+          </a>
+        </div>
+
+        <div class="button-row button-row-spaced">
+          <a class="button button-arrow" href="proyectos.html" data-transition>Explorar archivo completo</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="capacidades-title">
+      <div class="shell">
+        <div class="eyebrow reveal">Capacidades</div>
+        <div class="section-heading reveal">
+          <h2 class="section-title" id="capacidades-title">Una visión. <em>Cuatro capas.</em></h2>
+          <p>Puedo entrar en una parte concreta del producto o conectar el recorrido completo. La ventaja está en que ninguna decisión vive aislada.</p>
+        </div>
+        <div class="capability-list">
+          <article class="capability-row reveal">
+            <h3>Producto y experiencia</h3>
+            <p>Convierto una necesidad en un flujo claro antes de convertirla en pantallas.</p>
+            <div class="capability-tools">UX · arquitectura de información · prototipos · sistemas visuales</div>
+          </article>
+          <article class="capability-row reveal">
+            <h3>Aplicaciones móviles</h3>
+            <p>Apps para iOS y Android con interfaces cuidadas, lógica offline y componentes nativos cuando hacen falta.</p>
+            <div class="capability-tools">Flutter · Dart · WidgetKit · Android Widgets · RevenueCat</div>
+          </article>
+          <article class="capability-row reveal">
+            <h3>Web y backend</h3>
+            <p>Experiencias rápidas conectadas a APIs, autenticación y datos diseñados para crecer sin fricción.</p>
+            <div class="capability-tools">React · Next.js · Go · Node.js · PostgreSQL · Redis</div>
+          </article>
+          <article class="capability-row reveal">
+            <h3>Infraestructura</h3>
+            <p>El producto no termina al compilar. Configuro su despliegue, seguridad y continuidad en producción.</p>
+            <div class="capability-tools">AWS · DigitalOcean · Docker · Nginx · GitHub Actions</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section profile-section" id="perfil">
+      <div class="shell profile-grid">
+        <div class="profile-copy reveal">
+          <div class="eyebrow eyebrow-light">Perfil</div>
+          <h2>Código con criterio de producto.</h2>
+          <p>Soy José, desarrollador full-stack con especialidad en productos móviles. Me gusta entender por qué existe una función, cómo se sentirá al usarla y qué necesita detrás para seguir funcionando cuando deje de ser un prototipo.</p>
+        </div>
+        <dl class="profile-facts reveal">
+          <div class="fact-row"><dt>Base</dt><dd>México</dd></div>
+          <div class="fact-row"><dt>Enfoque</dt><dd>Mobile + full-stack</dd></div>
+          <div class="fact-row"><dt>Experiencia</dt><dd>3+ años construyendo</dd></div>
+          <div class="fact-row"><dt>Plataformas</dt><dd>iOS, Android y web</dd></div>
+          <div class="fact-row"><dt>Interés</dt><dd>Productos útiles y con identidad</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="proceso-title">
+      <div class="shell">
+        <div class="eyebrow reveal">Forma de trabajo</div>
+        <div class="section-heading reveal">
+          <h2 class="section-title" id="proceso-title">Pensar, construir, <em>poner a prueba.</em></h2>
+          <p>Un proceso corto y visible. Las decisiones importantes se toman con contexto, no se esconden detrás de entregas gigantes.</p>
+        </div>
+        <div class="process-grid reveal">
+          <article class="process-step"><span class="process-label">Entender</span><h3>Primero el problema</h3><p>Objetivo, usuarios, restricciones y el recorrido mínimo que debe sentirse completo.</p></article>
+          <article class="process-step"><span class="process-label">Construir</span><h3>Una base que aguante</h3><p>Interfaz y arquitectura avanzan juntas para evitar sorpresas cuando el producto crece.</p></article>
+          <article class="process-step"><span class="process-label">Entregar</span><h3>Producción es parte del trabajo</h3><p>Pruebas, despliegue y una entrega clara para que el producto pueda seguir evolucionando.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contacto">
+      <div class="shell">
+        <div class="contact-copy reveal">
+          <div class="eyebrow">Contacto</div>
+          <h2>Hagamos algo <span>difícil de ignorar.</span></h2>
+        </div>
+        <div class="contact-bottom reveal">
+          <p class="contact-note">¿Tienes una idea, una app que necesita crecer o un sistema que todavía vive en una hoja de cálculo? Cuéntame el contexto.</p>
+          <a class="contact-email" href="mailto:josecvfg@gmail.com">josecvfg@gmail.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner shell">
+      <span>© <span data-year>2026</span> José Villarreal</span>
+      <span>Diseño · Código · Sistemas</span>
+      <div class="footer-links"><a href="https://github.com/jose-xd" target="_blank" rel="noreferrer">GitHub ↗</a><a href="#contenido">Volver arriba ↑</a></div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- PROYECTOS -->
-<section id="proyectos">
-  <div class="section-head reveal">
-    <div class="eyebrow">ps --user jose <span class="glow">// procesos activos</span></div>
-  </div>
-
-  <div class="proc-table reveal">
-    <div class="proc-head">
-      <span></span><span>proceso</span><span>descripción</span><span>plataforma</span><span></span>
-    </div>
-
-    <a href="snaps.html" data-transition style="color:inherit;">
-      <div class="proc-row">
-        <span class="proc-status"></span>
-        <div class="proc-name">Snaps<span class="proc-sub">notas efímeras · widget nativo</span></div>
-        <div class="proc-tags"><span class="tag">Flutter</span><span class="tag">Go</span><span class="tag">Redis</span></div>
-        <div class="proc-meta">iOS · Android</div>
-        <span class="proc-arrow">→</span>
-      </div>
-    </a>
-
-    <a href="astra.html" data-transition style="color:inherit;">
-      <div class="proc-row">
-        <span class="proc-status dev"></span>
-        <div class="proc-name">Astraea <span class="proc-badge">próximamente</span><span class="proc-sub">app educativa · aprende las constelaciones</span></div>
-        <div class="proc-tags"><span class="tag">Flutter</span><span class="tag">Gamificación</span></div>
-        <div class="proc-meta">iOS · Android</div>
-        <span class="proc-arrow">→</span>
-      </div>
-    </a>
-
-    <a href="proyectos.html" data-transition style="color:inherit;">
-      <div class="proc-row">
-        <span class="proc-status"></span>
-        <div class="proc-name">Proyectos Web<span class="proc-sub">DGSC · Cotizaciones - apps fullstack</span></div>
-        <div class="proc-tags"><span class="tag">Next.js</span><span class="tag">React</span><span class="tag">TS</span></div>
-        <div class="proc-meta">Web</div>
-        <span class="proc-arrow">→</span>
-      </div>
-    </a>
-
-    <a href="infra.html" data-transition style="color:inherit;">
-      <div class="proc-row">
-        <span class="proc-status"></span>
-        <div class="proc-name">Cloud &amp; Infra<span class="proc-sub">deploys, contenedores y pipelines reales</span></div>
-        <div class="proc-tags"><span class="tag">AWS</span><span class="tag">DigitalOcean</span><span class="tag">Docker</span></div>
-        <div class="proc-meta">Infra</div>
-        <span class="proc-arrow">→</span>
-      </div>
-    </a>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section id="contacto">
-  <div class="section-head reveal">
-    <div class="eyebrow">contact --init</div>
-  </div>
-  <h2 class="contact-big reveal">¿Un producto por construir? <span class="accent">Hablemos.</span></h2>
-
-  <div class="term-window reveal" data-delay="100">
-    <div class="term-bar"><span></span><span></span><span></span></div>
-    <div class="term-body">
-      <div><span class="p">jose@portfolio</span> ~ % <span class="cmd">contact --list</span></div>
-      <div class="out">→ email · disponible para proyectos y colaboraciones</div>
-      <div class="out">→ github · código público de mis proyectos</div>
-      <div class="term-links">
-        <a href="mailto:josecvfg@gmail.com" class="btn magnetic">✉ Escribir un email</a>
-        <a href="https://github.com/josecvfg" target="_blank" class="btn magnetic">↗ Ver GitHub</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <span>© 2026 Jose Villarreal - build local, ship global</span>
-</footer>
-
-<script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

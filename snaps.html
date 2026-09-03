@@ -1,162 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Snaps - Jose Villarreal</title>
-<link rel="icon" type="image/png" href="assets/img/icon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
-<style>
-  .hero { padding: 9rem 4rem 3rem; }
-  .hero-grid { display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 3rem; align-items: end; }
-  .hero-title { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 6.5vw, 5.2rem); letter-spacing: -0.03em; line-height: 0.95; margin: 0.6rem 0 1.2rem; }
-  .hero-title .accent { color: var(--amber); }
-  .hero-desc { color: var(--text-dim); font-size: 1.05rem; line-height: 1.7; max-width: 520px; }
-  .hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
-
-  .about-wrap { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3.5rem; align-items: start; }
-  .about-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; margin-bottom: 1.3rem; line-height: 1.3; }
-  .about-title .accent { color: var(--teal); }
-  .about-text { color: var(--text-dim); line-height: 1.85; }
-  .about-text p + p { margin-top: 1rem; }
-
-  /* device frames */
-  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; max-width: 1000px; margin: 2rem auto 0; }
-  .device { border: 1px solid var(--border); border-radius: 18px; padding: 10px; background: var(--surface); }
-  .device-screen { border-radius: 10px; overflow: hidden; aspect-ratio: 9/17; background: var(--bg-soft); }
-  .device-screen img { width: 100%; height: 100%; object-fit: contain; transition: transform .6s var(--ease); }
-  .device:hover .device-screen img { transform: scale(1.03); }
-  .device-label { font-family: var(--mono); font-size: 0.68rem; color: var(--text-faint); text-align: center; padding-top: 0.7rem; }
-
-  /* features */
-  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-  .feat-item { background: var(--surface); padding: 1.8rem; }
-  .feat-item .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); margin-bottom: 1rem; }
-  .feat-item h3 { font-family: var(--display); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
-  .feat-item p { color: var(--text-dim); font-size: 0.86rem; line-height: 1.6; }
-
-  /* architecture */
-  .arch-flow { display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding-bottom: 0.5rem; }
-  .arch-node { flex: 1; min-width: 220px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); padding: 1.5rem; }
-  .arch-node .icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
-  .arch-node h4 { font-family: var(--mono); font-size: 0.85rem; color: var(--teal); margin-bottom: 0.4rem; }
-  .arch-node p { color: var(--text-dim); font-size: 0.82rem; line-height: 1.55; }
-  .arch-arrow { display: flex; align-items: center; justify-content: center; padding: 0 1rem; color: var(--text-faint); font-family: var(--mono); font-size: 1.1rem; }
-  .arch-detail { margin-top: 1.4rem; }
-  .arch-detail .manifest-row { flex-direction: column; gap: 0.3rem; }
-  .arch-detail .manifest-key { width: auto; color: var(--amber); }
-
-  @media (max-width: 860px) {
-    .hero { padding: 7rem 1.4rem 2rem; }
-    .hero-grid, .about-wrap { grid-template-columns: 1fr; }
-    .gallery { grid-template-columns: repeat(2, 1fr); }
-    .feat-grid { grid-template-columns: 1fr; }
-    .arch-flow { flex-direction: column; }
-    .arch-arrow { transform: rotate(90deg); padding: 0.4rem 0; }
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="Snaps, una app de notas temporales para iOS y Android diseñada y desarrollada por José Villarreal.">
+  <title>Snaps — Caso de estudio de José Villarreal</title>
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
+<body class="case-page" data-case="snaps">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="header-inner shell">
+      <a class="brand" href="index.html" data-transition aria-label="Ir al inicio"><span class="brand-mark" aria-hidden="true">JV</span><span class="brand-copy"><span>José Villarreal</span><span>Product engineer</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><span></span></button>
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal"><a href="proyectos.html" data-transition>Trabajo</a><a href="index.html#perfil">Perfil</a><a href="infra.html" data-transition>Infraestructura</a><a class="nav-cta" href="index.html#contacto">Hablemos</a></nav>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+  </header>
 
-<div class="winbar">
-  <div class="winbar-lights"><span></span><span></span><span></span></div>
-  <div class="winbar-path"><a href="index.html" data-transition style="color:inherit">Jose Villarreal / </a><span class="seg-cur">Snaps</span><span class="car"></span></div>
-  <nav class="winbar-tabs">
-    <a href="index.html" data-transition>inicio</a>
-    <a href="proyectos.html" data-transition>proyectos</a>
-    <a href="infra.html" data-transition>infra</a>
-  </nav>
-  <div class="winbar-status"><span class="dot"></span><span data-clock>--:--:--</span></div>
-</div>
-
-<section class="hero">
-  <div class="hero-grid">
-    <div>
-      <div class="eyebrow reveal">flutter run --release <span class="glow">// app móvil</span></div>
-      <h1 class="hero-title reveal" data-delay="60">Snap<span class="accent">s.</span></h1>
-      <p class="hero-desc reveal" data-delay="120">Notas que viven el tiempo que tú decides. Cuando el timer llega a cero desaparecen para siempre, sin archivar, sin acumulación, sin rastro.</p>
-      <div class="hero-tags reveal" data-delay="160">
-        <span class="tag">Flutter</span><span class="tag">Go</span><span class="tag">Redis</span><span class="tag">iOS &amp; Android</span>
+  <main id="contenido">
+    <section class="case-hero">
+      <div class="shell">
+        <a class="case-back" href="proyectos.html" data-transition>Volver a proyectos</a>
+        <div class="eyebrow reveal">Producto móvil</div>
+        <h1 class="case-title reveal">Snap<span>s.</span></h1>
+        <div class="case-intro-grid">
+          <div>
+            <p class="case-summary reveal">Una app donde cada nota tiene una vida útil. <strong>El tiempo no es un ajuste secundario, es el centro del producto.</strong></p>
+            <div class="button-row button-row-spaced reveal"><a class="button button-primary" href="https://apps.apple.com/us/app/snaps-notas-temporales/id6753906165" target="_blank" rel="noreferrer">App Store</a><a class="button" href="https://play.google.com/store/apps/details?id=com.snapsapps.snaps" target="_blank" rel="noreferrer">Google Play</a></div>
+          </div>
+          <dl class="case-facts reveal">
+            <div class="fact-row"><dt>Tipo</dt><dd>App móvil</dd></div>
+            <div class="fact-row"><dt>Estado</dt><dd>En producción</dd></div>
+            <div class="fact-row"><dt>Rol</dt><dd>Producto, diseño, desarrollo y deploy</dd></div>
+            <div class="fact-row"><dt>Stack</dt><dd>Flutter · Go · Redis</dd></div>
+          </dl>
+        </div>
       </div>
-    </div>
-    <div class="manifest reveal" data-delay="120">
-      <div class="manifest-row"><span class="manifest-key">tipo</span><span class="manifest-val">App móvil nativa</span></div>
-      <div class="manifest-row"><span class="manifest-key">stack</span><span class="manifest-val">Flutter · Go · Redis</span></div>
-      <div class="manifest-row"><span class="manifest-key">rol</span><span class="manifest-val">Diseño, desarrollo &amp; deploy</span></div>
-      <div class="manifest-row"><span class="manifest-key">estado</span><span class="manifest-val ok">● en producción</span></div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section>
-  <div class="about-wrap">
-    <div>
-      <h2 class="about-title reveal">Una nota tiene fecha de <span class="accent">expiración.</span></h2>
-      <div class="about-text reveal" data-delay="70">
-        <p>Snaps nació de una idea simple: ¿qué pasaría si tus notas tuvieran vida propia? No todo merece ser guardado para siempre, a veces solo necesitas capturar un pensamiento y luego dejarlo ir.</p>
-        <p>Con Snaps, tú decides cuánto tiempo vive cada nota: 5 minutos, 2 horas o 3 días. Cuando el tiempo termina, la nota desaparece sin dejar rastro. La efimeralidad como característica, no como error, el olvido, por diseño.</p>
+    <section class="case-showcase" aria-label="Pantallas de Snaps">
+      <div class="shell showcase-grid">
+        <figure class="phone-shot reveal"><img src="assets/img/snaps-1.jpg" alt="Lista de notas temporales en Snaps" width="1125" height="2436"><figcaption>Notas activas</figcaption></figure>
+        <figure class="phone-shot reveal"><img src="assets/img/snaps-2.jpg" alt="Creación y personalización de una nota en Snaps" width="1242" height="2688"><figcaption>Creación de un snap</figcaption></figure>
+        <figure class="phone-shot reveal"><img src="assets/img/snaps-3.jpg" alt="Widget de Snaps en la pantalla de inicio" width="1242" height="2688"><figcaption>Widget nativo</figcaption></figure>
       </div>
-    </div>
-    <div class="eyebrow reveal" data-delay="100" style="align-self:start;">02 // características</div>
-  </div>
-</section>
+    </section>
 
-<section style="padding-top:0;">
-  <div class="feat-grid reveal">
-    <div class="feat-item"><span class="dot"></span><h3>Duración configurable</h3><p>Cada nota tiene su propio timer, de minutos a días. La expiración corre en el backend, no en el dispositivo.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Personalización visual</h3><p>Colores y estilos por nota, para identificar cada snap de un vistazo.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Widget nativo</h3><p>Notas activas visibles en la pantalla de inicio, con el tiempo restante actualizándose en vivo.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Expiración garantizada</h3><p>Redis elimina la nota al llegar a cero. El borrado es real, permanente y sin recuperación posible.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Performance nativa</h3><p>Flutter compila a código nativo en ambas plataformas, animaciones fluidas a 60fps.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Backend de baja latencia</h3><p>Go maneja las requests con mínimo overhead; Redis gestiona los timers con TTL nativo por clave.</p></div>
-  </div>
-</section>
+    <section class="section">
+      <div class="shell case-story-grid">
+        <div class="story-label"><div class="eyebrow reveal">La idea</div></div>
+        <div class="story-copy">
+          <h2 class="reveal">Diseñar alrededor del <span>olvido.</span></h2>
+          <p class="reveal">No toda nota merece convertirse en archivo. Snaps parte de una pregunta sencilla: ¿qué pasa si capturar algo no obliga a conservarlo? Cada nota recibe una duración y desaparece cuando el contador llega a cero. Eso cambia la experiencia completa, desde la interfaz hasta la forma de almacenar los datos.</p>
+          <p class="reveal">La app también resuelve el acceso rápido con widgets para iOS y Android. Las notas importantes viven en la pantalla de inicio mientras son útiles, sin pedirle al usuario que abra la app cada vez.</p>
+          <div class="feature-lines">
+            <article class="feature-line reveal"><h3>Duración configurable</h3><p>Cada snap puede vivir desde minutos hasta una semana. El tiempo restante siempre es visible.</p></article>
+            <article class="feature-line reveal"><h3>Widgets nativos</h3><p>WidgetKit y Android App Widgets muestran las notas en el inicio con una experiencia propia de cada plataforma.</p></article>
+            <article class="feature-line reveal"><h3>Personalización</h3><p>Fondos, tipografías, iconos y colores permiten diferenciar una nota de un vistazo.</p></article>
+            <article class="feature-line reveal"><h3>Modo offline</h3><p>La experiencia sigue disponible sin conexión y sincroniza el estado cuando la red vuelve.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section>
-  <div class="eyebrow reveal">ls ./screenshots</div>
-  <div class="gallery" style="margin-top:2rem;">
-    <div class="device reveal"><div class="device-screen"><img src="assets/img/snaps-1.jpg" alt="Feed de notas en Snaps" loading="lazy"></div><div class="device-label">feed de notas</div></div>
-    <div class="device reveal" data-delay="80"><div class="device-screen"><img src="assets/img/snaps-2.jpg" alt="Crear nota en Snaps" loading="lazy"></div><div class="device-label">crear nota</div></div>
-    <div class="device reveal" data-delay="160"><div class="device-screen"><img src="assets/img/snaps-3.jpg" alt="Widget de pantalla de inicio de Snaps" loading="lazy"></div><div class="device-label">widget de inicio</div></div>
-  </div>
-</section>
+    <section class="section architecture">
+      <div class="shell">
+        <div class="eyebrow reveal">Arquitectura</div>
+        <div class="section-heading reveal"><h2 class="section-title">El timer también vive <em>en el servidor.</em></h2><p>La expiración no depende de que la app esté abierta. Cada capa tiene una responsabilidad concreta.</p></div>
+        <div class="architecture-flow reveal">
+          <article class="architecture-node"><span>Cliente</span><h3>Flutter</h3><p>Una base para iOS y Android, caché local y renderizado de las notas.</p></article>
+          <article class="architecture-node"><span>Identidad</span><h3>Supabase Auth</h3><p>Sesiones y cuentas para sincronizar datos entre dispositivos.</p></article>
+          <article class="architecture-node"><span>API</span><h3>Go</h3><p>Creación, consulta y borrado de snaps con una API ligera.</p></article>
+          <article class="architecture-node"><span>Tiempo</span><h3>Redis TTL</h3><p>Cada nota se guarda con su expiración exacta. Redis elimina la clave al llegar a cero.</p></article>
+        </div>
+      </div>
+    </section>
 
-<section>
-  <div class="eyebrow reveal">cat architecture.yml</div>
-  <div class="arch-flow reveal" style="margin-top:2rem;">
-    <div class="arch-node"><div class="icon">📱</div><h4>flutter - cliente</h4><p>App nativa iOS/Android. UI con widgets personalizados y sincronización en tiempo real.</p></div>
-    <div class="arch-arrow">→</div>
-    <div class="arch-node"><div class="icon">⚙️</div><h4>go - api</h4><p>API REST de alto rendimiento: autenticación, creación de snaps y coordinación con Redis.</p></div>
-    <div class="arch-arrow">→</div>
-    <div class="arch-node"><div class="icon">⚡</div><h4>redis - storage</h4><p>Notas con TTL nativo. Al expirar la clave, Redis la elimina sola, sin crons, sin jobs externos.</p></div>
-  </div>
-  <div class="manifest arch-detail reveal" data-delay="100">
-    <div class="manifest-row"><span class="manifest-key">flutter → go</span><span class="manifest-val">HTTP/REST con token de sesión en headers; modelos Dart tipados parsean la respuesta JSON.</span></div>
-    <div class="manifest-row"><span class="manifest-key">go → redis</span><span class="manifest-val">Cada snap se guarda con un TTL exacto en segundos, calculado al crear la nota.</span></div>
-    <div class="manifest-row"><span class="manifest-key">widget nativo</span><span class="manifest-val">WidgetKit (iOS) y App Widgets (Android) sincronizan el countdown en background.</span></div>
-  </div>
-</section>
+    <a class="next-project" href="astra.html" data-transition><div class="shell"><small>Siguiente caso</small><strong>Astraea <span>↗</span></strong></div></a>
+  </main>
 
-<section id="contacto" style="text-align:center;">
-  <h2 class="about-title reveal" style="font-size:clamp(1.8rem,4vw,2.8rem);">Disponible en <span class="accent" style="color:var(--amber)">iOS</span> &amp; <span class="accent" style="color:var(--amber)">Android.</span></h2>
-  <div class="reveal" data-delay="80" style="margin-top:1.6rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
-    <a href="https://apps.apple.com/us/app/snaps-notas-temporales/id6753906165" data-transition class="btn magnetic primary">App Store</a>
-    <a href="https://play.google.com/store/apps/details?id=com.snapsapps.snaps" data-transition class="btn magnetic primary">Google Play</a>
-  </div>
-  <div class="reveal" data-delay="80" style="margin-top:1.6rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
-    <a href="proyectos.html" data-transition class="btn magnetic primary">Ver más proyectos</a>
-    <a href="index.html#contacto" data-transition class="btn magnetic">Hablemos de tu proyecto</a>
-  </div>
-</section>
-
-<footer>
-  <span>© 2026 Jose Villarreal</span>
-  <a href="index.html" data-transition>← volver al inicio</a>
-</footer>
-
-<script src="assets/js/main.js"></script>
+  <footer class="site-footer"><div class="footer-inner shell"><span>© <span data-year>2026</span> José Villarreal</span><span>Snaps / Producto móvil</span><div class="footer-links"><a href="https://github.com/jose-xd" target="_blank" rel="noreferrer">GitHub ↗</a><a href="index.html#contacto">Contacto</a></div></div></footer>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

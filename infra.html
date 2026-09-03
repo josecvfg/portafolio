@@ -1,174 +1,102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cloud & Infra - Jose Villarreal</title>
-<link rel="icon" type="image/png" href="assets/img/icon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
-<style>
-  .hero { padding: 9rem 4rem 3rem; }
-  .hero-title { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 6.5vw, 5.2rem); letter-spacing: -0.03em; line-height: 0.95; margin: 0.6rem 0 1.2rem; }
-  .hero-title .accent { color: var(--amber); }
-  .hero-desc { color: var(--text-dim); font-size: 1.05rem; line-height: 1.7; max-width: 560px; }
-  .hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
-
-  /* consola simulada de fondo, decorativa */
-  .console-deco {
-    border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface);
-    font-family: var(--mono); font-size: 0.78rem; padding: 1.4rem 1.6rem; margin-top: 2.2rem; color: var(--text-dim);
-    max-width: 640px;
-  }
-  .console-deco .l1 { color: var(--text-faint); }
-  .console-deco .ok { color: var(--teal); }
-
-  .case { margin-bottom: 5rem; }
-  .case-head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.6rem; flex-wrap: wrap; }
-  .case-head h2 { font-family: var(--display); font-weight: 600; font-size: 1.7rem; }
-  .case-head .accent { color: var(--amber); }
-  .case-desc { color: var(--text-dim); line-height: 1.8; max-width: 680px; margin-bottom: 2rem; }
-
-  .arch-flow { display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding-bottom: 0.5rem; }
-  .arch-node { flex: 1; min-width: 200px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); padding: 1.4rem; }
-  .arch-node .icon { font-size: 1.3rem; margin-bottom: 0.5rem; }
-  .arch-node h4 { font-family: var(--mono); font-size: 0.82rem; color: var(--teal); margin-bottom: 0.4rem; }
-  .arch-node p { color: var(--text-dim); font-size: 0.8rem; line-height: 1.5; }
-  .arch-arrow { display: flex; align-items: center; justify-content: center; padding: 0 0.9rem; color: var(--text-faint); font-family: var(--mono); }
-
-  .pipeline { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-top: 1.6rem; }
-  .pl-step { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.4rem; border-bottom: 1px solid var(--border-soft); font-family: var(--mono); font-size: 0.82rem; }
-  .pl-step:last-child { border-bottom: none; }
-  .pl-check { color: var(--teal); }
-  .pl-name { color: var(--text); flex: 1; }
-  .pl-desc { color: var(--text-faint); font-size: 0.76rem; }
-  .pl-time { color: var(--text-faint); font-size: 0.72rem; white-space: nowrap; }
-
-  .tools-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-  .tool-item { background: var(--surface); padding: 1.6rem 1.2rem; text-align: center; }
-  .tool-item .icon { font-size: 1.6rem; margin-bottom: 0.7rem; }
-  .tool-item h3 { font-family: var(--display); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
-  .tool-item p { color: var(--text-dim); font-size: 0.76rem; line-height: 1.5; }
-
-  @media (max-width: 860px) {
-    .hero { padding: 7rem 1.4rem 2rem; }
-    .arch-flow { flex-direction: column; }
-    .arch-arrow { transform: rotate(90deg); padding: 0.4rem 0; }
-    .tools-grid { grid-template-columns: repeat(2, 1fr); }
-    .pl-step { flex-wrap: wrap; }
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="Infraestructura, backend y despliegues en producción para productos desarrollados por José Villarreal.">
+  <title>Infraestructura — José Villarreal</title>
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-
-<div class="winbar">
-  <div class="winbar-lights"><span></span><span></span><span></span></div>
-  <div class="winbar-path"><a href="index.html" data-transition style="color:inherit">Jose Villarreal / </a><span class="seg-cur">Cloud &amp; Infra</span><span class="car"></span></div>
-  <nav class="winbar-tabs">
-    <a href="index.html" data-transition>inicio</a>
-    <a href="proyectos.html" data-transition>proyectos</a>
-    <a href="snaps.html" data-transition>snaps</a>
-  </nav>
-  <div class="winbar-status"><span class="dot"></span><span data-clock>--:--:--</span></div>
-</div>
-
-<section class="hero">
-  <div class="eyebrow reveal">docker compose up -d <span class="glow">// cloud &amp; devops</span></div>
-  <h1 class="hero-title reveal" data-delay="60">Cloud &amp; <span class="accent">Infra.</span></h1>
-  <p class="hero-desc reveal" data-delay="120">Arquitecturas reales en producción: deploy automatizado, servidores administrados y servicios en la nube, sin humo, sin capturas de marketing.</p>
-  <div class="hero-tags reveal" data-delay="160">
-    <span class="tag">DigitalOcean</span><span class="tag">AWS EC2</span><span class="tag">GitHub Actions</span><span class="tag">Docker</span><span class="tag">Redis</span>
-  </div>
-  <div class="console-deco reveal" data-delay="220">
-    <div class="l1">$ github-actions - deploy.yml</div>
-    <div>▶ flutter build apk --release</div>
-    <div class="ok">✓ built build/app/outputs/apk/release</div>
-    <div>▶ ssh droplet.digitalocean.com</div>
-    <div class="ok">✓ connected</div>
-    <div>▶ docker compose up -d</div>
-    <div class="ok">✓ go-api ... redis ... running</div>
-  </div>
-</section>
-
-<section>
-  <div class="eyebrow reveal" style="margin-bottom:2.5rem;">01 // casos reales</div>
-
-  <div class="case">
-    <div class="case-head reveal">
-      <h2>Snaps <span class="accent">- backend</span></h2>
-      <span class="tag">DigitalOcean</span><span class="tag">Redis</span><span class="tag">GitHub Actions</span>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="header-inner shell">
+      <a class="brand" href="index.html" data-transition aria-label="Ir al inicio"><span class="brand-mark" aria-hidden="true">JV</span><span class="brand-copy"><span>José Villarreal</span><span>Product engineer</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><span></span></button>
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal"><a href="proyectos.html" data-transition>Trabajo</a><a href="index.html#perfil">Perfil</a><a href="infra.html" aria-current="page">Infraestructura</a><a class="nav-cta" href="index.html#contacto">Hablemos</a></nav>
     </div>
-    <p class="case-desc reveal" data-delay="60">El backend de Snaps corre en un Droplet de DigitalOcean. La API en Go y Redis comparten servidor, coordinados con Docker Compose. GitHub Actions maneja el CI/CD: cada push a <code>main</code> compila la app de Flutter, corre los tests y despliega automáticamente.</p>
+    <div class="scroll-progress" aria-hidden="true"></div>
+  </header>
 
-    <div class="arch-flow reveal" data-delay="100">
-      <div class="arch-node"><div class="icon">📱</div><h4>flutter app</h4><p>iOS / Android - HTTPS</p></div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-node"><div class="icon">🌊</div><h4>droplet - do</h4><p>Ubuntu, red interna</p></div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-node"><div class="icon">⚙️</div><h4>go api</h4><p>contenedor Docker · 127.0.0.1</p></div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-node"><div class="icon">⚡</div><h4>redis</h4><p>TTL nativo</p></div>
-    </div>
+  <main id="contenido">
+    <section class="page-hero">
+      <div class="shell page-hero-grid">
+        <div><div class="eyebrow reveal">Cloud + Backend + Operación</div><h1 class="display-title reveal">El producto también vive <em>después del deploy.</em></h1></div>
+        <p class="page-hero-aside reveal">Diseño la infraestructura como parte del producto. Debe ser clara de operar, razonable de pagar y capaz de crecer sin convertir cada cambio en una emergencia.</p>
+      </div>
+    </section>
 
-    <div class="pipeline reveal" data-delay="140">
-      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">checkout &amp; setup</span><span class="pl-desc">actions/checkout · flutter-action · setup-go</span><span class="pl-time">~12s</span></div>
-      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">flutter build apk --release</span><span class="pl-desc">compilación nativa con caché de dependencias</span><span class="pl-time">~2m 10s</span></div>
-      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">go build &amp; test</span><span class="pl-desc">build del backend + tests unitarios</span><span class="pl-time">~28s</span></div>
-      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">deploy to DigitalOcean</span><span class="pl-desc">ssh al droplet → git pull → docker compose up -d</span><span class="pl-time">~18s</span></div>
-    </div>
-  </div>
+    <section class="section">
+      <div class="shell">
+        <div class="eyebrow reveal">Mapa de responsabilidades</div>
+        <div class="section-heading reveal"><h2 class="section-title">De una interacción a <em>un sistema vivo.</em></h2><p>Cada capa resuelve un tipo distinto de riesgo. El trabajo está en conectarlas sin añadir complejidad innecesaria.</p></div>
+        <div class="infra-diagram reveal">
+          <article class="infra-layer"><span class="layer-index">Experiencia</span><h3>Cliente</h3><p>La app o la web donde ocurre la interacción real.</p><ul><li>Flutter</li><li>React</li><li>Next.js</li></ul></article>
+          <article class="infra-layer"><span class="layer-index">Lógica</span><h3>API</h3><p>Reglas del producto, autenticación y coordinación de datos.</p><ul><li>Go</li><li>Node.js</li><li>REST</li></ul></article>
+          <article class="infra-layer"><span class="layer-index">Estado</span><h3>Datos</h3><p>Persistencia duradera o temporal según el comportamiento que se necesita.</p><ul><li>PostgreSQL</li><li>Redis</li><li>Firestore</li></ul></article>
+          <article class="infra-layer"><span class="layer-index">Operación</span><h3>Cloud</h3><p>Contenedores, HTTPS, automatización y observabilidad básica.</p><ul><li>AWS</li><li>DigitalOcean</li><li>Docker</li></ul></article>
+        </div>
+      </div>
+    </section>
 
-  <div class="case">
-    <div class="case-head reveal">
-      <h2>DGSC <span class="accent">- app web</span></h2>
-      <span class="tag">AWS EC2</span><span class="tag">Docker</span><span class="tag">Next.js</span>
-    </div>
-    <p class="case-desc reveal" data-delay="60">DGSC corre en una instancia EC2 de AWS. La app de Next.js está containerizada con Docker, lo que hace el deploy reproducible y el entorno idéntico entre desarrollo y producción. EC2 expone la app directamente vía puerto 443 con certificado SSL.</p>
+    <section class="section">
+      <div class="shell">
+        <div class="eyebrow reveal">Casos reales</div>
+        <div class="infra-case reveal">
+          <div><span class="case-label">Backend móvil</span><h2>Snaps <span>backend.</span></h2></div>
+          <div class="infra-case-copy">
+            <p>La API de Snaps está construida en Go y usa Redis para que la expiración de una nota sea parte del almacenamiento, no una tarea programada que intenta limpiar después. El servicio corre en DigitalOcean detrás de HTTPS y se despliega de forma repetible.</p>
+            <div class="mini-flow">
+              <div class="mini-node"><small>Código</small><strong>Push a main</strong></div>
+              <div class="mini-node"><small>Pipeline</small><strong>GitHub Actions</strong></div>
+              <div class="mini-node"><small>Servidor</small><strong>DigitalOcean</strong></div>
+              <div class="mini-node"><small>Runtime</small><strong>Go + Redis</strong></div>
+            </div>
+          </div>
+        </div>
 
-    <div class="arch-flow reveal" data-delay="100">
-      <div class="arch-node"><div class="icon">🌐</div><h4>browser</h4><p>usuario · HTTPS 443</p></div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-node"><div class="icon">☁️</div><h4>ec2 - aws</h4><p>t3.micro · docker run</p></div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-node"><div class="icon">🐳</div><h4>contenedor</h4><p>Docker · puerto 3000</p></div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-node"><div class="icon">⚡</div><h4>next.js</h4><p>SSR + API Routes</p></div>
-    </div>
+        <div class="infra-case reveal">
+          <div><span class="case-label">Aplicación web</span><h2>DGSC <span>web app.</span></h2></div>
+          <div class="infra-case-copy">
+            <p>DGSC reúne frontend y rutas del servidor en Next.js. La aplicación está containerizada para mantener el mismo entorno durante la entrega y corre en una instancia de AWS EC2 con tráfico seguro por HTTPS.</p>
+            <div class="mini-flow">
+              <div class="mini-node"><small>Usuario</small><strong>Navegador</strong></div>
+              <div class="mini-node"><small>Tráfico</small><strong>HTTPS</strong></div>
+              <div class="mini-node"><small>Cómputo</small><strong>AWS EC2</strong></div>
+              <div class="mini-node"><small>Aplicación</small><strong>Docker + Next.js</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="pipeline reveal" data-delay="140">
-      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">docker build</span><span class="pl-desc">imagen de Next.js con multi-stage build</span><span class="pl-time">~1m 40s</span></div>
-      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">push to registry</span><span class="pl-desc">imagen publicada en Docker Hub / ECR</span><span class="pl-time">~45s</span></div>
-      <div class="pl-step"><span class="pl-check">✓</span><span class="pl-name">pull &amp; run en EC2</span><span class="pl-desc">ssh al servidor → docker pull → docker run -d -p 443:3000</span><span class="pl-time">~22s</span></div>
-    </div>
-  </div>
-</section>
+    <section class="section" aria-labelledby="herramientas-title">
+      <div class="shell">
+        <div class="eyebrow reveal">Herramientas</div>
+        <div class="section-heading reveal"><h2 class="section-title" id="herramientas-title">Tecnología elegida por <em>el problema.</em></h2><p>No busco la arquitectura más vistosa. Busco una que pueda explicar, mantener y pagar mientras el producto encuentra su ritmo.</p></div>
+        <div class="capability-list">
+          <article class="capability-row reveal"><h3>Docker</h3><p>Entornos repetibles entre desarrollo y producción.</p><div class="capability-tools">Imágenes · Compose · volúmenes · redes</div></article>
+          <article class="capability-row reveal"><h3>GitHub Actions</h3><p>Builds, pruebas y entregas automáticas a partir del repositorio.</p><div class="capability-tools">CI/CD · secretos · artefactos · despliegue</div></article>
+          <article class="capability-row reveal"><h3>AWS + DigitalOcean</h3><p>Infraestructura ajustada al tamaño y presupuesto del producto.</p><div class="capability-tools">EC2 · Droplets · DNS · TLS · Nginx</div></article>
+          <article class="capability-row reveal"><h3>Redis + PostgreSQL</h3><p>Elegir entre velocidad, expiración y persistencia sin forzar una sola solución.</p><div class="capability-tools">TTL · caché · índices · consultas · respaldos</div></article>
+        </div>
+      </div>
+    </section>
 
-<section style="padding-top:0;">
-  <div class="eyebrow reveal" style="margin-bottom:2rem;">02 // herramientas</div>
-  <div class="tools-grid reveal">
-    <div class="tool-item"><div class="icon">🌊</div><h3>DigitalOcean</h3><p>Droplets para backends y APIs. Costos predecibles, buen rendimiento.</p></div>
-    <div class="tool-item"><div class="icon">☁️</div><h3>AWS EC2</h3><p>Instancias para apps web, con integración al resto del ecosistema AWS.</p></div>
-    <div class="tool-item"><div class="icon">🐳</div><h3>Docker</h3><p>Mismo entorno en dev y producción, sin el clásico "en mi máquina sí funciona".</p></div>
-    <div class="tool-item"><div class="icon">⚙️</div><h3>GitHub Actions</h3><p>CI/CD automatizado: cada push dispara build, tests y deploy.</p></div>
-    <div class="tool-item"><div class="icon">⚡</div><h3>Redis</h3><p>Almacenamiento en memoria con TTL nativo para datos temporales.</p></div>
-  </div>
-</section>
+    <section class="section contact-section">
+      <div class="shell">
+        <div class="contact-copy reveal"><div class="eyebrow">¿Listo para producción?</div><h2>Construyamos algo que <span>se mantenga de pie.</span></h2></div>
+        <div class="contact-bottom reveal"><p class="contact-note">Puedo ayudarte a diseñar la base técnica de un producto nuevo o a ordenar uno que ya está creciendo.</p><a class="contact-email" href="mailto:josecvfg@gmail.com">josecvfg@gmail.com</a></div>
+      </div>
+    </section>
+  </main>
 
-<section id="contacto" style="text-align:center;">
-  <h2 style="font-family:var(--display); font-weight:600; font-size:clamp(1.8rem,4vw,2.8rem);" class="reveal">¿Necesitas llevar tu app a <span style="color:var(--amber)">producción?</span></h2>
-  <div class="reveal" data-delay="80" style="margin-top:1.6rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
-    <a href="proyectos.html" data-transition class="btn magnetic primary">Ver proyectos web</a>
-    <a href="index.html#contacto" data-transition class="btn magnetic">Hablemos de tu proyecto</a>
-  </div>
-</section>
-
-<footer>
-  <span>© 2026 Jose Villarreal</span>
-  <a href="index.html" data-transition>← volver al inicio</a>
-</footer>
-
-<script src="assets/js/main.js"></script>
+  <footer class="site-footer"><div class="footer-inner shell"><span>© <span data-year>2026</span> José Villarreal</span><span>Cloud / Backend / CI-CD</span><div class="footer-links"><a href="https://github.com/jose-xd" target="_blank" rel="noreferrer">GitHub ↗</a><a href="index.html" data-transition>Inicio ↑</a></div></div></footer>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

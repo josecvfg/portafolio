@@ -1,111 +1,84 @@
-// ==========================================================================
-// JOSE VILLARREAL — PORTFOLIO — comportamiento compartido
-// ==========================================================================
+document.documentElement.classList.add("js");
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.classList.add('page-enter');
+document.addEventListener("DOMContentLoaded", () => {
+  const body = document.body;
+  const header = document.querySelector(".site-header");
+  const progress = document.querySelector(".scroll-progress");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".main-nav");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- reveal on scroll ---------- */
-  const reveals = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const delay = entry.target.dataset.delay || 0;
-        setTimeout(() => entry.target.classList.add('visible'), delay);
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  reveals.forEach((el, i) => {
-    if (!el.dataset.delay) el.dataset.delay = (i % 4) * 70;
-    io.observe(el);
+  const closeMenu = () => {
+    body.classList.remove("menu-open");
+    menuToggle?.setAttribute("aria-expanded", "false");
+  };
+
+  menuToggle?.addEventListener("click", () => {
+    const open = body.classList.toggle("menu-open");
+    menuToggle.setAttribute("aria-expanded", String(open));
   });
 
-  /* ---------- magnetismo en botones ---------- */
-  document.querySelectorAll('.magnetic').forEach((el) => {
-    el.addEventListener('mousemove', (e) => {
-      const r = el.getBoundingClientRect();
-      const mx = e.clientX - r.left - r.width / 2;
-      const my = e.clientY - r.top - r.height / 2;
-      el.style.transform = `translate(${mx * 0.25}px, ${my * 0.35}px)`;
-    });
-    el.addEventListener('mouseleave', () => { el.style.transform = 'translate(0,0)'; });
+  nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMenu();
   });
 
-  /* ---------- reloj en vivo (hora de México) ---------- */
-  const clock = document.querySelector('[data-clock]');
-  if (clock) {
-    const tick = () => {
-      const now = new Date();
-      const fmt = new Intl.DateTimeFormat('es-MX', { timeZone: 'America/Hermosillo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
-      clock.textContent = fmt.format(now) + ' MST';
-    };
-    tick();
-    setInterval(tick, 1000);
+  const syncScroll = () => {
+    const root = document.documentElement;
+    const scrollable = Math.max(root.scrollHeight - innerHeight, 1);
+    const ratio = Math.min(scrollY / scrollable, 1);
+    header?.classList.toggle("scrolled", scrollY > 16);
+    if (progress) progress.style.width = `${ratio * 100}%`;
+  };
+
+  syncScroll();
+  addEventListener("scroll", syncScroll, { passive: true });
+
+  const reveals = document.querySelectorAll(".reveal");
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    reveals.forEach((element) => element.classList.add("visible"));
+  } else {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: .12, rootMargin: "0px 0px -6%" });
+
+    reveals.forEach((element) => observer.observe(element));
   }
 
-  /* ---------- contadores numéricos ---------- */
-  document.querySelectorAll('[data-count]').forEach((el) => {
-    const target = parseFloat(el.dataset.count);
-    const suffix = el.dataset.suffix || '';
-    const counterIO = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const dur = 1200;
-          const start = performance.now();
-          const step = (t) => {
-            const p = Math.min((t - start) / dur, 1);
-            const eased = 1 - Math.pow(1 - p, 3);
-            const val = target < 10 && target % 1 !== 0 ? (target * eased).toFixed(1) : Math.floor(target * eased);
-            el.textContent = val + suffix;
-            if (p < 1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
-          counterIO.unobserve(el);
-        }
-      });
-    }, { threshold: 0.5 });
-    counterIO.observe(el);
-  });
+  const hero = document.querySelector(".home-hero");
+  if (hero && !reduceMotion && matchMedia("(pointer: fine)").matches) {
+    hero.addEventListener("pointermove", (event) => {
+      const bounds = hero.getBoundingClientRect();
+      const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+      const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+      hero.style.setProperty("--mx", `${x}%`);
+      hero.style.setProperty("--my", `${y}%`);
+    });
+  }
 
-  /* ---------- transición entre páginas internas ---------- */
-  const curtain = document.createElement('div');
-  curtain.className = 'curtain';
-  document.body.appendChild(curtain);
-  document.querySelectorAll('a[data-transition]').forEach((link) => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || link.target === '_blank') return;
-      e.preventDefault();
-      curtain.classList.add('leaving');
-      setTimeout(() => { window.location.href = href; }, 460);
+  const curtain = document.createElement("div");
+  curtain.className = "page-curtain";
+  curtain.setAttribute("aria-hidden", "true");
+  body.appendChild(curtain);
+
+  document.querySelectorAll("a[data-transition]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (reduceMotion || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const url = new URL(link.href, location.href);
+      if (url.origin !== location.origin || url.hash || link.target === "_blank") return;
+      event.preventDefault();
+      closeMenu();
+      curtain.classList.add("leaving");
+      setTimeout(() => { location.href = url.href; }, 460);
     });
   });
 
-  /* ---------- efecto de escritura (boot sequence) ---------- */
-  document.querySelectorAll('[data-typewriter]').forEach((el) => {
-    const lines = JSON.parse(el.dataset.typewriter);
-    el.innerHTML = '';
-    let li = 0;
-    function typeLine() {
-      if (li >= lines.length) { el.classList.add('done'); return; }
-      const lineEl = document.createElement('div');
-      lineEl.className = 'boot-line';
-      el.appendChild(lineEl);
-      const text = lines[li];
-      let ci = 0;
-      const speed = 18;
-      (function typeChar() {
-        if (ci <= text.length) {
-          lineEl.textContent = text.slice(0, ci);
-          ci++;
-          setTimeout(typeChar, speed);
-        } else {
-          li++;
-          setTimeout(typeLine, 220);
-        }
-      })();
-    }
-    typeLine();
+  document.querySelectorAll("[data-year]").forEach((node) => {
+    node.textContent = new Date().getFullYear();
   });
 });

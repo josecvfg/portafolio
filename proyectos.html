@@ -1,103 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Proyectos web - Jose Villarreal</title>
-<link rel="icon" type="image/png" href="assets/img/icon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
-<style>
-  .hero { padding: 9rem 4rem 3rem; }
-  .hero-title { font-family: var(--display); font-weight: 700; font-size: clamp(2.4rem, 6vw, 4.5rem); letter-spacing: -0.03em; line-height: 1; margin-bottom: 1rem; }
-  .hero-title .accent { color: var(--amber); }
-  .hero-desc { color: var(--text-dim); max-width: 560px; font-size: 1.05rem; line-height: 1.7; }
-
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
-  .card {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--surface);
-    transition: border-color .3s, transform .3s;
-    display: flex;
-    flex-direction: column;
-  }
-  .card:hover { border-color: var(--amber); transform: translateY(-4px); }
-  .card-shot { aspect-ratio: 16/10; overflow: hidden; background: var(--bg-soft); border-bottom: 1px solid var(--border); }
-  .card-shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
-  .card:hover .card-shot img { transform: scale(1.04); }
-  .card-body { padding: 1.8rem; display: flex; flex-direction: column; gap: 0.9rem; flex: 1; }
-  .card-top { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 0.68rem; color: var(--text-faint); }
-  .card-top .live { display: flex; align-items: center; gap: 0.4rem; color: var(--teal); }
-  .card-top .live::before { content:''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 6px var(--teal); }
-  .card-title { font-family: var(--display); font-weight: 600; font-size: 1.6rem; }
-  .card-desc { color: var(--text-dim); font-size: 0.92rem; line-height: 1.6; }
-  .card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: auto; }
-  .card-cta { display: flex; align-items: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.75rem; color: var(--amber); margin-top: 0.4rem; }
-  .card:hover .card-cta span { transform: translateX(4px); }
-  .card-cta span { display: inline-block; transition: transform .25s; }
-
-  .more-row { text-align: center; padding: 3rem 0 0; color: var(--text-faint); font-family: var(--mono); font-size: 0.8rem; }
-
-  @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } .hero { padding: 7rem 1.4rem 2rem; } }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="Archivo de productos móviles, aplicaciones web e infraestructura desarrollados por José Villarreal.">
+  <title>Proyectos — José Villarreal</title>
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="header-inner shell">
+      <a class="brand" href="index.html" data-transition aria-label="Ir al inicio"><span class="brand-mark" aria-hidden="true">JV</span><span class="brand-copy"><span>José Villarreal</span><span>Product engineer</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><span></span></button>
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+        <a href="proyectos.html" aria-current="page">Trabajo</a>
+        <a href="index.html#perfil">Perfil</a>
+        <a href="infra.html" data-transition>Infraestructura</a>
+        <a class="nav-cta" href="index.html#contacto">Hablemos</a>
+      </nav>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+  </header>
 
-<div class="winbar">
-  <div class="winbar-lights"><span></span><span></span><span></span></div>
-  <div class="winbar-path"><a href="index.html" data-transition style="color:inherit">Jose Villarreal / </a><span class="seg-cur">Proyectos web</span><span class="car"></span></div>
-  <nav class="winbar-tabs">
-    <a href="index.html" data-transition>inicio</a>
-    <a href="snaps.html" data-transition>snaps</a>
-    <a href="infra.html" data-transition>infra</a>
-  </nav>
-  <div class="winbar-status"><span class="dot"></span><span data-clock>--:--:--</span></div>
-</div>
-
-<section class="hero">
-  <div class="eyebrow reveal">cd ~/proyectos/web</div>
-  <h1 class="hero-title reveal" data-delay="60">Proyectos <span class="accent">web.</span></h1>
-  <p class="hero-desc reveal" data-delay="120">Aplicaciones fullstack construidas con Next.js y React, del primer wireframe al deploy en producción, incluyendo la base de datos y la lógica de negocio detrás.</p>
-</section>
-
-<section style="padding-top:0;">
-  <div class="grid2">
-
-    <a href="dgsc.html" data-transition class="card reveal" style="color:inherit;">
-      <div class="card-shot"><img src="assets/img/dgsc-1.webp" alt="DGSC - Disc Golf Score Card" loading="lazy" /></div>
-      <div class="card-body">
-        <div class="card-top"><span>001</span><span class="live">en producción</span></div>
-        <div class="card-title">DGSC</div>
-        <p class="card-desc">Tarjeta de puntaje para disc golf. Login, historial de rondas y ubicación del campo en mapa.</p>
-        <div class="card-tags"><span class="tag">Next.js</span><span class="tag">Auth</span><span class="tag">Maps</span></div>
-        <div class="card-cta">Ver proyecto <span>→</span></div>
+  <main id="contenido">
+    <section class="page-hero">
+      <div class="shell page-hero-grid">
+        <div>
+          <div class="eyebrow reveal">Archivo de trabajo</div>
+          <h1 class="display-title reveal">Productos, apps y <em>sistemas.</em></h1>
+        </div>
+        <p class="page-hero-aside reveal">Una selección de proyectos en los que la experiencia visible y la arquitectura detrás fueron parte del mismo trabajo.</p>
       </div>
-    </a>
+    </section>
 
-    <a href="cotizaciones.html" data-transition class="card reveal" data-delay="80" style="color:inherit;">
-      <div class="card-shot"><img src="assets/img/cotiz-1.jpg" alt="Cotizaciones - generador de cotizaciones" loading="lazy" /></div>
-      <div class="card-body">
-        <div class="card-top"><span>002</span><span class="live">en producción</span></div>
-        <div class="card-title">Cotizaciones</div>
-        <p class="card-desc">Generador de cotizaciones profesionales: clientes, catálogo, totales automáticos y exportación a PDF.</p>
-        <div class="card-tags"><span class="tag">React</span><span class="tag">PDF</span><span class="tag">Dashboard</span></div>
-        <div class="card-cta">Ver proyecto <span>→</span></div>
+    <section class="section">
+      <div class="shell">
+        <div class="archive-list">
+          <a class="archive-item reveal" data-project="snaps" href="snaps.html" data-transition>
+            <h2 class="archive-name">Snaps</h2><p class="archive-summary">Notas temporales con widgets nativos y expiración real en el backend.</p><span class="archive-stack">Flutter · Go<br>Redis · iOS · Android</span><span class="archive-arrow">↗</span>
+          </a>
+          <a class="archive-item reveal" data-project="astraea" href="astra.html" data-transition>
+            <h2 class="archive-name">Astraea</h2><p class="archive-summary">Aprendizaje de astronomía convertido en exploración, progreso y hábito.</p><span class="archive-stack">Flutter<br>Diseño de producto · UX</span><span class="archive-arrow">↗</span>
+          </a>
+          <a class="archive-item reveal" data-project="dgsc" href="dgsc.html" data-transition>
+            <h2 class="archive-name">DGSC</h2><p class="archive-summary">Puntuación digital para disc golf con historial, cuentas y mapas.</p><span class="archive-stack">Next.js<br>Auth · Maps · AWS</span><span class="archive-arrow">↗</span>
+          </a>
+          <a class="archive-item reveal" data-project="cotiza" href="cotizaciones.html" data-transition>
+            <h2 class="archive-name">Cotiza</h2><p class="archive-summary">Cotizaciones profesionales, catálogo, clientes, métricas y exportación a PDF.</p><span class="archive-stack">React<br>Dashboard · PDF</span><span class="archive-arrow">↗</span>
+          </a>
+          <a class="archive-item reveal" href="infra.html" data-transition>
+            <h2 class="archive-name">Infraestructura</h2><p class="archive-summary">Arquitectura, despliegue y automatización para productos reales.</p><span class="archive-stack">Docker · AWS<br>DigitalOcean · CI/CD</span><span class="archive-arrow">↗</span>
+          </a>
+        </div>
       </div>
-    </a>
+    </section>
 
-  </div>
-  <div class="more-row reveal"># más proyectos en construcción</div>
-</section>
+    <section class="section contact-section">
+      <div class="shell">
+        <div class="contact-copy reveal"><div class="eyebrow">Siguiente proyecto</div><h2>El próximo puede ser <span>el tuyo.</span></h2></div>
+        <div class="contact-bottom reveal"><p class="contact-note">Cuéntame qué quieres construir, qué ya existe y dónde se está atorando.</p><a class="contact-email" href="mailto:josecvfg@gmail.com">josecvfg@gmail.com</a></div>
+      </div>
+    </section>
+  </main>
 
-<footer>
-  <span>© 2026 Jose Villarreal</span>
-  <a href="index.html" data-transition>← volver al inicio</a>
-</footer>
-
-<script src="assets/js/main.js"></script>
+  <footer class="site-footer"><div class="footer-inner shell"><span>© <span data-year>2026</span> José Villarreal</span><span>Proyectos seleccionados</span><div class="footer-links"><a href="https://github.com/jose-xd" target="_blank" rel="noreferrer">GitHub ↗</a><a href="index.html" data-transition>Inicio ↑</a></div></div></footer>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -1,134 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cotizaciones - Jose Villarreal</title>
-<link rel="icon" type="image/png" href="assets/img/icon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
-<style>
-  .hero { padding: 9rem 4rem 3rem; }
-  .hero-grid { display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 3rem; align-items: end; }
-  .hero-title { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 6.5vw, 5.2rem); letter-spacing: -0.03em; line-height: 0.95; margin: 0.6rem 0 1.2rem; }
-  .hero-title .accent { color: var(--amber); }
-  .hero-desc { color: var(--text-dim); font-size: 1.05rem; line-height: 1.7; max-width: 520px; }
-  .hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
-
-  .about-wrap { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3.5rem; align-items: start; }
-  .about-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; margin-bottom: 1.3rem; line-height: 1.3; }
-  .about-title .accent { color: var(--teal); }
-  .about-text { color: var(--text-dim); line-height: 1.85; }
-  .about-text p + p { margin-top: 1rem; }
-
-  .gallery3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
-  .shot { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface); }
-  .shot img { width: 100%; display: block; aspect-ratio: 4/3; object-fit: cover; transition: transform .6s var(--ease); }
-  .shot:hover img { transform: scale(1.04); }
-  .shot-label { font-family: var(--mono); font-size: 0.66rem; color: var(--text-faint); padding: 0.8rem 1rem; border-top: 1px solid var(--border); }
-
-  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-  .feat-item { background: var(--surface); padding: 1.8rem; }
-  .feat-item .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); margin-bottom: 1rem; }
-  .feat-item h3 { font-family: var(--display); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
-  .feat-item p { color: var(--text-dim); font-size: 0.86rem; line-height: 1.6; }
-
-  /* mock invoice card — pequeño detalle ilustrativo */
-  .invoice { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); padding: 1.4rem 1.6rem; font-family: var(--mono); font-size: 0.78rem; }
-  .invoice-head { display: flex; justify-content: space-between; color: var(--text-faint); border-bottom: 1px dashed var(--border); padding-bottom: 0.8rem; margin-bottom: 0.8rem; }
-  .invoice-row { display: flex; justify-content: space-between; padding: 0.3rem 0; color: var(--text-dim); }
-  .invoice-total { display: flex; justify-content: space-between; padding-top: 0.6rem; margin-top: 0.5rem; border-top: 1px solid var(--border); color: var(--amber); font-weight: 600; }
-
-  @media (max-width: 860px) {
-    .hero { padding: 7rem 1.4rem 2rem; }
-    .hero-grid, .about-wrap { grid-template-columns: 1fr; }
-    .gallery3 { grid-template-columns: 1fr; }
-    .feat-grid { grid-template-columns: 1fr; }
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="Cotiza, una herramienta web para crear cotizaciones profesionales, administrar clientes y exportar documentos a PDF.">
+  <title>Cotiza — Caso de estudio de José Villarreal</title>
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
+<body class="case-page" data-case="cotiza">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="header-inner shell">
+      <a class="brand" href="index.html" data-transition aria-label="Ir al inicio"><span class="brand-mark" aria-hidden="true">JV</span><span class="brand-copy"><span>José Villarreal</span><span>Product engineer</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><span></span></button>
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal"><a href="proyectos.html" data-transition>Trabajo</a><a href="index.html#perfil">Perfil</a><a href="infra.html" data-transition>Infraestructura</a><a class="nav-cta" href="index.html#contacto">Hablemos</a></nav>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+  </header>
 
-<div class="winbar">
-  <div class="winbar-lights"><span></span><span></span><span></span></div>
-  <div class="winbar-path"><a href="index.html" data-transition style="color:inherit">Jose Villarreal / </a><span class="seg-cur">Cotizaciones</span><span class="car"></span></div>
-  <nav class="winbar-tabs">
-    <a href="index.html" data-transition>inicio</a>
-    <a href="proyectos.html" data-transition>proyectos</a>
-    <a href="dgsc.html" data-transition>dgsc</a>
-  </nav>
-  <div class="winbar-status"><span class="dot"></span><span data-clock>--:--:--</span></div>
-</div>
-
-<section class="hero">
-  <div class="hero-grid">
-    <div>
-      <div class="eyebrow reveal">npm run build <span class="glow">// app web</span></div>
-      <h1 class="hero-title reveal" data-delay="60">Cotiza<span class="accent">ciones.</span></h1>
-      <p class="hero-desc reveal" data-delay="120">Genera cotizaciones profesionales en segundos: clientes, catálogo, totales automáticos y exportación a PDF lista para enviar.</p>
-      <div class="hero-tags reveal" data-delay="160">
-        <span class="tag">React</span><span class="tag">PDF</span><span class="tag">Dashboard</span><span class="tag">Fullstack</span>
+  <main id="contenido">
+    <section class="case-hero">
+      <div class="shell">
+        <a class="case-back" href="proyectos.html" data-transition>Volver a proyectos</a>
+        <div class="eyebrow reveal">Herramienta web</div>
+        <h1 class="case-title reveal">Cotiz<span>a.</span></h1>
+        <div class="case-intro-grid">
+          <p class="case-summary reveal">Del catálogo al PDF en un mismo flujo. <strong>Una herramienta para cotizar rápido sin parecer improvisado.</strong></p>
+          <dl class="case-facts reveal">
+            <div class="fact-row"><dt>Tipo</dt><dd>Herramienta de negocio</dd></div>
+            <div class="fact-row"><dt>Estado</dt><dd>En producción</dd></div>
+            <div class="fact-row"><dt>Rol</dt><dd>Producto, diseño y desarrollo</dd></div>
+            <div class="fact-row"><dt>Stack</dt><dd>React · PDF · Dashboard</dd></div>
+          </dl>
+        </div>
       </div>
-    </div>
-    <div class="invoice reveal" data-delay="120">
-      <div class="invoice-head"><span>Cotización</span><span>PDF</span></div>
-      <div class="invoice-row"><span>Cliente</span><span>Acme Corp.</span></div>
-      <div class="invoice-row"><span>Diseño web</span><span>$4,500</span></div>
-      <div class="invoice-row"><span>Backend API</span><span>$6,000</span></div>
-      <div class="invoice-row"><span>Mantenimiento</span><span>$1,200</span></div>
-      <div class="invoice-total"><span>Total</span><span>$11,700</span></div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section>
-  <div class="about-wrap">
-    <div>
-      <h2 class="about-title reveal">Menos Excel, <span class="accent">más profesional.</span></h2>
-      <div class="about-text reveal" data-delay="70">
-        <p>Cotizaciones nació de un problema cotidiano para freelancers y pequeñas empresas: armar una cotización decente toma demasiado tiempo y termina en plantillas de Excel o Word poco profesionales.</p>
-        <p>La app gestiona un catálogo de productos y servicios, una base de clientes, y genera cotizaciones completas con cálculo automático de subtotales, descuentos e impuestos. Al terminar, un clic genera el PDF. El módulo de estadísticas muestra el valor total cotizado, la tasa de cierre y los productos más solicitados.</p>
+    <section class="case-showcase browser-showcase" aria-label="Pantallas del sistema de cotizaciones">
+      <div class="shell showcase-grid">
+        <figure class="browser-shot reveal"><img src="assets/img/cotiz-1.jpg" alt="Dashboard principal del sistema de cotizaciones" width="1920" height="934"><figcaption>Dashboard · clientes y cotizaciones recientes</figcaption></figure>
+        <figure class="browser-shot small reveal"><img src="assets/img/cotiz-2.jpg" alt="Panel de estadísticas del sistema de cotizaciones" width="1679" height="821"><figcaption>Métricas del negocio</figcaption></figure>
+        <figure class="browser-shot reveal"><img src="assets/img/cotiz-3.jpg" alt="PDF profesional generado por el sistema de cotizaciones" width="787" height="574"><figcaption>Documento final listo para enviar</figcaption></figure>
       </div>
-    </div>
-    <div class="eyebrow reveal" data-delay="100" style="align-self:start;">02 // características</div>
-  </div>
-</section>
+    </section>
 
-<section style="padding-top:0;">
-  <div class="feat-grid reveal">
-    <div class="feat-item"><span class="dot"></span><h3>Gestión de clientes</h3><p>Base de datos de clientes; sus datos se autocompletan al crear una cotización.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Catálogo de productos</h3><p>Productos y servicios con precio unitario; los totales se calculan en tiempo real.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Generación de PDF</h3><p>Exporta cualquier cotización con un clic, en formato limpio y listo para enviar.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Cálculo automático</h3><p>Subtotales, descuentos e impuestos sin fórmulas manuales ni errores de suma.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Estadísticas</h3><p>Total cotizado por período, productos más frecuentes y métricas de actividad.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Historial completo</h3><p>Filtra por cliente, fecha o estado y consulta el detalle de cualquier cotización pasada.</p></div>
-  </div>
-</section>
+    <section class="section">
+      <div class="shell case-story-grid">
+        <div class="story-label"><div class="eyebrow reveal">El problema</div></div>
+        <div class="story-copy">
+          <h2 class="reveal">Sacar el trabajo repetitivo <span>del camino.</span></h2>
+          <p class="reveal">Para freelancers y pequeños negocios, crear una cotización suele significar duplicar una hoja de cálculo, buscar datos de un cliente y revisar fórmulas. El proceso es lento, fácil de romper y difícil de mantener consistente.</p>
+          <p class="reveal">Cotiza convierte ese recorrido en una herramienta de trabajo. El catálogo y los clientes se reutilizan, los totales se calculan en tiempo real y el resultado se exporta como un documento limpio. El historial y las estadísticas hacen que la información no se pierda después de enviar el PDF.</p>
+          <div class="feature-lines">
+            <article class="feature-line reveal"><h3>Clientes reutilizables</h3><p>Los datos se guardan una vez y se autocompletan en cada nueva cotización.</p></article>
+            <article class="feature-line reveal"><h3>Catálogo conectado</h3><p>Productos y servicios conservan nombre, precio y unidad para trabajar con consistencia.</p></article>
+            <article class="feature-line reveal"><h3>Cálculo automático</h3><p>Subtotales, descuentos e impuestos se actualizan mientras se construye el documento.</p></article>
+            <article class="feature-line reveal"><h3>PDF profesional</h3><p>La cotización final queda lista para descargar y enviar sin volver a maquetarla.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section>
-  <div class="eyebrow reveal">ls ./screenshots</div>
-  <div class="gallery3" style="margin-top:2rem;">
-    <div class="shot reveal"><img src="assets/img/cotiz-1.jpg" alt="Dashboard principal - Cotizaciones" loading="lazy"><div class="shot-label">dashboard principal</div></div>
-    <div class="shot reveal" data-delay="80"><img src="assets/img/cotiz-2.jpg" alt="Estadísticas y gráficas - Cotizaciones" loading="lazy"><div class="shot-label">estadísticas y gráficas</div></div>
-    <div class="shot reveal" data-delay="160"><img src="assets/img/cotiz-3.jpg" alt="Exportación a PDF - Cotizaciones" loading="lazy"><div class="shot-label">exportación a PDF</div></div>
-  </div>
-</section>
+    <section class="section architecture">
+      <div class="shell">
+        <div class="eyebrow reveal">Flujo principal</div>
+        <div class="section-heading reveal"><h2 class="section-title">Cada paso prepara <em>el siguiente.</em></h2><p>La herramienta reduce entradas repetidas y mantiene una fuente clara para los datos del documento.</p></div>
+        <div class="architecture-flow reveal">
+          <article class="architecture-node"><span>Base</span><h3>Cliente</h3><p>Datos fiscales y de contacto disponibles para futuras cotizaciones.</p></article>
+          <article class="architecture-node"><span>Oferta</span><h3>Catálogo</h3><p>Productos y servicios se agregan con precio y cantidad.</p></article>
+          <article class="architecture-node"><span>Revisión</span><h3>Totales</h3><p>Descuentos, impuestos y subtotal se recalculan al instante.</p></article>
+          <article class="architecture-node"><span>Salida</span><h3>PDF</h3><p>Un documento consistente queda listo para compartir con el cliente.</p></article>
+        </div>
+      </div>
+    </section>
 
-<section id="contacto" style="text-align:center;">
-  <h2 class="about-title reveal" style="font-size:clamp(1.8rem,4vw,2.8rem);">Cotiza <span style="color:var(--amber)">rápido.</span></h2>
-  <div class="reveal" data-delay="80" style="margin-top:1.6rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
-    <a href="proyectos.html" data-transition class="btn magnetic primary">Ver más proyectos</a>
-    <a href="index.html#contacto" data-transition class="btn magnetic">Hablemos de tu proyecto</a>
-  </div>
-</section>
+    <a class="next-project" href="infra.html" data-transition><div class="shell"><small>Siguiente · Sistemas</small><strong>Infraestructura <span>↗</span></strong></div></a>
+  </main>
 
-<footer>
-  <span>© 2026 Jose Villarreal</span>
-  <a href="index.html" data-transition>← volver al inicio</a>
-</footer>
-
-<script src="assets/js/main.js"></script>
+  <footer class="site-footer"><div class="footer-inner shell"><span>© <span data-year>2026</span> José Villarreal</span><span>Cotiza / Herramienta web</span><div class="footer-links"><a href="https://github.com/jose-xd" target="_blank" rel="noreferrer">GitHub ↗</a><a href="index.html#contacto">Contacto</a></div></div></footer>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -1,125 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DGSC - Jose Villarreal</title>
-<link rel="icon" type="image/png" href="assets/img/icon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
-<style>
-  .hero { padding: 9rem 4rem 3rem; }
-  .hero-grid { display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 3rem; align-items: end; }
-  .hero-title { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 6.5vw, 5.2rem); letter-spacing: -0.03em; line-height: 0.95; margin: 0.6rem 0 1.2rem; }
-  .hero-title .accent { color: var(--amber); }
-  .hero-desc { color: var(--text-dim); font-size: 1.05rem; line-height: 1.7; max-width: 520px; }
-  .hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
-
-  .about-wrap { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3.5rem; align-items: start; }
-  .about-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; margin-bottom: 1.3rem; line-height: 1.3; }
-  .about-title .accent { color: var(--teal); }
-  .about-text { color: var(--text-dim); line-height: 1.85; }
-  .about-text p + p { margin-top: 1rem; }
-
-  .gallery2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
-  .shot { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: var(--surface); }
-  .shot img { width: 100%; display: block; transition: transform .6s var(--ease); }
-  .shot:hover img { transform: scale(1.02); }
-  .shot-label { font-family: var(--mono); font-size: 0.68rem; color: var(--text-faint); padding: 0.9rem 1.1rem; border-top: 1px solid var(--border); }
-
-  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-  .feat-item { background: var(--surface); padding: 1.8rem; }
-  .feat-item .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); margin-bottom: 1rem; }
-  .feat-item h3 { font-family: var(--display); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
-  .feat-item p { color: var(--text-dim); font-size: 0.86rem; line-height: 1.6; }
-
-  @media (max-width: 860px) {
-    .hero { padding: 7rem 1.4rem 2rem; }
-    .hero-grid, .about-wrap { grid-template-columns: 1fr; }
-    .gallery2 { grid-template-columns: 1fr; }
-    .feat-grid { grid-template-columns: 1fr; }
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="DGSC, una aplicación web full-stack para llevar el puntaje y el historial de partidas de disc golf.">
+  <title>DGSC — Caso de estudio de José Villarreal</title>
+  <link rel="icon" type="image/png" href="assets/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
+<body class="case-page" data-case="dgsc">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="header-inner shell">
+      <a class="brand" href="index.html" data-transition aria-label="Ir al inicio"><span class="brand-mark" aria-hidden="true">JV</span><span class="brand-copy"><span>José Villarreal</span><span>Product engineer</span></span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><span></span></button>
+      <nav class="main-nav" id="main-nav" aria-label="Navegación principal"><a href="proyectos.html" data-transition>Trabajo</a><a href="index.html#perfil">Perfil</a><a href="infra.html" data-transition>Infraestructura</a><a class="nav-cta" href="index.html#contacto">Hablemos</a></nav>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+  </header>
 
-<div class="winbar">
-  <div class="winbar-lights"><span></span><span></span><span></span></div>
-  <div class="winbar-path"><a href="index.html" data-transition style="color:inherit">Jose Villarreal / </a><span class="seg-cur">DGSC</span><span class="car"></span></div>
-  <nav class="winbar-tabs">
-    <a href="index.html" data-transition>inicio</a>
-    <a href="proyectos.html" data-transition>proyectos</a>
-    <a href="cotizaciones.html" data-transition>cotizaciones</a>
-  </nav>
-  <div class="winbar-status"><span class="dot"></span><span data-clock>--:--:--</span></div>
-</div>
-
-<section class="hero">
-  <div class="hero-grid">
-    <div>
-      <div class="eyebrow reveal">next build <span class="glow">// app web fullstack</span></div>
-      <h1 class="hero-title reveal" data-delay="60">DG<span class="accent">SC.</span></h1>
-      <p class="hero-desc reveal" data-delay="120">Disc Golf Score Card. Registra tus rondas, consulta el historial y marca el campo en el mapa, pensada para usarse al aire libre con el sol de frente.</p>
-      <div class="hero-tags reveal" data-delay="160">
-        <span class="tag">Next.js</span><span class="tag">Auth</span><span class="tag">Maps</span><span class="tag">Fullstack</span>
+  <main id="contenido">
+    <section class="case-hero">
+      <div class="shell">
+        <a class="case-back" href="proyectos.html" data-transition>Volver a proyectos</a>
+        <div class="eyebrow reveal">Aplicación web</div>
+        <h1 class="case-title reveal">DGS<span>C.</span></h1>
+        <div class="case-intro-grid">
+          <p class="case-summary reveal">Una tarjeta de puntaje para usar en movimiento. <strong>Menos cálculos, más atención en la partida.</strong></p>
+          <dl class="case-facts reveal">
+            <div class="fact-row"><dt>Tipo</dt><dd>Web app full-stack</dd></div>
+            <div class="fact-row"><dt>Estado</dt><dd>En producción</dd></div>
+            <div class="fact-row"><dt>Rol</dt><dd>Diseño, desarrollo y despliegue</dd></div>
+            <div class="fact-row"><dt>Stack</dt><dd>Next.js · Maps · AWS</dd></div>
+          </dl>
+        </div>
       </div>
-    </div>
-    <div class="manifest reveal" data-delay="120">
-      <div class="manifest-row"><span class="manifest-key">tipo</span><span class="manifest-val">App web fullstack</span></div>
-      <div class="manifest-row"><span class="manifest-key">stack</span><span class="manifest-val">Next.js · Maps API</span></div>
-      <div class="manifest-row"><span class="manifest-key">funciones</span><span class="manifest-val">Login · historial · ubicación</span></div>
-      <div class="manifest-row"><span class="manifest-key">estado</span><span class="manifest-val ok">● en producción</span></div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section>
-  <div class="about-wrap">
-    <div>
-      <h2 class="about-title reveal">Golf de disco, <span class="accent">puntaje digital.</span></h2>
-      <div class="about-text reveal" data-delay="70">
-        <p>DGSC nació de una necesidad real: llevar el marcador en una ronda de disc golf siempre terminaba en notas de papel arrugadas o cálculos mentales con poco margen de error.</p>
-        <p>La app permite crear una tarjeta de puntaje para cualquier campo, registrar los tiros por hoyo de cada jugador, y guardar la partida con la ubicación exacta. Todo en una interfaz rápida y sin distracciones. El historial guarda cada ronda pasada para que veas tu progreso a lo largo del tiempo.</p>
+    <section class="case-showcase browser-showcase" aria-label="Pantallas de DGSC">
+      <div class="shell showcase-grid">
+        <figure class="browser-shot reveal"><img src="assets/img/dgsc-1.webp" alt="Tarjeta de puntuación durante una partida en DGSC" width="750" height="374"><figcaption>Partida en curso · scorecard multijugador</figcaption></figure>
+        <figure class="browser-shot small reveal"><img src="assets/img/dgsc-2.webp" alt="Selección de campo mediante un mapa en DGSC" width="750" height="381"><figcaption>Selección del campo · mapa</figcaption></figure>
       </div>
-    </div>
-    <div class="eyebrow reveal" data-delay="100" style="align-self:start;">02 // características</div>
-  </div>
-</section>
+    </section>
 
-<section style="padding-top:0;">
-  <div class="feat-grid reveal">
-    <div class="feat-item"><span class="dot"></span><h3>Tarjeta de puntaje</h3><p>Scorecard digital multi-jugador, con pares por hoyo y cálculo automático del total.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Login &amp; cuentas</h3><p>Cada jugador con su propio historial, disponible desde cualquier dispositivo.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Ubicación del campo</h3><p>Selecciona el campo desde un mapa integrado; cada partida queda vinculada geográficamente.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Historial de partidas</h3><p>Fechas, campos, compañeros y resultados, accesibles en cualquier momento.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Interfaz rápida</h3><p>Controles grandes y flujo claro para registrar un tiro en segundos, al aire libre.</p></div>
-    <div class="feat-item"><span class="dot"></span><h3>Next.js fullstack</h3><p>Frontend y backend en un solo proyecto, API Routes con rendering optimizado.</p></div>
-  </div>
-</section>
+    <section class="section">
+      <div class="shell case-story-grid">
+        <div class="story-label"><div class="eyebrow reveal">El contexto</div></div>
+        <div class="story-copy">
+          <h2 class="reveal">Una interfaz pensada para <span>jugar afuera.</span></h2>
+          <p class="reveal">Llevar el marcador en una ronda de disc golf suele terminar en papel, notas improvisadas o cálculos mentales. DGSC concentra el puntaje, los jugadores y el campo en una sola vista que se puede usar rápido desde el teléfono.</p>
+          <p class="reveal">La aplicación calcula el total mientras avanza la partida y guarda cada ronda en el perfil. La ubicación permite asociar el resultado con el campo correcto, para que el historial tenga contexto y no sea solo una lista de números.</p>
+          <div class="feature-lines">
+            <article class="feature-line reveal"><h3>Scorecard multijugador</h3><p>Pares por hoyo, tiros de cada jugador y total automático durante la ronda.</p></article>
+            <article class="feature-line reveal"><h3>Controles directos</h3><p>Interacciones grandes y claras para registrar un resultado con el menor número de pasos.</p></article>
+            <article class="feature-line reveal"><h3>Campos en el mapa</h3><p>La ubicación vincula cada partida con el lugar donde realmente se jugó.</p></article>
+            <article class="feature-line reveal"><h3>Historial personal</h3><p>Fechas, compañeros y resultados quedan disponibles desde la cuenta del jugador.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section>
-  <div class="eyebrow reveal">ls ./screenshots</div>
-  <div class="gallery2" style="margin-top:2rem;">
-    <div class="shot reveal"><img src="assets/img/dgsc-1.webp" alt="Tarjeta de puntaje en partida - DGSC" loading="lazy"><div class="shot-label">tarjeta de puntaje en partida</div></div>
-    <div class="shot reveal" data-delay="80"><img src="assets/img/dgsc-2.webp" alt="Selección del campo en mapa - DGSC" loading="lazy"><div class="shot-label">selección del campo en mapa</div></div>
-  </div>
-</section>
+    <section class="section architecture">
+      <div class="shell">
+        <div class="eyebrow reveal">Sistema</div>
+        <div class="section-heading reveal"><h2 class="section-title">Un flujo corto, <em>de punta a punta.</em></h2><p>La interfaz y el servidor comparten una sola base para mantener el producto simple de operar.</p></div>
+        <div class="architecture-flow reveal">
+          <article class="architecture-node"><span>Entrada</span><h3>Interfaz responsive</h3><p>La tarjeta se adapta al teléfono y a escritorio sin perder legibilidad.</p></article>
+          <article class="architecture-node"><span>Aplicación</span><h3>Next.js</h3><p>Frontend y rutas de servidor viven en el mismo proyecto.</p></article>
+          <article class="architecture-node"><span>Contexto</span><h3>Sesión + mapas</h3><p>La cuenta conserva el historial y la ubicación identifica el campo.</p></article>
+          <article class="architecture-node"><span>Producción</span><h3>AWS EC2</h3><p>La aplicación corre en un contenedor Docker con HTTPS.</p></article>
+        </div>
+      </div>
+    </section>
 
-<section id="contacto" style="text-align:center;">
-  <h2 class="about-title reveal" style="font-size:clamp(1.8rem,4vw,2.8rem);">Juega. <span style="color:var(--amber)">Puntúa.</span></h2>
-  <div class="reveal" data-delay="80" style="margin-top:1.6rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
-    <a href="proyectos.html" data-transition class="btn magnetic primary">Ver más proyectos</a>
-    <a href="index.html#contacto" data-transition class="btn magnetic">Hablemos de tu proyecto</a>
-  </div>
-</section>
+    <a class="next-project" href="cotizaciones.html" data-transition><div class="shell"><small>Siguiente caso</small><strong>Cotiza <span>↗</span></strong></div></a>
+  </main>
 
-<footer>
-  <span>© 2026 Jose Villarreal</span>
-  <a href="index.html" data-transition>← volver al inicio</a>
-</footer>
-
-<script src="assets/js/main.js"></script>
+  <footer class="site-footer"><div class="footer-inner shell"><span>© <span data-year>2026</span> José Villarreal</span><span>DGSC / Aplicación web</span><div class="footer-links"><a href="https://github.com/jose-xd" target="_blank" rel="noreferrer">GitHub ↗</a><a href="index.html#contacto">Contacto</a></div></div></footer>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
