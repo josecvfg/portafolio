@@ -24,9 +24,9 @@
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><span></span></button>
       <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-        <a href="#trabajo">Trabajo</a>
-        <a href="#perfil">Perfil</a>
-        <a href="infra.html" data-transition>Infraestructura</a>
+        <a href="#trabajo">Proyectos</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#perfil">Sobre mí</a>
         <a class="nav-cta" href="#contacto">Hablemos</a>
       </nav>
     </div>
@@ -37,29 +37,34 @@
     <section class="home-hero">
       <div class="hero-grid shell">
         <div>
-          <div class="availability">Desarrollo independiente</div>
+          <div class="availability">Sonora · Desarrollo independiente</div>
           <h1 class="hero-title">
-            <span class="word-mask"><span class="hero-word">Diseño el</span></span><br>
-            <span class="word-mask"><span class="hero-word outline">producto.</span></span><br>
-            <span class="word-mask"><span class="hero-word">Construyo el sistema.</span></span>
+            <span class="word-mask"><span class="hero-word">Ideas digitales</span></span><br>
+            <span class="word-mask"><span class="hero-word outline">claras.</span></span><br>
+            <span class="word-mask"><span class="hero-word">Productos reales.</span></span>
           </h1>
-          <p class="hero-lead">Desarrollo experiencias móviles y web con la arquitectura que necesitan para llegar a producción. <strong>Una sola visión desde la interfaz hasta el servidor.</strong></p>
+          <p class="hero-lead">Si necesitas una app, una página que comunique mejor tu negocio o un sistema que te ahorre trabajo, puedo ayudarte desde la primera idea hasta dejarlo funcionando. <strong>Tú explicas el problema. Yo conecto diseño, código y lanzamiento.</strong></p>
           <div class="button-row hero-actions">
-            <a class="button button-primary button-arrow" href="#trabajo">Ver proyectos</a>
-            <a class="button" href="mailto:josecvfg@gmail.com">Iniciar una conversación</a>
+            <a class="button button-primary" href="#contacto">Cuéntame tu proyecto</a>
+            <a class="button button-arrow" href="#trabajo">Ver proyectos</a>
           </div>
+          <ul class="trust-list" aria-label="Ventajas de trabajar conmigo">
+            <li><span class="ui-icon ui-icon-check" aria-hidden="true"></span>Trato directo</li>
+            <li><span class="ui-icon ui-icon-check" aria-hidden="true"></span>Alcance y tiempos claros</li>
+            <li><span class="ui-icon ui-icon-check" aria-hidden="true"></span>Entrega lista para usar</li>
+          </ul>
         </div>
 
-        <div class="system-map" aria-label="Mapa de las áreas de desarrollo que conecta José">
+        <div class="system-map" aria-label="Servicios digitales que ofrece José">
           <svg class="map-orbit" viewBox="0 0 520 520" aria-hidden="true">
             <path d="M105 82 C230 20 325 45 426 122 C495 176 482 318 405 425 C305 490 180 475 92 391 C18 299 30 160 105 82Z"/>
             <path d="M86 102 L260 260 L420 134 M260 260 L102 394 M260 260 L421 420"/>
           </svg>
-          <div class="system-core"><span>Producto<br>completo</span></div>
-          <div class="map-node node-mobile"><strong>Mobile</strong><small>Flutter · iOS · Android</small></div>
-          <div class="map-node node-web"><strong>Web</strong><small>React · Next.js</small></div>
-          <div class="map-node node-backend"><strong>Backend</strong><small>Go · Node · Redis</small></div>
-          <div class="map-node node-cloud"><strong>Cloud</strong><small>AWS · DO · Docker</small></div>
+          <div class="system-core"><span>Tu idea<br>lista para usarse</span></div>
+          <div class="map-node node-mobile"><span class="ui-icon ui-icon-phone" aria-hidden="true"></span><strong>App móvil</strong><small>Para iOS y Android</small></div>
+          <div class="map-node node-web"><span class="ui-icon ui-icon-monitor" aria-hidden="true"></span><strong>Sitio web</strong><small>Claro, rápido y responsivo</small></div>
+          <div class="map-node node-backend"><span class="ui-icon ui-icon-workflow" aria-hidden="true"></span><strong>Sistema a medida</strong><small>Menos trabajo repetitivo</small></div>
+          <div class="map-node node-cloud"><span class="ui-icon ui-icon-cloud" aria-hidden="true"></span><strong>Puesta en línea</strong><small>Servidor, seguridad y soporte</small></div>
         </div>
       </div>
       <div class="hero-index">Portafolio / MX</div>
@@ -75,41 +80,41 @@
 
         <div class="work-grid">
           <a class="project-card mobile-card reveal" data-project="snaps" href="snaps.html" data-transition>
-            <div class="project-visual"><img src="assets/img/snaps-2.jpg" alt="Pantalla para crear una nota temporal en Snaps" width="1242" height="2688" loading="lazy"></div>
+            <div class="project-visual"><img src="assets/img/snaps-2.webp" alt="Pantalla para crear una nota temporal en Snaps" width="1242" height="2688" loading="lazy" decoding="async"></div>
             <div class="project-content">
               <div class="project-meta"><span>Producto móvil</span><span class="project-status">En producción</span></div>
-              <div class="project-title">Snaps <span>↗</span></div>
-              <p class="project-description">Notas temporales con widgets nativos, sincronización y una arquitectura pensada alrededor del tiempo.</p>
+              <div class="project-title">Snaps <span class="ui-icon ui-icon-up-right" aria-hidden="true"></span></div>
+              <p class="project-description">Una app de notas que desaparecen cuando dejan de ser útiles. Disponible en iOS y Android, con acceso rápido desde la pantalla de inicio.</p>
               <ul class="project-tags"><li>Flutter</li><li>Go</li><li>Redis</li><li>iOS + Android</li></ul>
             </div>
           </a>
 
           <a class="project-card mobile-card reveal" data-project="astraea" href="astra.html" data-transition>
-            <div class="project-visual"><img src="assets/img/astra-1.png" alt="Lección sobre la constelación del Zodiaco en Astraea" width="379" height="838" loading="lazy"></div>
+            <div class="project-visual"><img src="assets/img/astra-1.webp" alt="Lección sobre la constelación del Zodiaco en Astraea" width="379" height="838" loading="lazy" decoding="async"></div>
             <div class="project-content">
               <div class="project-meta"><span>Educación móvil</span><span class="project-status">En desarrollo</span></div>
-              <div class="project-title">Astraea <span>↗</span></div>
-              <p class="project-description">Una experiencia para aprender astronomía a través de constelaciones, lecciones cortas y progreso gamificado.</p>
+              <div class="project-title">Astraea <span class="ui-icon ui-icon-up-right" aria-hidden="true"></span></div>
+              <p class="project-description">Una experiencia que hace la astronomía más cercana mediante recorridos, lecciones breves y progreso visible.</p>
               <ul class="project-tags"><li>Flutter</li><li>UX móvil</li><li>Gamificación</li></ul>
             </div>
           </a>
 
           <a class="project-card compact reveal" data-project="dgsc" href="dgsc.html" data-transition>
-            <div class="project-visual"><img src="assets/img/dgsc-1.webp" alt="Tarjeta de puntuación de disc golf en DGSC" width="750" height="374" loading="lazy"></div>
+            <div class="project-visual"><img src="assets/img/dgsc-1.webp" alt="Tarjeta de puntuación de disc golf en DGSC" width="750" height="374" loading="lazy" decoding="async"></div>
             <div class="project-content">
               <div class="project-meta"><span>Web app</span><span class="project-status">Fullstack</span></div>
-              <div class="project-title">DGSC <span>↗</span></div>
-              <p class="project-description">Puntuación, historial y ubicación para partidas de disc golf.</p>
+              <div class="project-title">DGSC <span class="ui-icon ui-icon-up-right" aria-hidden="true"></span></div>
+              <p class="project-description">Un marcador digital que evita cálculos manuales y guarda cada partida con sus jugadores y ubicación.</p>
               <ul class="project-tags"><li>Next.js</li><li>Auth</li><li>Maps</li></ul>
             </div>
           </a>
 
           <a class="project-card compact reveal" data-project="cotiza" href="cotizaciones.html" data-transition>
-            <div class="project-visual"><img src="assets/img/cotiz-2.jpg" alt="Panel de estadísticas del sistema de cotizaciones" width="1679" height="821" loading="lazy"></div>
+            <div class="project-visual"><img src="assets/img/cotiz-2.webp" alt="Panel de estadísticas del sistema de cotizaciones" width="1679" height="821" loading="lazy" decoding="async"></div>
             <div class="project-content">
               <div class="project-meta"><span>Herramienta web</span><span class="project-status">En producción</span></div>
-              <div class="project-title">Cotiza <span>↗</span></div>
-              <p class="project-description">Clientes, catálogo, cálculos y PDFs en un flujo hecho para trabajar rápido.</p>
+              <div class="project-title">Cotiza <span class="ui-icon ui-icon-up-right" aria-hidden="true"></span></div>
+              <p class="project-description">Una herramienta que organiza clientes y productos, calcula totales y crea cotizaciones listas para enviar.</p>
               <ul class="project-tags"><li>React</li><li>Dashboard</li><li>PDF</li></ul>
             </div>
           </a>
@@ -130,8 +135,8 @@
             </div>
             <div class="project-content">
               <div class="project-meta"><span>Sistemas</span><span class="project-status">Cloud</span></div>
-              <div class="project-title">Infra <span>↗</span></div>
-              <p class="project-description">Despliegues reproducibles, servidores administrados y automatización para mantener los productos vivos.</p>
+              <div class="project-title">Infra <span class="ui-icon ui-icon-up-right" aria-hidden="true"></span></div>
+              <p class="project-description">La parte que no se ve, pero mantiene una app disponible, segura y preparada para crecer.</p>
               <ul class="project-tags"><li>AWS</li><li>DigitalOcean</li><li>Docker</li><li>CI/CD</li></ul>
             </div>
           </a>
@@ -143,33 +148,37 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="capacidades-title">
+    <section class="section" id="servicios" aria-labelledby="capacidades-title">
       <div class="shell">
-        <div class="eyebrow reveal">Capacidades</div>
+        <div class="eyebrow reveal">Servicios</div>
         <div class="section-heading reveal">
-          <h2 class="section-title" id="capacidades-title">Una visión. <em>Cuatro capas.</em></h2>
-          <p>Puedo entrar en una parte concreta del producto o conectar el recorrido completo. La ventaja está en que ninguna decisión vive aislada.</p>
+          <h2 class="section-title" id="capacidades-title">¿Qué podemos <em>construir?</em></h2>
+          <p>Puedes llegar con una idea, un proceso manual o un producto que necesita mejorar. Primero aclaramos el objetivo y después elegimos la solución.</p>
         </div>
-        <div class="capability-list">
+        <div class="capability-list services-bento">
           <article class="capability-row reveal">
-            <h3>Producto y experiencia</h3>
-            <p>Convierto una necesidad en un flujo claro antes de convertirla en pantallas.</p>
-            <div class="capability-tools">UX · arquitectura de información · prototipos · sistemas visuales</div>
+            <span class="service-icon"><span class="ui-icon ui-icon-lightbulb" aria-hidden="true"></span></span>
+            <h3>Dar forma a una idea</h3>
+            <p>Definimos qué debe resolver el producto, para quién y cuál es la versión adecuada para empezar.</p>
+            <div class="capability-tools">Estrategia · experiencia · prototipo</div>
           </article>
           <article class="capability-row reveal">
-            <h3>Aplicaciones móviles</h3>
-            <p>Apps para iOS y Android con interfaces cuidadas, lógica offline y componentes nativos cuando hacen falta.</p>
-            <div class="capability-tools">Flutter · Dart · WidgetKit · Android Widgets · RevenueCat</div>
+            <span class="service-icon"><span class="ui-icon ui-icon-phone" aria-hidden="true"></span></span>
+            <h3>Crear una app móvil</h3>
+            <p>Aplicaciones para iPhone y Android con una experiencia cuidada, pagos, cuentas o funciones sin conexión cuando hacen falta.</p>
+            <div class="capability-tools">iOS · Android · Flutter</div>
           </article>
           <article class="capability-row reveal">
-            <h3>Web y backend</h3>
-            <p>Experiencias rápidas conectadas a APIs, autenticación y datos diseñados para crecer sin fricción.</p>
-            <div class="capability-tools">React · Next.js · Go · Node.js · PostgreSQL · Redis</div>
+            <span class="service-icon"><span class="ui-icon ui-icon-monitor" aria-hidden="true"></span></span>
+            <h3>Mejorar tu presencia web</h3>
+            <p>Páginas rápidas y responsivas que explican bien tu negocio y facilitan que un cliente dé el siguiente paso.</p>
+            <div class="capability-tools">Diseño web · desarrollo · SEO técnico</div>
           </article>
           <article class="capability-row reveal">
-            <h3>Infraestructura</h3>
-            <p>El producto no termina al compilar. Configuro su despliegue, seguridad y continuidad en producción.</p>
-            <div class="capability-tools">AWS · DigitalOcean · Docker · Nginx · GitHub Actions</div>
+            <span class="service-icon"><span class="ui-icon ui-icon-workflow" aria-hidden="true"></span></span>
+            <h3>Automatizar tu trabajo</h3>
+            <p>Sistemas internos para cotizar, organizar información o reemplazar tareas repetitivas que hoy consumen tiempo.</p>
+            <div class="capability-tools">Paneles · datos · automatización</div>
           </article>
         </div>
       </div>
@@ -179,15 +188,15 @@
       <div class="shell profile-grid">
         <div class="profile-copy reveal">
           <div class="eyebrow eyebrow-light">Perfil</div>
-          <h2>Código con criterio de producto.</h2>
-          <p>Soy José, desarrollador full-stack con especialidad en productos móviles. Me gusta entender por qué existe una función, cómo se sentirá al usarla y qué necesita detrás para seguir funcionando cuando deje de ser un prototipo.</p>
+          <h2>Un solo punto de contacto, de principio a fin.</h2>
+          <p>Soy José, desarrollador full-stack especializado en productos móviles. No trabajo solo para que algo funcione. También cuido que se entienda, que se sienta propio de tu proyecto y que sea sencillo mantenerlo después de publicarlo.</p>
         </div>
         <dl class="profile-facts reveal">
-          <div class="fact-row"><dt>Base</dt><dd>México</dd></div>
-          <div class="fact-row"><dt>Enfoque</dt><dd>Mobile + full-stack</dd></div>
+          <div class="fact-row"><dt>Base</dt><dd>Sonora</dd></div>
+          <div class="fact-row"><dt>Enfoque</dt><dd>Apps, web y sistemas</dd></div>
           <div class="fact-row"><dt>Experiencia</dt><dd>3+ años construyendo</dd></div>
           <div class="fact-row"><dt>Plataformas</dt><dd>iOS, Android y web</dd></div>
-          <div class="fact-row"><dt>Interés</dt><dd>Productos útiles y con identidad</dd></div>
+          <div class="fact-row"><dt>Forma</dt><dd>Comunicación directa y clara</dd></div>
         </dl>
       </div>
     </section>
@@ -196,13 +205,13 @@
       <div class="shell">
         <div class="eyebrow reveal">Forma de trabajo</div>
         <div class="section-heading reveal">
-          <h2 class="section-title" id="proceso-title">Pensar, construir, <em>poner a prueba.</em></h2>
-          <p>Un proceso corto y visible. Las decisiones importantes se toman con contexto, no se esconden detrás de entregas gigantes.</p>
+          <h2 class="section-title" id="proceso-title">Del problema a una solución <em>lista para usarse.</em></h2>
+          <p>El proceso se mantiene visible. Sabes qué estamos resolviendo, qué sigue y por qué se toma cada decisión importante.</p>
         </div>
         <div class="process-grid reveal">
-          <article class="process-step"><span class="process-label">Entender</span><h3>Primero el problema</h3><p>Objetivo, usuarios, restricciones y el recorrido mínimo que debe sentirse completo.</p></article>
-          <article class="process-step"><span class="process-label">Construir</span><h3>Una base que aguante</h3><p>Interfaz y arquitectura avanzan juntas para evitar sorpresas cuando el producto crece.</p></article>
-          <article class="process-step"><span class="process-label">Entregar</span><h3>Producción es parte del trabajo</h3><p>Pruebas, despliegue y una entrega clara para que el producto pueda seguir evolucionando.</p></article>
+          <article class="process-step"><span class="process-icon"><span class="ui-icon ui-icon-lightbulb" aria-hidden="true"></span></span><span class="process-label">Entender</span><h3>Empezamos por el problema</h3><p>Hablamos del objetivo, las personas que lo usarán y lo mínimo que debe resolver bien.</p></article>
+          <article class="process-step"><span class="process-icon"><span class="ui-icon ui-icon-code" aria-hidden="true"></span></span><span class="process-label">Construir</span><h3>Ves avances reales</h3><p>Diseño y desarrollo avanzan juntos para validar pronto y corregir antes de que algo cueste más.</p></article>
+          <article class="process-step"><span class="process-icon"><span class="ui-icon ui-icon-rocket" aria-hidden="true"></span></span><span class="process-label">Lanzar</span><h3>Lo dejamos funcionando</h3><p>La entrega incluye pruebas, publicación y una base ordenada para que el proyecto pueda seguir creciendo.</p></article>
         </div>
       </div>
     </section>
@@ -211,10 +220,10 @@
       <div class="shell">
         <div class="contact-copy reveal">
           <div class="eyebrow">Contacto</div>
-          <h2>Hagamos algo <span>difícil de ignorar.</span></h2>
+          <h2>Tu idea puede empezar con <span>una conversación.</span></h2>
         </div>
         <div class="contact-bottom reveal">
-          <p class="contact-note">¿Tienes una idea, una app que necesita crecer o un sistema que todavía vive en una hoja de cálculo? Cuéntame el contexto.</p>
+          <p class="contact-note">Cuéntame qué quieres mejorar, qué haces hoy y qué resultado buscas. No necesitas llegar con especificaciones técnicas.</p>
           <a class="contact-email" href="mailto:josecvfg@gmail.com">josecvfg@gmail.com</a>
         </div>
       </div>
@@ -225,7 +234,7 @@
     <div class="footer-inner shell">
       <span>© <span data-year>2026</span> José Villarreal</span>
       <span>Diseño · Código · Sistemas</span>
-      <div class="footer-links"><a href="https://github.com/jose-xd" target="_blank" rel="noreferrer">GitHub ↗</a><a href="#contenido">Volver arriba ↑</a></div>
+      <div class="footer-links"><a class="icon-link" href="https://github.com/jose-xd" target="_blank" rel="noreferrer">GitHub <span class="ui-icon ui-icon-up-right" aria-hidden="true"></span></a><a class="icon-link" href="#contenido">Volver arriba <span class="ui-icon ui-icon-arrow-up" aria-hidden="true"></span></a></div>
     </div>
   </footer>
 

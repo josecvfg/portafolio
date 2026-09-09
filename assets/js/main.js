@@ -7,22 +7,43 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".main-nav");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const menuBackdrop = document.createElement("button");
+  menuBackdrop.type = "button";
+  menuBackdrop.className = "menu-backdrop";
+  menuBackdrop.setAttribute("aria-label", "Cerrar menú");
+  menuBackdrop.setAttribute("aria-hidden", "true");
+  menuBackdrop.tabIndex = -1;
+  header?.after(menuBackdrop);
 
   const closeMenu = () => {
     body.classList.remove("menu-open");
     menuToggle?.setAttribute("aria-expanded", "false");
+    menuToggle?.setAttribute("aria-label", "Abrir menú");
+    menuBackdrop.setAttribute("aria-hidden", "true");
   };
 
   menuToggle?.addEventListener("click", () => {
     const open = body.classList.toggle("menu-open");
     menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    menuBackdrop.setAttribute("aria-hidden", String(!open));
   });
 
   nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+  menuBackdrop.addEventListener("click", closeMenu);
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeMenu();
+    if (event.key === "Escape" && body.classList.contains("menu-open")) {
+      closeMenu();
+      menuToggle?.focus();
+    }
   });
+
+  const desktopMenu = window.matchMedia("(min-width: 901px)");
+  const syncMenuLayout = (event) => {
+    if (event.matches) closeMenu();
+  };
+  desktopMenu.addEventListener?.("change", syncMenuLayout);
 
   const syncScroll = () => {
     const root = document.documentElement;
