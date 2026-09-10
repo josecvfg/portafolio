@@ -584,20 +584,6 @@ body.menu-open .site-header {
   isolation: isolate;
 }
 
-.system-map::after {
-  content: "De la idea al lanzamiento";
-  position: absolute;
-  left: 50%;
-  bottom: 1.5rem;
-  transform: translateX(-50%);
-  color: var(--quiet);
-  font-family: var(--mono);
-  font-size: .7rem;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
 .system-map::before {
   content: "";
   position: absolute;
